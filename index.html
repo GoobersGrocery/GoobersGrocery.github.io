@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goobers' Grocery - Home of the Gooberlicious!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/04/supermarket-simulator-5.jpg?q=70&fit=contain&w=1200&h=628&dpr=1');
+            background-size: cover;
+            background-position: center center;
+            opacity: 0.30; /* Made it less faded */
+            filter: blur(4px); /* Added blur effect */
+            z-index: -1;
+            transform: scale(1.1); /* Slightly zoom in to avoid edges */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        img { /* Prevents images from being dragged */
+            -webkit-user-drag: none;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+        .modal-bg {
+            background-color: rgba(0,0,0,0.7);
+        }
+        .star-rating input[type="radio"] { display: none; }
+        .star-rating label {
+            font-size: 2rem;
+            color: #d1d5db;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating:not(:checked) > label:hover,
+        .star-rating:not(:checked) > label:hover ~ label {
+            color: #f59e0b;
+        }
+        .shake {
+            animation: shake 0.5s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* Custom scrollbar for the store reviews container */
+        #store-reviews-container::-webkit-scrollbar {
+            width: 10px;
+        }
+        #store-reviews-container::-webkit-scrollbar-track {
+            background: #fffbeB; /* Light yellow */
+            border-radius: 10px;
+        }
+        #store-reviews-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #f59e0b, #ea580c);
+            border-radius: 10px;
+            border: 2px solid #fffbeB;
+        }
+        #store-reviews-container::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, #facc15, #f97316);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-40">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <!-- Made the logo bigger -->
+                <img src="https://i.ibb.co/mVKsXSxw/wmremove-transformed.png" alt="Goobers' Grocery Logo" class="h-20 w-auto">
+                <h1 class="text-2xl md:text-3xl font-black text-gray-800 hidden md:block">Goobers' Grocery</h1>
+            </div>
+            <div class="flex-1 max-w-xl mx-4">
+                <input id="search-bar" type="text" placeholder="Search for a gooberlicious item..." class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500">
+            </div>
+            <div class="text-sm text-gray-600">
+                Welcome, <span id="username-display" class="font-bold">Valued Goober</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-8 md:p-12 text-white text-center shadow-lg mb-12">
+            <h2 class="text-4xl md:text-5xl font-black mb-4">Welcome, you simpletons!</h2>
+            <p class="text-lg md:text-xl mb-6 max-w-3xl mx-auto">You've stumbled upon the greatest grocery store ever built. Why? Because I, Caseoh, built it. Everything here is top-tier, just like me. I personally make sure every item is perfect for my customers. Now, spend your money. And a word of advice... <strong>bring exact change.</strong> You don't want to find out what happens when I have to break a bill. Let's just say you'll be having a... 'dookie' dream.</p>
+        </section>
+
+        <!-- About Caseoh Section -->
+        <section class="bg-white rounded-2xl shadow-lg p-8 mb-12 flex flex-col md:flex-row items-center gap-8">
+            <img src="https://mythictalent.b-cdn.net/creators/caseoh.png" alt="Caseoh, The Founder" class="w-48 h-48 md:w-64 md:h-64 object-cover rounded-full border-4 border-yellow-400">
+            <div class="text-center md:text-left">
+                <h3 class="text-3xl font-bold mb-3">A Little About Me, The Legend</h3>
+                <p class="text-gray-700 leading-relaxed">Listen up. Before "Goobers' Grocery," you were all eating dirt. I looked at the grocery world and thought, "This is garbage. I can do better." So I did. I poured my blood, sweat, and a whole lot of tears (of joy, from my greatness) into this place. Every single shelf, every product, every ridiculously low price... that was all me. I single-handedly created this paradise. Don't let anyone tell you otherwise. The employees? They just stock the shelves I designed. This is the house that Caseoh built. You're welcome.</p>
+            </div>
+        </section>
+        
+        <!-- Deal of the Week Section -->
+        <section class="mb-12">
+            <h3 class="text-3xl font-bold mb-6 text-center">Caseoh's Deal of the Week! (Buy it NOW)</h3>
+            <div id="deal-of-the-day" class="bg-gradient-to-br from-red-500 to-yellow-500 rounded-2xl shadow-xl p-8 text-white flex flex-col md:flex-row items-center gap-8 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+                <!-- Content injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Product Listing -->
+        <section id="products-section" class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-8">
+            <h3 class="text-3xl font-bold mb-6 text-center">Our Gooberlicious Products</h3>
+            <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
+                <!-- Products will be injected here by JavaScript -->
+            </div>
+            <p id="no-results" class="text-center text-gray-500 py-12 text-xl hidden">Womp Womp. No items found, you simpleton. Try searching for something else.</p>
+        </section>
+        
+        <!-- Propaganda Sections -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
+            <!-- Employee "Testimonials" -->
+            <section class="bg-white rounded-2xl shadow-lg p-8">
+                <h3 class="text-3xl font-bold mb-6 text-center">What My "Valued" Employees Say</h3>
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <img src="https://i.ibb.co/XfD28yKZ/Tim3.png" alt="Employee Tim" class="w-20 h-20 rounded-full object-cover border-2 border-gray-200">
+                        <div>
+                            <p class="text-gray-600 italic">"Mr. Caseoh is... a boss. He has a vision, and it's a big one. Literally. He lets me work here, and for that, I am grateful. He always keeps his heart open for us, which is nice. It's a job."</p>
+                            <p class="font-bold text-right mt-2">- Tim, Cashier</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <img src="https://static.wikia.nocookie.net/caseohs-groceries/images/e/ec/Jim2.png/revision/latest?cb=20241116045302" alt="Employee Jim" class="w-20 h-20 rounded-full object-cover border-2 border-gray-200">
+                        <div>
+                            <p class="text-gray-600 italic">"Working at Goobers' is an experience. Mr. Caseoh demands excellence, which he says he provides. He's the best boss I could ever have, probably. He's truly built something here."</p>
+                            <p class="font-bold text-right mt-2">- Jim, Shelf Stocker</p>
+                        </div>
+                    </div>
+                     <!-- Added new employee Slim -->
+                    <div class="flex items-start gap-4">
+                        <img src="https://i.ibb.co/DPBCxd1Z/Slim1.png" alt="Employee Slim" class="w-20 h-20 rounded-full object-cover border-2 border-gray-200">
+                        <div>
+                            <p class="text-gray-600 italic">"Mr. Caseoh... he pays the bills. Sometimes he looks at the cash register and asks if it's edible. It's a unique work environment. He told me if I don't smile I'm fired, so... I'm smiling."</p>
+                            <p class="font-bold text-right mt-2">- Slim, Cashier</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Store Reviews Section -->
+            <section class="bg-white rounded-2xl shadow-lg p-8 flex flex-col">
+                <h3 class="text-3xl font-bold mb-4 text-center">Review My Glorious Store</h3>
+                <!-- Stats -->
+                <div class="bg-gray-100 rounded-lg p-4 mb-6 text-center">
+                    <p class="text-lg font-semibold">Average Goober Rating:</p>
+                    <div class="flex items-center justify-center text-4xl font-black text-yellow-500">
+                        <span id="store-avg-rating">4.23</span>
+                        <svg class="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    </div>
+                    <div id="review-percentages" class="text-sm mt-2 text-gray-600">Calculating...</div>
+                </div>
+                <!-- Review Form -->
+                <form id="store-review-form" class="space-y-4 mb-6">
+                    <div class="star-rating flex flex-row-reverse justify-center">
+                        <input type="radio" id="store-star5" name="store-rating" value="5" required/><label for="store-star5" title="5 stars">★</label>
+                        <input type="radio" id="store-star4" name="store-rating" value="4"/><label for="store-star4" title="4 stars">★</label>
+                        <input type="radio" id="store-star3" name="store-rating" value="3"/><label for="store-star3" title="3 stars">★</label>
+                        <input type="radio" id="store-star2" name="store-rating" value="2"/><label for="store-star2" title="2 stars">★</label>
+                        <input type="radio" id="store-star1" name="store-rating" value="1"/><label for="store-star1" title="1 star">★</label>
+                    </div>
+                    <textarea id="store-review-comment" class="w-full p-2 border border-gray-300 rounded-md h-24" placeholder="Tell me how great my store is..." required></textarea>
+                    <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg transition">Submit Gooberview</button>
+                </form>
+                <!-- Existing Reviews -->
+                <div id="store-reviews-container" class="mt-auto flex-grow h-64 overflow-y-auto space-y-4 pr-2">
+                    <p class="text-center text-gray-500">Loading reviews...</p>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto p-8 text-center">
+            <p class="font-bold text-2xl mb-2">Have a Gooberlicious Day!</p>
+            <p class="mb-4">Follow my journey to greatness on YouTube.</p>
+            <a href="https://www.youtube.com/@caseoh_" target="_blank" class="inline-block bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-6 rounded-lg transition mb-6">
+                Caseoh's YouTube
+            </a>
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex justify-center items-center space-x-4">
+                    <button id="legal-notice-btn" class="text-sm text-gray-400 hover:text-white underline">Important Legal Notice</button>
+                    <button id="other-businesses-btn" class="text-sm text-gray-400 hover:text-white underline">View Other Businesses</button>
+                    <a href="https://maps.app.goo.gl/yhnMvrsZA8GkkYD18" target="_blank" class="text-sm text-gray-400 hover:text-white underline">View Our Location</a>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">&copy; 2025 Goobers' Grocery. All rights reserved by me, Caseoh. <br> This is a fan-made website by Jandré du Preez.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Product Modal -->
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row overflow-hidden">
+            <div class="w-full md:w-1/2 p-4 flex items-center justify-center bg-gray-100">
+                <img id="modal-img" src="" alt="Product Image" class="max-w-full max-h-96 object-contain">
+            </div>
+            <div class="w-full md:w-1/2 p-6 flex flex-col">
+                <div class="flex-grow overflow-y-auto pr-2">
+                    <div class="flex justify-between items-start">
+                        <h3 id="modal-name" class="text-3xl font-bold">Product Name</h3>
+                        <button id="close-product-modal" class="text-3xl text-gray-500 hover:text-gray-800">&times;</button>
+                    </div>
+                    <p id="modal-price" class="text-2xl font-semibold text-yellow-600 my-2">$0.00</p>
+                    <p id="modal-desc" class="text-gray-600 mb-4">Product description goes here.</p>
+                    
+                    <h4 class="text-xl font-bold border-t pt-4 mt-4 mb-2">Gooberviews</h4>
+                    <div id="item-reviews-container" class="space-y-3 mb-4 max-h-48 overflow-y-auto">
+                        <!-- Item reviews will be loaded here -->
+                        <p class="text-gray-500">No reviews yet. Be the first simpleton to leave one!</p>
+                    </div>
+                </div>
+                
+                <div class="flex-shrink-0 border-t pt-4 mt-auto">
+                    <h4 class="text-lg font-bold mb-2">Leave your own Gooberview</h4>
+                    <form id="item-review-form" class="space-y-3">
+                         <div class="star-rating flex flex-row-reverse justify-center">
+                            <input type="radio" id="item-star5" name="item-rating" value="5" required/><label for="item-star5" title="5 stars">★</label>
+                            <input type="radio" id="item-star4" name="item-rating" value="4"/><label for="item-star4" title="4 stars">★</label>
+                            <input type="radio" id="item-star3" name="item-rating" value="3"/><label for="item-star3" title="3 stars">★</label>
+                            <input type="radio" id="item-star2" name="item-rating" value="2"/><label for="item-star2" title="2 stars">★</label>
+                            <input type="radio" id="item-star1" name="item-rating" value="1"/><label for="item-star1" title="1 star">★</label>
+                        </div>
+                        <textarea id="item-review-comment" class="w-full p-2 border rounded-md h-16" placeholder="Spit it out..." required></textarea>
+                        <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 rounded-lg transition">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legal Notice Modal -->
+    <div id="legal-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 text-center relative">
+            <button id="close-legal-modal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button>
+            <h3 class="text-2xl font-bold mb-4">LEGAL NOTICE</h3>
+            <p class="text-gray-700">If you happen to, you know, keel over and die from eating any food you buy here, that's not on me. Zero liability is held against me, Caseoh. It's not my fault. Take it up with the manufacturers who made the stuff, or maybe blame one of my employees that work here at Goobers' Grocery. They probably messed something up. I'm perfect. Now close this and go buy something.</p>
+        </div>
+    </div>
+    
+    <!-- Other Businesses Modal -->
+    <div id="businesses-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-6 relative">
+            <button id="close-businesses-modal" class="absolute top-2 right-4 text-2xl text-gray-500 hover:text-gray-800">&times;</button>
+            <h3 class="text-2xl font-bold mb-4 text-center">My Other Glorious Businesses</h3>
+            <ul class="space-y-3 text-center">
+                <li><a href="https://youtu.be/vLeR8-ScECg?si=57l9oVoYSdtSFKAB" target="_blank" class="text-yellow-400 hover:underline font-semibold text-lg">Sweet Shop</a></li>
+                <li><a href="https://youtu.be/t-Y0Wfc6qYg?si=Qfw8YXyE_hO_kZUy" target="_blank" class="text-yellow-400 hover:underline font-semibold text-lg">Gas Station</a></li>
+                <li><a href="https://youtu.be/MHYl7Cew4-8?si=U-T7DSQtACneU2hL" target="_blank" class="text-yellow-400 hover:underline font-semibold text-lg">Card Shop</a></li>
+                <li><a href="https://youtu.be/K7j8I6cNyjY?si=WkMDjgDaUXl7AS4n" target="_blank" class="text-yellow-400 hover:underline font-semibold text-lg">GoobLagoon Water Park</a></li>
+                <li><a href="https://youtu.be/NCIlhnvZalU?si=Lo_fmpvm7SCY62BN" target="_blank" class="text-yellow-400 hover:underline font-semibold text-lg">The Warsh Laundry</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, onSnapshot, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Your web app's Firebase configuration ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyAd3y5vw5Ttje5fXUTQPN98k2jJDW2shCQ",
+            authDomain: "goobers-grocery.firebaseapp.com",
+            projectId: "goobers-grocery",
+            storageBucket: "goobers-grocery.appspot.com",
+            messagingSenderId: "21684152585",
+            appId: "1:21684152585:web:055da230ba738673bfcbd8",
+            measurementId: "G-25N3X6KEQT"
+        };
+        
+        // --- App ID and Firestore Path Setup ---
+        const appId = 'goobers-grocery-app'; // A static App ID for this website
+        
+        // --- Initialize Firebase ---
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- Collections References ---
+        const storeReviewsCol = collection(db, `/artifacts/${appId}/public/data/store_reviews`);
+        const itemReviewsCol = collection(db, `/artifacts/${appId}/public/data/item_reviews`);
+
+        // --- Product Data ---
+        // Products are now organized by category
+        const products = [
+            // Pantry Staples
+            { id: 'farine_flour', name: 'Farine Suprême Flour', price: 2.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/6/66/Flour_Farine.png/revision/latest?cb=20240223001005' },
+            { id: 'sublett_flour', name: "Sublett's White Whole Wheat Flour", price: 3.50, img: "https://static.wikia.nocookie.net/supermarket-simulator/images/6/6a/Flour_Sublett%27s.png/revision/latest?cb=20240223001006" },
+            { id: 'susu_sugar', name: 'SUSU Powdered Sugar', price: 3.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/9/97/Sugar_Powdered_Susu.png/revision/latest?cb=20240223001006' },
+            { id: 'pablo_sugar', name: 'Pablo Powdered Sugar 750g', price: 3.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/6/61/Sugar_Powdered_Pablo.png/revision/latest?cb=20240223001005' },
+            { id: 'panzati_spaghetti', name: 'Panzati Spaghetti', price: 4.50, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/a/a9/Pasta_Panzati.png/revision/latest?cb=20240223001014' },
+            { id: 'elo_rice', name: 'Elo Rice 1kg', price: 8.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/0/03/Rice_Elo.png/revision/latest?cb=20240223001005' },
+            { id: 'lespieds_oil', name: 'Lespieds Oil', price: 4.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/5/5b/Oil_Lespieds.png/revision/latest?cb=20240223001005' },
+            { id: 'honei_honey', name: 'Honei Honey', price: 4.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/7/76/Honey_Hone.png/revision/latest?cb=20240223015232' },
+            { id: 'patatartine_spread', name: 'Patatartine Chocolate Spread', price: 10.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/2/22/Chocolate_Spread_Patatartine.png/revision/latest?cb=20240223001005' },
+            { id: 'boudain_powder', name: 'Boudain Chocolate Powder', price: 9.45, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/2/21/Chocolate_Powder_Boudain.png/revision/latest?cb=20240223001007' },
+            { id: 'puray_potatoes', name: 'Puray Mashed Potatoes', price: 4.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/6/61/Mashed_Potatoes_Puray.png/revision/latest?cb=20240223001019' },
+            
+            // Condiments
+            { id: 'kekette_ketchup', name: 'Kekette Chope Ketchup', price: 4.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/b/b1/Ketchup_Kekette.png/revision/latest?cb=20240223023344' },
+            { id: 'yoyo_mayo', name: 'Maptite Yoyo Mayonnaise', price: 4.45, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/1/1d/Mayonnaise_Yoyo.png/revision/latest?cb=20240223022839' },
+            { id: 'maptite_hot_sauce', name: 'Maptite Hot Sauce', price: 3.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/8/80/Hot_Sauce_Hothot.png/revision/latest?cb=20240223001005' },
+            
+            // Bakery & Desserts
+            { id: 'rons_bread', name: "Ron's Sandwich Bread 550g", price: 5.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/5/54/Sliced_Bread_Ron%27s.png/revision/latest?cb=20240223001022' },
+            { id: 'michmich_madeleines', name: 'Michmich Petites Madeleines 400g', price: 7.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/d/d3/Cake_St_Michmich.png/revision/latest?cb=20240223013747' },
+            { id: 'brassard_chocolate', name: 'Brassard Praire Chocolate 300g', price: 4.55, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/a/a1/Cake_Prairie.png/revision/latest?cb=20240223021132' },
+            { id: 'marbre_cake', name: 'Marbré Cake 300g', price: 5.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/c/c0/Cake_Marbr%C3%A9.png/revision/latest?cb=20240223001007' },
+            { id: 'bonbek_candy', name: 'Bonbek Bubblebuzz Candy', price: 3.45, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/b/bd/Candy_Bonbek.png/revision/latest?cb=20240223001005' },
+            
+            // Dairy & Refrigerated
+            { id: 'lopez_butter', name: 'Lopez Paysans Butter 250g', price: 3.45, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/b/b7/Butter_Paysans.png/revision/latest?cb=20240223001005' },
+            { id: 'madone_yoghurt', name: 'Madone Yoghurt', price: 1.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/a/ae/Yoghurt_Madone.png/revision/latest?cb=20240223014429' },
+            { id: 'yowp_yoghurt', name: 'Yowp Yoghurt', price: 1.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/7/73/Yoghurt_Yowp.png/revision/latest?cb=20240223014428' },
+            { id: 'frugen_yoghurt', name: 'Frügen Yoghurt', price: 1.15, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/3/34/Yoghurt_Fr%C3%BCgen.png/revision/latest?cb=20240223014429' },
+            { id: 'bio_egg_12', name: 'BIO Egg ×12', price: 12.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/6/62/Eggs_%2812-Pack%29_Bio.png/revision/latest?cb=20240223001005' },
+            { id: 'bio_egg_8', name: 'BIO Egg ×8', price: 8.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/3/38/Eggs_%288-Pack%29_Bio.png/revision/latest?cb=20240223001005' },
+            { id: 'bio_egg_4', name: 'BIO Egg ×4', price: 3.75, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/3/37/Eggs_%284-Pack%29_Bio.png/revision/latest?cb=20240223001005' },
+            { id: 'bk_ham', name: 'B&K Food Sliced Ham', price: 4.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/0/04/Ham_B%26K.png/revision/latest?cb=20240223022839' },
+            { id: 'chopped_beef', name: 'Chopped Beef 650g', price: 7.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/a/ae/Ground_Beef_Bovora.png/revision/latest?cb=20240223022839' },
+            { id: 'veal_chop', name: 'Veal Chop 250g', price: 6.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/9/98/Veal_Chop_Bovora.png/revision/latest?cb=20240223014428' },
+
+            // Frozen
+            { id: 'extra_ice_cream', name: 'Extra Vanilla & Strawberry Ice Cream', price: 6.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/c/c2/Ice_cream_Vanille_Maxi_Cone.png/revision/latest?cb=20240223001005' },
+            { id: 'maxi_cone_ice_cream', name: 'Maxi Cone Chocolate Pistache Ice Cream', price: 7.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/2/29/Ice_cream_Chocolate_Maxi_Cone.png/revision/latest?cb=20240223001005' },
+            
+            // Breakfast
+            { id: 'honey_bees_cereal', name: 'Honey Bees Cereal 400g', price: 8.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/a/a9/Cereal_Honey_Bees.png/revision/latest?cb=20240223001005' },
+            { id: 'racoon_cereal', name: 'Racoon Crispy Chibi Cereal 400g', price: 7.45, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/3/3a/Cereal_Crispy_Chibi.png/revision/latest?cb=20240223001005' },
+            { id: 'narvalo_coffee', name: 'Narvalo Dark Coffee', price: 9.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/c/c3/Coffee_Dark_Roast_Narvalo.png/revision/latest?cb=20240223001017' },
+            { id: 'palace_tea', name: 'Palace Green Tea', price: 7.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/3/3e/Tea_Green_Tea_Palace.png/revision/latest?cb=20240223001005' },
+            
+            // Snacks
+            { id: 'covidos_chips', name: 'Covidos Chips 365g', price: 2.50, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/0/0b/Chips_Covidos.png/revision/latest?cb=20240223001005' },
+
+            // Drinks
+            { id: 'montcuq_water', name: 'Montcuq Water 1L', price: 2.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/b/ba/Bottled_Water_Montcuq.png/revision/latest?cb=20240223001017' },
+            { id: 'flotte_water', name: 'Flotte Water 750ml', price: 1.25, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/b/b0/Bottled_Water_Aotte.png/revision/latest?cb=20240223001004' },
+            { id: 'cola_soda', name: 'Cola Soda 2L', price: 3.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/d/dc/Soda_Cola.png/revision/latest?cb=20240223013340' },
+            { id: 'zap_soda', name: 'Zap-Soda 1.5L', price: 2.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/d/d7/Soda_Zap.png/revision/latest?cb=20240223013336' },
+            { id: 'turko_cola', name: 'Turko Cola Soda 2L', price: 3.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/6/61/Soda_Turko.png/revision/latest?cb=20240223013337' },
+            { id: 'jus_twistu', name: 'Jus Twistu Soda 1L', price: 1.50, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/f/f1/Soda_Jus_Tsistu.png/revision/latest?cb=20240223013337' },
+            { id: 'bio_apple_juice', name: 'BIO Juice Apple Juice 1L', price: 6.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/2/2d/Apple_Juice_Bio_Juice.png/revision/latest?cb=20240223001002' },
+
+            // Household & Cleaning
+            { id: 'paper_towels', name: '6-Pack Compact Paper Towels', price: 7.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/4/42/Paper_Towel_Compact.png/revision/latest?cb=20240223021712' },
+            { id: 'petus_toilet_paper', name: 'Petus Toilet Paper ×12', price: 7.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/e/ed/Toilet_Paper_Petus.png/revision/latest?cb=20240223001006' },
+            { id: 'savion_soap', name: 'Savion Hand Soap', price: 4.00, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/8/89/Hand_Soap_Savion.png/revision/latest?cb=20240223014739' },
+            { id: 'signoulos_toothpaste', name: 'Signoulos Toothpaste', price: 7.55, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/5/58/Toothpaste_Signoulos.png/revision/latest?cb=20240223001012' },
+            { id: 'touprop_cleaner', name: 'Touprop Triple Action Cleaner', price: 6.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/b/bb/Cleaner_Touprop.png/revision/latest?cb=20240223001005' },
+            { id: 'kilemol_spray', name: 'Kilemol Bug Spray', price: 5.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/2/26/Cleaner_Kilemol.png/revision/latest?cb=20240223001005' },
+            { id: 'souplesse_softener', name: 'Souplesse Fresh Air Fabric Softener', price: 14.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/3/39/Fabric_Softener_Souplesse.png/revision/latest?cb=20240223001005' },
+            { id: 'java_bleach', name: 'Java Vevel Bleach 760 ml', price: 8.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/8/8f/Bleach_Jaja_Vevel.png/revision/latest?cb=20240223001003' },
+            
+            // Pet Food
+            { id: 'patpat_cat_food', name: 'PatPat Cat Food', price: 17.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/6/64/Cat_Food_Patpat.png/revision/latest?cb=20240223001005' },
+            { id: 'miaoumiam_cat_food', name: 'Miaoumiam Chicken & Catnip 4kg', price: 19.50, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/6/6e/Cat_Food_Miaoumiam.png/revision/latest?cb=20240223001004' },
+            { id: 'patpat_dog_food', name: 'PatPat Dog Food 20kg', price: 24.99, img: 'https://static.wikia.nocookie.net/supermarket-simulator/images/4/4d/Dog_Food_Patpat.png/revision/latest?cb=20240223001016' }
+        ];
+
+        // --- Added unique, Caseoh-style product descriptions for ALL items ---
+        const productDescriptions = {
+            panzati_spaghetti: "Look, it's spaghetti. You boil it, you eat it. Don't mess it up or you're banned. Simple.",
+            susu_sugar: "For when your food ain't sweet enough. Don't go pourin' the whole bag in your coffee like a simpleton.",
+            kekette_ketchup: "It's ketchup. Put it on fries or whatever. If I see you puttin' this on a steak, it's an instant permaban.",
+            farine_flour: "You can make, like, a cake with this. Or just throw it at someone. I'm not your dad, do what you want.",
+            sublett_flour: "It's flour... but fancier, I guess? Still looks like a bag of white dust to me. Go bake something.",
+            extra_ice_cream: "It's cold and it's sweet. If you let it melt all over the floor, Jim the janitor is gonna have a word with you. And by Jim, I mean me.",
+            paper_towels: "For when you spill your soda all over your brand new keyboard. Or for your dookie stains. Whatever, man.",
+            lespieds_oil: "It's oil. It makes things not stick to the pan. Don't drink it. You're not a car. I think.",
+            maxi_cone_ice_cream: "It's literally a giant cone of ice cream. If you need more of a description than that, you're banned.",
+            savion_soap: "Wash your hands, you animals. You've been touching all my stuff. Don't make me get the bleach.",
+            rons_bread: "It's for sandwiches. Don't come cryin' to me if you mess up a grilled cheese. That's a you problem.",
+            bk_ham: "Slap it between two slices of that bread I'm sellin'. Boom. Lunch. You're welcome.",
+            chopped_beef: "For when you're feelin' like a real carnivore. Cook it first. I'm not liable if you eat this raw and start seein' things.",
+            bio_egg_12: "They come from chickens. Don't drop 'em. Jim just mopped. This is the big pack for big goobers.",
+            bio_egg_8: "A respectable amount of eggs. Not too many, not too few. Good job.",
+            bio_egg_4: "You only need four eggs? What are you making, an omelet for an ant? Pathetic.",
+            narvalo_coffee: "For those mornings you look like a 1x1 Lego brick. Drink this and maybe you'll look like a 2x2.",
+            touprop_cleaner: "This stuff cleans things. Don't spray it in your eyes. The warning label is there for a reason, you goobers.",
+            kilemol_spray: "Get rid of those pesky flies buzzin' around your head. Or your mods. Same thing.",
+            patatartine_spread: "Eat it out of the jar with a spoon. No one's judging you here. Except me. I'm judging.",
+            boudain_powder: "It's chocolate powder. Mix it with milk. If you add water, you're a criminal and I'm calling the cops.",
+            honey_bees_cereal: "It's got honey and bees on the box. I don't think there's actual bees in it. Probably. Eat up.",
+            racoon_cereal: "Look at this little trash panda. He knows what's good. Be like the raccoon. Buy the cereal.",
+            patpat_cat_food: "Your cat's been staring at you all day. It's not because it loves you. It's hungry. Feed it this or it might eat you in your sleep.",
+            miaoumiam_cat_food: "This is the fancy stuff. For the cat that thinks it's better than you. Spoil that little goober. Kitty loves this so much, don't disappoint her.",
+            michmich_madeleines: "These are little fancy cakes. Good for a light snack before your actual snack.",
+            bonbek_candy: "It's candy. It's sugary. What more do you want from me? A whole speech? Just buy it, you simpleton.",
+            brassard_chocolate: "A whole bread thingy of chocolate. You could build a house with this. A delicious, delicious house.",
+            marbre_cake: "It's got swirls in it. Ooooh, fancy. Tastes like cake. Get it.",
+            montcuq_water: "It's water. It's wet. Hydrate yourself so you don't pass out in my store.",
+            flotte_water: "This water comes in a slightly smaller bottle. For people with smaller hands, I guess. I wouldn't know about that.",
+            lopez_butter: "Slap this on some toast. Makes everything better. Don't eat the whole block, you'll regret it. Or maybe you won't.",
+            covidos_chips: "They're chips. They're crunchy. They're salty. Perfect for when you're watching me dominate on stream.",
+            madone_yoghurt: "It's yogurt in a cup. Peel the lid, get a spoon. It's not rocket science. This one is... blue.",
+            yowp_yoghurt: "This one's green. Same stuff, different cup. Are you just buying these for the colors?",
+            frugen_yoghurt: "This one has fruit bits. A healthy choice... for a simpleton. Good job, you tried.",
+            patpat_dog_food: "Your dog's a good boy, right? Then get him the good stuff. He deserves it for putting up with you.",
+            souplesse_softener: "Makes your clothes feel less like cardboard. You'll finally be huggable. Maybe.",
+            maptite_hot_sauce: "You think you can handle this? This ain't for the weak. One drop of this and you'll be sweatin' more than me on a Tuesday.",
+            honei_honey: "It comes from bees. It's sticky. Put it on stuff. Don't get it in your hair.",
+            yoyo_mayo: "It's mayonnaise. For your sandwiches and stuff. It's jiggly. Kinda like me after a big meal.",
+            puray_potatoes: "Mashed potatoes without the mashing. Just add water and bam, potato goodness. Science, man.",
+            elo_rice: "A giant bag of rice. It'll last you a while. Or like, one meal for me.",
+            cola_soda: "It's fizzy and sugary. Drink it. Don't shake it unless you want to clean my ceiling.",
+            zap_soda: "Zap! Tastes like lightning, probably. Or just lemon-lime. Whatever, it's cheap.",
+            turko_cola: "Another cola. You guys really like cola, huh? Fine by me, more money for me.",
+            jus_twistu: "This one looks like fruit punch. It's probably delicious. Go on, twist it up.",
+            pablo_sugar: "Another bag of sugar. Because one is never enough. You guys are addicted.",
+            petus_toilet_paper: "Look, you got dookie stains, you need to wipe 'em. This is the good stuff, won't tear. You're welcome.",
+            veal_chop: "It's a piece of meat. You cook it, you eat it. Don't burn it, that's a waste of my perfectly good product.",
+            signoulos_toothpaste: "Brush your teeth. Your breath probably smells like a 1x1 Lego brick. This'll help.",
+            palace_tea: "For when you want to feel fancy while you're drinking hot leaf juice. Pinky up, goobers.",
+            java_bleach: "This is for, like, SERIOUS stains. Not for drinkin'. If you drink this, you're gonna have more problems than just being banned from my chat.",
+            bio_apple_juice: "It's apple juice. Tastes like apples. Mind-blowing, I know. Just buy it already.",
+            default: "I picked this out myself. It's probably the best you'll ever have. Now buy it before I get mad."
+        };
+
+        // --- Username Generation (More options added) ---
+        const adjectives = ['Goobery', 'Wobbly', 'Gigantic', 'Banned', 'Simple', 'Hungry', 'Jiggly', 'BoxShaped', 'Chonky', 'Glizzy', '1x1Lego', 'Dookie', 'Lawsuit', 'Cranky', 'Screaming', 'Sweaty', 'Loud', 'Bankrupt', 'Gassy', 'Confused', 'Crying', 'Greasy'];
+        const nouns = ['Simpleton', 'Goober', 'Eater', 'Customer', 'Builder', 'Donator', 'Mod', 'Shopper', 'Brick', 'Janitor', 'Victim', 'Gladiator', 'Gobbler', 'Hater', 'Fanboy', 'Keyboard', 'Creature', 'Mouthbreather', 'Bandit', 'Entity', 'Wall', 'Building'];
+
+        function generateUsername() {
+            const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const noun = nouns[Math.floor(Math.random() * nouns.length)];
+            const num = Math.floor(Math.random() * 900) + 100;
+            return `${adj}${noun}${num}`;
+        }
+
+        function getOrSetUsername() {
+            let username = sessionStorage.getItem('gooberUsername');
+            if (!username) {
+                username = generateUsername();
+                sessionStorage.setItem('gooberUsername', username);
+            }
+            document.getElementById('username-display').textContent = username;
+            return username;
+        }
+
+        // --- DOM Elements ---
+        const productGrid = document.getElementById('product-grid');
+        const searchBar = document.getElementById('search-bar');
+        const noResults = document.getElementById('no-results');
+        const productModal = document.getElementById('product-modal');
+        const legalModal = document.getElementById('legal-modal');
+        const businessesModal = document.getElementById('businesses-modal');
+        const dealContainer = document.getElementById('deal-of-the-day');
+        let currentItemUnsubscribe = null;
+
+        // --- Render Functions ---
+        const renderProducts = (productsToRender) => {
+            productGrid.innerHTML = '';
+            if (productsToRender.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            }
+            noResults.classList.add('hidden');
+            
+            productsToRender.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center cursor-pointer transition transform hover:scale-105 hover:shadow-xl';
+                card.innerHTML = `
+                    <div class="h-32 w-full flex items-center justify-center mb-4">
+                         <img src="${product.img}" alt="${product.name}" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/150x150/f3f4f6/9ca3af?text=Banned';">
+                    </div>
+                    <h4 class="font-bold text-sm h-10">${product.name}</h4>
+                    <p class="text-lg font-extrabold text-gray-800 mt-2">$${product.price.toFixed(2)}</p>
+                `;
+                card.addEventListener('click', () => openProductModal(product));
+                productGrid.appendChild(card);
+            });
+        };
+
+        const renderReviews = (container, reviews) => {
+            container.innerHTML = '';
+            if (reviews.length === 0) {
+                container.innerHTML = `<p class="text-gray-500 text-center">No reviews yet. Be the first simpleton to leave one!</p>`;
+                return;
+            }
+            reviews.sort((a, b) => b.timestamp.toDate() - a.timestamp.toDate()); // Sort newest first
+            reviews.forEach(review => {
+                const reviewEl = document.createElement('div');
+                reviewEl.className = 'bg-gray-50 p-3 rounded-lg border';
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                reviewEl.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <p class="font-bold text-sm">${review.username}</p>
+                        <p class="text-yellow-500 text-sm">${stars}</p>
+                    </div>
+                    <p class="text-gray-700 mt-1 text-sm">${review.comment}</p>
+                `;
+                container.appendChild(reviewEl);
+            });
+        };
+        
+        // --- Modal Logic ---
+        const openProductModal = (product) => {
+            // Unsubscribe from previous listener if it exists
+            if (currentItemUnsubscribe) {
+                currentItemUnsubscribe();
+            }
+
+            document.getElementById('modal-img').src = product.img;
+            document.getElementById('modal-name').textContent = product.name;
+            document.getElementById('modal-price').textContent = `$${product.price.toFixed(2)}`;
+            
+            // Updated to use specific descriptions
+            document.getElementById('modal-desc').textContent = productDescriptions[product.id] || productDescriptions.default;
+            
+            productModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            // Set current product ID for the form
+            document.getElementById('item-review-form').dataset.productId = product.id;
+            
+            // Fetch reviews for this specific item
+            const itemReviewsContainer = document.getElementById('item-reviews-container');
+            itemReviewsContainer.innerHTML = `<p class="text-gray-500">Loading Gooberviews...</p>`;
+            const q = query(itemReviewsCol, where("itemId", "==", product.id));
+            currentItemUnsubscribe = onSnapshot(q, (querySnapshot) => {
+                const reviews = [];
+                querySnapshot.forEach((doc) => {
+                    reviews.push(doc.data());
+                });
+                renderReviews(itemReviewsContainer, reviews);
+            });
+        };
+
+        const closeProductModal = () => {
+             // Unsubscribe when modal is closed
+            if (currentItemUnsubscribe) {
+                currentItemUnsubscribe();
+                currentItemUnsubscribe = null;
+            }
+            productModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            document.getElementById('item-review-form').reset();
+        };
+
+        // --- Event Listeners ---
+        searchBar.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredProducts = products.filter(p => p.name.toLowerCase().includes(searchTerm));
+            renderProducts(filteredProducts);
+        });
+
+        document.getElementById('close-product-modal').addEventListener('click', closeProductModal);
+        document.getElementById('legal-notice-btn').addEventListener('click', () => legalModal.classList.remove('hidden'));
+        document.getElementById('close-legal-modal').addEventListener('click', () => legalModal.classList.add('hidden'));
+        document.getElementById('other-businesses-btn').addEventListener('click', () => businessesModal.classList.remove('hidden'));
+        document.getElementById('close-businesses-modal').addEventListener('click', () => businessesModal.classList.add('hidden'));
+
+        // Close modals on background click
+        productModal.addEventListener('click', (e) => {
+            if (e.target === productModal) closeProductModal();
+        });
+        legalModal.addEventListener('click', (e) => {
+            if (e.target === legalModal) legalModal.classList.add('hidden');
+        });
+        businessesModal.addEventListener('click', (e) => {
+            if (e.target === businessesModal) businessesModal.classList.add('hidden');
+        });
+        
+        dealContainer.addEventListener('click', () => {
+            const dealProduct = JSON.parse(dealContainer.dataset.product);
+            if (dealProduct) {
+                openProductModal(dealProduct);
+            }
+        });
+
+        // --- Firebase Logic ---
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                console.log("Anonymous user signed in:", user.uid);
+                getOrSetUsername();
+                // Load initial data once authenticated
+                loadStoreReviews();
+            } else {
+                signInAnonymously(auth).catch(error => console.error("Anonymous sign-in failed:", error));
+            }
+        });
+        
+        // Store Review Submission
+        document.getElementById('store-review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const rating = form['store-rating'].value;
+            const comment = form['store-review-comment'].value;
+
+            if (!rating) {
+                form.querySelector('.star-rating').classList.add('shake');
+                setTimeout(() => form.querySelector('.star-rating').classList.remove('shake'), 500);
+                return;
+            }
+
+            try {
+                await addDoc(storeReviewsCol, {
+                    username: getOrSetUsername(),
+                    rating: parseInt(rating),
+                    comment: comment,
+                    timestamp: new Date()
+                });
+                form.reset();
+            } catch (error) {
+                console.error("Error adding store review: ", error);
+            }
+        });
+        
+        // Item Review Submission
+        document.getElementById('item-review-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const productId = form.dataset.productId;
+            const rating = form['item-rating'].value;
+            const comment = form['item-review-comment'].value;
+
+            if (!rating) {
+                form.querySelector('.star-rating').classList.add('shake');
+                setTimeout(() => form.querySelector('.star-rating').classList.remove('shake'), 500);
+                return;
+            }
+
+            try {
+                await addDoc(itemReviewsCol, {
+                    itemId: productId,
+                    username: getOrSetUsername(),
+                    rating: parseInt(rating),
+                    comment: comment,
+                    timestamp: new Date()
+                });
+                form.reset();
+            } catch (error) {
+                console.error("Error adding item review: ", error);
+            }
+        });
+        
+        // Load and Listen for Store Reviews
+        const loadStoreReviews = () => {
+            const storeReviewsContainer = document.getElementById('store-reviews-container');
+            onSnapshot(storeReviewsCol, (snapshot) => {
+                const reviews = [];
+                snapshot.forEach(doc => reviews.push(doc.data()));
+                
+                // Update stats
+                if (reviews.length > 0) {
+                    const totalRating = reviews.reduce((acc, r) => acc + r.rating, 0);
+                    const avgRating = (totalRating / reviews.length).toFixed(2);
+                    document.getElementById('store-avg-rating').textContent = avgRating;
+                    
+                    const goodReviews = reviews.filter(r => r.rating >= 4).length;
+                    const badReviews = reviews.filter(r => r.rating <= 2).length;
+                    const goodPercent = ((goodReviews / reviews.length) * 100).toFixed(0);
+                    const badPercent = ((badReviews / reviews.length) * 100).toFixed(0);
+                    document.getElementById('review-percentages').textContent = `👍 ${goodPercent}% Goober-Approved | 👎 ${badPercent}% Simpleton-Scorned`;
+
+                } else {
+                     document.getElementById('store-avg-rating').textContent = '4.23';
+                     document.getElementById('review-percentages').textContent = 'Be the first to rate!';
+                }
+
+                renderReviews(storeReviewsContainer, reviews);
+            });
+        };
+        
+        // --- New Feature: Deal of the Week ---
+        const setupDealOfTheDay = () => {
+            // Specific product for the deal as requested
+            let dealProduct = products.find(p => p.id === 'bio_egg_4');
+            let oldPrice = 6.00;
+            let newPrice = 3.75;
+
+            // Fallback to a random product if the specific one isn't found
+            if (!dealProduct) {
+                dealProduct = products[Math.floor(Math.random() * products.length)];
+                oldPrice = dealProduct.price; // Use original price
+                newPrice = (dealProduct.price * 0.75).toFixed(2); // generic discount
+            }
+            
+            // New positive description for the deal card ONLY. The original description is used in the modal.
+            const dealDescription = "An UNBELIEVABLE deal on eggs! Perfect for your breakfast, lunch, or a midnight snack. Get 'em before they're gone!";
+
+            dealContainer.dataset.product = JSON.stringify(dealProduct); // Store product data for modal
+            
+            dealContainer.innerHTML = `
+                <div class="relative w-full md:w-1/3 flex items-center justify-center">
+                    <img src="${dealProduct.img}" alt="${dealProduct.name}" class="max-h-64 object-contain">
+                    <div class="absolute top-0 right-0 bg-yellow-300 text-yellow-900 text-lg font-black px-4 py-2 rounded-full transform rotate-12 -mr-4 -mt-4 shadow-lg">
+                        HOT DEAL!
+                    </div>
+                </div>
+                <div class="w-full md:w-2/3 text-center md:text-left">
+                    <h4 class="text-4xl font-black mb-2">${dealProduct.name}</h4>
+                    <div class="flex items-baseline justify-center md:justify-start mb-4">
+                        <p class="text-2xl font-bold text-gray-200 line-through mr-4">$${oldPrice.toFixed(2)}</p>
+                        <p class="text-5xl font-black text-yellow-300">$${newPrice.toFixed(2)}!</p>
+                    </div>
+                    <p class="text-lg opacity-90">${dealDescription}</p>
+                    <p class="text-yellow-200 mt-4 font-bold animate-pulse">Click me to see more, you simpleton!</p>
+                </div>
+            `;
+        };
+
+        // --- Initial Load ---
+        renderProducts(products);
+        setupDealOfTheDay();
+
+    </script>
+</body>
+</html>
