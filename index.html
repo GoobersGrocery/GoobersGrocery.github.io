@@ -133,7 +133,14 @@
 
         <!-- Product Listing -->
         <section id="products-section" class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 md:p-8">
-            <h3 class="text-3xl font-bold mb-6 text-center">Our Gooberlicious Products</h3>
+            <h3 class="text-3xl font-bold mb-2 text-center">Our Gooberlicious Products</h3>
+             <div id="sort-controls" class="flex flex-wrap justify-center gap-2 mb-6">
+                <button data-sort="default" class="sort-btn bg-yellow-500 text-white font-semibold py-2 px-4 rounded-full text-sm">Default</button>
+                <button data-sort="price-asc" class="sort-btn bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-full text-sm hover:bg-gray-300">Price: Low to High</button>
+                <button data-sort="price-desc" class="sort-btn bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-full text-sm hover:bg-gray-300">Price: High to Low</button>
+                <button data-sort="name-asc" class="sort-btn bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-full text-sm hover:bg-gray-300">Name: A-Z</button>
+                <button data-sort="rating-desc" class="sort-btn bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-full text-sm hover:bg-gray-300">Rating: High to Low</button>
+            </div>
             <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
                 <!-- Products will be injected here by JavaScript -->
             </div>
@@ -275,6 +282,7 @@
                         <button id="close-product-modal" class="hidden md:block text-4xl text-gray-500 hover:text-gray-800 leading-none">&times;</button>
                     </div>
                     <p id="modal-price" class="text-2xl font-semibold text-yellow-600 my-2">$0.00</p>
+                    <div id="modal-avg-rating" class="mb-4"></div>
                     <p id="modal-desc" class="text-gray-600 mb-4">Product description goes here.</p>
                     
                     <h4 class="text-xl font-bold border-t pt-4 mt-4 mb-2">Gooberviews</h4>
@@ -468,7 +476,6 @@
             patpat_cat_food: "Your cat's been staring at you all day. It's not because it loves you. It's hungry. Feed it this or it might eat you in your sleep.",
             miaoumiam_cat_food: "This is the fancy stuff. For the cat that thinks it's better than you. Spoil that little goober. Kitty loves this so much, don't disappoint her.",
             patpat_dog_food: "Your dog's a good boy, right? Then get him the good stuff. He deserves it for putting up with you.",
-            // New Product Descriptions
             wc_boeff_bleach: "For when you need to clean up a... 'dookie' situation. This stuff is strong. Don't drink it.",
             farmers_mwef_chicken: "It's a whole chicken. Cook it. Don't bring it to me raw, you simpleton.",
             stark_tuna: "Tuna in plastic cup. Good for cats or hungry goobers. Your choice.",
@@ -505,9 +512,14 @@
         const legalModal = document.getElementById('legal-modal');
         const businessesModal = document.getElementById('businesses-modal');
         const dealContainer = document.getElementById('deal-of-the-week');
+        const sortControls = document.getElementById('sort-controls');
+
         let currentItemUnsubscribe = null;
         let weeklyDealProduct = null;
         const initialTitle = document.title;
+        let productReviewStats = {};
+        let currentSort = 'default';
+        let currentSearchTerm = '';
 
         const getWeekNumber = (d) => {
             d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -541,6 +553,36 @@
             `;
         };
 
+        function generateStarRatingHTML(productId, size = 'sm') {
+            const stats = productReviewStats[productId];
+            const textSize = size === 'sm' ? 'text-sm' : 'text-lg';
+            const countSize = size === 'sm' ? 'text-xs' : 'text-sm';
+
+            if (!stats || stats.count === 0) {
+                return `
+                    <div class="flex items-center justify-center ${textSize} mt-1" title="No reviews yet">
+                        <span class="text-gray-300">★★★★★</span>
+                        <span class="ml-1 text-gray-400 ${countSize}">(${0})</span>
+                    </div>
+                `;
+            }
+
+            const avgRating = stats.average;
+            const reviewCount = stats.count;
+            const fullStars = Math.round(avgRating);
+            let starsHTML = '';
+            for (let i = 0; i < 5; i++) {
+                starsHTML += `<span class="${i < fullStars ? 'text-yellow-400' : 'text-gray-300'}">★</span>`;
+            }
+
+            return `
+                <div class="flex items-center justify-center ${textSize} mt-1" title="${avgRating.toFixed(2)} out of 5 stars">
+                    ${starsHTML}
+                    <span class="ml-1 text-gray-500 ${countSize}">(${reviewCount})</span>
+                </div>
+            `;
+        }
+
         const renderProducts = (productsToRender) => {
             productGrid.innerHTML = '';
             if (productsToRender.length === 0) {
@@ -566,14 +608,21 @@
                     `;
                     dealBadge = `<div class="absolute top-0 right-0 bg-gradient-to-br from-red-500 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-md shadow-lg">DEAL!</div>`;
                 }
+                
+                const ratingHTML = generateStarRatingHTML(product.id, 'sm');
 
                 card.innerHTML = `
                     ${dealBadge}
-                    <div class="h-24 md:h-32 w-full flex items-center justify-center mb-2 md:mb-4">
+                    <div class="h-24 md:h-32 w-full flex items-center justify-center mb-2">
                          <img src="${product.img}" alt="${product.name}" class="max-h-full max-w-full object-contain" onerror="this.onerror=null;this.src='https://placehold.co/150x150/f3f4f6/9ca3af?text=Banned';">
                     </div>
-                    <h4 class="font-bold text-xs md:text-sm h-10 flex items-center justify-center">${product.name}</h4>
-                    ${priceHTML}
+                    <div class="flex-grow flex flex-col justify-between w-full">
+                         <h4 class="font-bold text-xs md:text-sm flex items-center justify-center min-h-[40px]">${product.name}</h4>
+                         <div>
+                            ${priceHTML}
+                            ${ratingHTML}
+                         </div>
+                    </div>
                 `;
                 card.addEventListener('click', () => openProductModal(product));
                 productGrid.appendChild(card);
@@ -646,6 +695,7 @@
             document.getElementById('modal-img').src = product.img;
             document.getElementById('modal-name').textContent = product.name;
             document.getElementById('modal-price').innerHTML = priceHTML;
+            document.getElementById('modal-avg-rating').innerHTML = generateStarRatingHTML(product.id, 'lg');
             document.getElementById('modal-desc').textContent = productDescriptions[product.id] || productDescriptions.default;
             
             productModal.classList.remove('hidden');
@@ -673,13 +723,54 @@
             document.title = initialTitle;
             history.pushState({}, initialTitle, window.location.pathname);
         };
-
-        const handleSearch = (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            renderProducts(products.filter(p => p.name.toLowerCase().includes(searchTerm)));
-        };
-        searchBar.addEventListener('input', handleSearch);
         
+        const filterAndSortAndRender = () => {
+            let productsToRender = products.filter(p => p.name.toLowerCase().includes(currentSearchTerm));
+            
+            const getPrice = p => (weeklyDealProduct && p.id === weeklyDealProduct.id ? p.dealPrice : p.price);
+            const getRating = p => (productReviewStats[p.id]?.average || 0);
+
+            let sortedProducts = [...productsToRender]; 
+            
+            switch(currentSort) {
+                case 'price-asc':
+                    sortedProducts.sort((a, b) => getPrice(a) - getPrice(b));
+                    break;
+                case 'price-desc':
+                    sortedProducts.sort((a, b) => getPrice(b) - getPrice(a));
+                    break;
+                case 'name-asc':
+                    sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'rating-desc':
+                    sortedProducts.sort((a, b) => getRating(b) - getRating(a));
+                    break;
+            }
+
+            renderProducts(sortedProducts);
+        };
+        
+        searchBar.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value.toLowerCase();
+            filterAndSortAndRender();
+        });
+
+        sortControls.addEventListener('click', (e) => {
+            const sortBtn = e.target.closest('.sort-btn');
+            if (!sortBtn) return;
+            
+            currentSort = sortBtn.dataset.sort;
+            
+            sortControls.querySelectorAll('.sort-btn').forEach(btn => {
+                btn.classList.remove('bg-yellow-500', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+            });
+            sortBtn.classList.add('bg-yellow-500', 'text-white');
+            sortBtn.classList.remove('bg-gray-200', 'text-gray-700', 'hover:bg-gray-300');
+
+            filterAndSortAndRender();
+        });
+
         document.getElementById('close-product-modal').addEventListener('click', closeProductModal);
         document.getElementById('close-product-modal-mobile').addEventListener('click', closeProductModal);
         document.getElementById('legal-notice-btn').addEventListener('click', () => legalModal.classList.remove('hidden'));
@@ -696,10 +787,37 @@
             if (dealProduct) openProductModal(dealProduct);
         });
 
+        const listenForProductReviews = () => {
+            onSnapshot(itemReviewsCol, (snapshot) => {
+                const reviewsByItem = {};
+                snapshot.docs.forEach(doc => {
+                    const review = doc.data();
+                    if (!reviewsByItem[review.itemId]) {
+                        reviewsByItem[review.itemId] = [];
+                    }
+                    reviewsByItem[review.itemId].push(review.rating);
+                });
+
+                const newStats = {};
+                for (const itemId in reviewsByItem) {
+                    const ratings = reviewsByItem[itemId];
+                    const totalRating = ratings.reduce((acc, rating) => acc + rating, 0);
+                    newStats[itemId] = {
+                        count: ratings.length,
+                        totalRating: totalRating,
+                        average: totalRating / ratings.length
+                    };
+                }
+                productReviewStats = newStats;
+                filterAndSortAndRender();
+            });
+        };
+
         onAuthStateChanged(auth, user => {
             if (user) {
                 getOrSetUsername();
                 loadStoreReviews();
+                listenForProductReviews();
             } else {
                 signInAnonymously(auth).catch(error => console.error("Anonymous sign-in failed:", error));
             }
@@ -838,7 +956,7 @@
         window.onpopstate = () => checkUrlForProduct();
         
         setupDealOfTheWeek();
-        renderProducts(products);
+        filterAndSortAndRender();
         checkUrlForProduct();
 
     </script>
