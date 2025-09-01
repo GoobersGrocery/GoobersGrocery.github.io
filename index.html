@@ -651,7 +651,7 @@
             productModal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
 
-            document.title = `${product.name} | Goobers' Grocery`;
+            document.title = `${product.name} - Goobers' Grocery`;
             history.pushState({ productId: product.id }, document.title, `?product=${product.id}`);
 
             document.getElementById('item-review-form').dataset.productId = product.id;
