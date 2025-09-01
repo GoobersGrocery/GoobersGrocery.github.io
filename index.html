@@ -62,22 +62,29 @@
             75% { transform: translateX(5px); }
         }
         
-        /* Custom scrollbar for the store reviews container */
-        #store-reviews-container::-webkit-scrollbar {
+        /* Custom scrollbar styling */
+        .custom-scrollbar::-webkit-scrollbar {
             width: 10px;
         }
-        #store-reviews-container::-webkit-scrollbar-track {
-            background: #fffbeB; /* Light yellow */
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
             border-radius: 10px;
         }
-        #store-reviews-container::-webkit-scrollbar-thumb {
+        .custom-scrollbar::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, #f59e0b, #ea580c);
             border-radius: 10px;
-            border: 2px solid #fffbeB;
+            border: 2px solid #f1f5f9;
         }
-        #store-reviews-container::-webkit-scrollbar-thumb:hover {
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(to bottom, #facc15, #f97316);
         }
+
+        #store-reviews-container::-webkit-scrollbar-track {
+             background: #fffbeB; /* Light yellow for this specific container */
+        }
+         #store-reviews-container::-webkit-scrollbar-thumb {
+             border: 2px solid #fffbeB;
+         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
@@ -201,7 +208,7 @@
                     <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg transition">Submit Gooberview</button>
                 </form>
                 <!-- Existing Reviews -->
-                <div id="store-reviews-container" class="mt-auto flex-grow h-64 overflow-y-auto space-y-4 pr-2">
+                <div id="store-reviews-container" class="mt-auto flex-grow h-64 overflow-y-auto space-y-4 pr-2 custom-scrollbar">
                     <p class="text-center text-gray-500">Loading reviews...</p>
                 </div>
             </section>
@@ -245,15 +252,18 @@
     </nav>
 
     <!-- Product Modal -->
-    <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
-        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col md:flex-row overflow-hidden">
-            <div class="w-full md:w-1/2 p-4 flex items-center justify-center bg-gray-100 relative">
-                 <!-- Close button for mobile view, inside the image container -->
-                <button id="close-product-modal-mobile" class="md:hidden absolute top-2 right-2 bg-gray-800/50 text-white rounded-full h-8 w-8 flex items-center justify-center text-xl">&times;</button>
-                <img id="modal-img" src="" alt="Product Image" class="max-w-full max-h-64 md:max-h-96 object-contain">
+    <div id="product-modal" class="fixed inset-0 z-50 flex md:items-center md:justify-center p-0 md:p-4 modal-bg hidden">
+        <div class="bg-white w-full h-full md:rounded-2xl shadow-2xl md:max-w-4xl md:max-h-[90vh] flex flex-col md:flex-row overflow-hidden">
+            <!-- Image Container: Takes top 1/3 of height on mobile -->
+            <div class="w-full md:w-1/2 p-4 flex items-center justify-center bg-gray-100 relative h-1/3 md:h-auto">
+                 <!-- Close button for mobile view -->
+                <button id="close-product-modal-mobile" class="md:hidden absolute top-4 right-4 bg-black/50 text-white rounded-full h-10 w-10 flex items-center justify-center text-2xl z-10">&times;</button>
+                <img id="modal-img" src="" alt="Product Image" class="max-w-full max-h-full object-contain">
             </div>
-            <div class="w-full md:w-1/2 p-6 flex flex-col">
-                <div class="flex-grow overflow-y-auto pr-2">
+            <!-- Content Container: Takes bottom 2/3 of height on mobile -->
+            <div class="w-full md:w-1/2 p-6 flex flex-col h-2/3 md:h-auto">
+                <!-- This inner div is the main scrollable area for content -->
+                <div class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
                     <div class="flex justify-between items-start">
                         <h3 id="modal-name" class="text-2xl md:text-3xl font-bold pr-4">Product Name</h3>
                         <button id="close-product-modal" class="hidden md:block text-4xl text-gray-500 hover:text-gray-800 leading-none">&times;</button>
@@ -262,12 +272,13 @@
                     <p id="modal-desc" class="text-gray-600 mb-4">Product description goes here.</p>
                     
                     <h4 class="text-xl font-bold border-t pt-4 mt-4 mb-2">Gooberviews</h4>
-                    <div id="item-reviews-container" class="space-y-3 mb-4 max-h-48 overflow-y-auto">
-                        <!-- Item reviews will be loaded here -->
+                    <!-- This div for item reviews now scrolls within its parent -->
+                    <div id="item-reviews-container" class="space-y-3 mb-4">
                         <p class="text-gray-500">No reviews yet. Be the first simpleton to leave one!</p>
                     </div>
                 </div>
                 
+                <!-- Review form stays at the bottom, not part of the scroll -->
                 <div class="flex-shrink-0 border-t pt-4 mt-auto">
                     <h4 class="text-lg font-bold mb-2">Leave your own Gooberview</h4>
                     <form id="item-review-form" class="space-y-3">
