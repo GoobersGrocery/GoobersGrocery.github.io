@@ -269,9 +269,9 @@
     </nav>
 
     <!-- Product Modal -->
-    <div id="product-modal" class="fixed inset-0 z-50 flex md:items-center md:justify-center p-0 md:p-4 modal-bg hidden">
+    <div id="product-modal" class="fixed inset-0 z-50 flex items-start md:items-center justify-center p-0 md:p-4 modal-bg hidden overflow-y-auto custom-scrollbar">
         <!-- Main modal container: made it wider (5xl) but constrained its height for a more "cinematic" and less "long" feel -->
-        <div class="bg-white w-full h-full md:rounded-2xl shadow-2xl md:max-w-5xl md:h-[700px] flex flex-col md:flex-row overflow-hidden">
+        <div class="bg-white w-full md:rounded-2xl shadow-2xl md:max-w-5xl md:h-[700px] flex flex-col md:flex-row md:overflow-hidden">
             
             <!-- Image container: Given more space -->
             <div class="w-full md:w-7/12 p-6 flex items-center justify-center bg-gray-50 relative h-1/3 md:h-auto">
@@ -280,7 +280,7 @@
             </div>
 
             <!-- Content container: Cleaner, more structured, with dedicated scrolling for reviews -->
-            <div class="w-full md:w-5/12 p-6 flex flex-col h-2/3 md:h-full overflow-hidden bg-white">
+            <div class="w-full md:w-5/12 p-6 flex flex-col flex-grow bg-white">
                 
                 <!-- Section 1: Product details (fixed top) -->
                 <div class="flex-shrink-0">
@@ -295,7 +295,7 @@
                 </div>
                 
                 <!-- Section 2: Reviews container (scrollable middle) -->
-                <div class="flex-grow overflow-y-auto custom-scrollbar -mr-4 pr-4">
+                <div class="flex-grow md:overflow-y-auto custom-scrollbar -mr-4 pr-4">
                      <h4 class="text-xl font-bold mb-2 sticky top-0 bg-white py-2">Gooberviews</h4>
                      <div id="item-reviews-container" class="space-y-4 mb-4">
                         <p class="text-gray-500">No reviews yet. Be the first simpleton to leave one!</p>
@@ -376,7 +376,7 @@
             { id: 'sublett_flour', name: "Sublett's White Whole Wheat Flour", price: 3.50, dealPrice: 2.99, img: "https://i.postimg.cc/x16q2WH2/Flour-Sublett-s.webp", dealDescription: "This fancy flour is on sale. Don't ask me what 'whole wheat' means." },
             { id: 'susu_sugar', name: 'SUSU Powdered Sugar 1kg', price: 6.99, dealPrice: 4.29, img: 'https://i.postimg.cc/Zq9Yh048/Sugar-Powdered-Susu.webp', dealDescription: "Get your sugar fix for less. Don't blame me for your cavities." },
             { id: 'pablo_sugar', name: 'Pablo Powdered Sugar 750g', price: 3.00, dealPrice: 2.50, img: 'https://i.postimg.cc/HxXpVKJj/Sugar-Powdered-Pablo.webp', dealDescription: "More sugar. You people have a problem. At least it's on sale." },
-            { id: 'panzati_spaghetti', name: 'Panzati Spaghetti', price: 4.50, dealPrice: 3.75, img: 'https://i.postimg.cc/qBcJrPV5/Pasta-Panzati.webp', dealDescription: "Making spaghetti? Good. Don't mess it up. Now it's cheaper to try." },
+            { id: 'panzati_spaghetti', name: 'Panzati Spaghetti 500g', price: 4.50, dealPrice: 3.75, img: 'https://i.postimg.cc/qBcJrPV5/Pasta-Panzati.webp', dealDescription: "Making spaghetti? Good. Don't mess it up. Now it's cheaper to try." },
             { id: 'elo_rice', name: 'Elo Rice 1kg', price: 8.99, dealPrice: 7.49, img: 'https://i.postimg.cc/vHQQZ0GH/Rice-Elo.webp', dealDescription: "A big ol' bag of rice. Should last you at least a day. Maybe two." },
             { id: 'lespieds_oil', name: 'Lespieds Oil', price: 4.00, dealPrice: 3.00, img: 'https://i.postimg.cc/T3LBdb53/Oil-Lespieds.webp', dealDescription: "Stop your food from sticking to the pan. It's a miracle of science, and it's on sale." },
             { id: 'honei_honey', name: 'Honei Honey', price: 4.99, dealPrice: 4.25, img: 'https://i.postimg.cc/9QDHDSKV/Honey-Hone.webp', dealDescription: "Sticky stuff from bees. Cheaper this week. Don't make a mess." },
@@ -975,3 +975,4 @@
     </script>
 </body>
 </html>
+
