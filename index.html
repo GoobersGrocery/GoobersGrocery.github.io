@@ -674,20 +674,34 @@
                 container.appendChild(reviewEl);
             });
 
+            // FIX: Attached listener with logic to prevent multiple clicks
             container.querySelectorAll('.helpful-btn').forEach(btn => {
-                btn.addEventListener('click', async (e) => {
+                btn.addEventListener('click', (e) => {
                     const button = e.currentTarget;
+                    button.disabled = true; // Disable immediately
                     const reviewId = button.dataset.reviewId;
+                    
+                    const helpfulVotes = JSON.parse(localStorage.getItem('helpfulVotes') || '{}');
                     if (!reviewId || helpfulVotes[reviewId]) return;
-
-                    const reviewRef = doc(collectionRef, reviewId);
-                    await updateDoc(reviewRef, { helpfulCount: increment(1) });
 
                     helpfulVotes[reviewId] = true;
                     localStorage.setItem('helpfulVotes', JSON.stringify(helpfulVotes));
-                    button.classList.remove('bg-gray-200', 'hover:bg-gray-300', 'text-gray-600');
-                    button.classList.add('bg-green-500', 'text-white');
-                    button.disabled = true;
+
+                    // Optimistically update UI
+                    button.classList.replace('bg-gray-200', 'bg-green-500');
+                    button.classList.add('text-white');
+                    const countSpan = button.textContent.match(/\((\d+)\)/);
+                    if (countSpan) {
+                        const newCount = parseInt(countSpan[1], 10) + 1;
+                        button.innerHTML = `<i class="fa-solid fa-thumbs-up mr-1"></i> Helpful (${newCount})`;
+                    }
+
+                    // Update database
+                    const reviewRef = doc(collectionRef, reviewId);
+                    updateDoc(reviewRef, { helpfulCount: increment(1) }).catch(err => {
+                        console.error("Firebase update failed:", err);
+                        // Optional: Revert UI changes on error
+                    });
                 });
             });
         };
