@@ -174,6 +174,22 @@
                             <p class="font-bold text-right mt-2 text-sm md:text-base">- Slim, Cashier</p>
                         </div>
                     </div>
+            <!-- A word from our founder -->
+					<section class="bg-white rounded-2xl shadow-lg p-6 md:p-8 mt-8">
+						<h3 class="text-2xl md:text-3xl font-bold mb-6 text-center">A Word From Our Founder</h3>
+						<div class="space-y-4">
+							<p class="text-gray-600 italic text-sm md:text-base">
+								"Every shop I open, every little thing I put together, is for one reason: I want people to walk in happy and leave thinking, 'That felt good.' Groceries, snacks, fun, everything should hit just right."
+							</p>
+							<p class="text-gray-600 italic text-sm md:text-base">
+								"My team matters just as much. Happy employees make happy customers. When my crew feels valued and supported, they spread that energy to everyone who walks in."
+							</p>
+							<p class="text-gray-600 italic text-sm md:text-base">
+								"I don’t open stores just to open stores. I open them to create spaces where people feel seen, cared for, and excited to come back. Customers and employees alike, I want everyone leaving with a smile. That is the Caseoh way."
+							</p>
+							<p class="font-bold text-right mt-2 text-sm md:text-base">- Caseoh, Founder</p>
+						</div>
+					</section>
                 </div>
             </section>
             
@@ -372,8 +388,8 @@
 
         const products = [
             // Existing Products with Deal Info
-            { id: 'farine_flour', name: 'Farine Suprême Flour', price: 2.99, dealPrice: 2.49, img: 'https://i.postimg.cc/YC6jsv2h/Flour-Farine.webp', dealDescription: "Bake a cake for your favorite streamer (me). Now it's cheaper. No excuses." },
-            { id: 'sublett_flour', name: "Sublett's White Whole Wheat Flour", price: 3.50, dealPrice: 2.99, img: "https://i.postimg.cc/x16q2WH2/Flour-Sublett-s.webp", dealDescription: "This fancy flour is on sale. Don't ask me what 'whole wheat' means." },
+            { id: 'farine_flour', name: 'Farine Suprême Flour 1kg', price: 2.99, dealPrice: 2.49, img: 'https://i.postimg.cc/YC6jsv2h/Flour-Farine.webp', dealDescription: "Bake a cake for your favorite streamer (me). Now it's cheaper. No excuses." },
+            { id: 'sublett_flour', name: "Sublett's White Whole Wheat Flour 1kg", price: 3.50, dealPrice: 2.99, img: "https://i.postimg.cc/x16q2WH2/Flour-Sublett-s.webp", dealDescription: "This fancy flour is on sale. Don't ask me what 'whole wheat' means." },
             { id: 'susu_sugar', name: 'SUSU Powdered Sugar 1kg', price: 6.99, dealPrice: 4.29, img: 'https://i.postimg.cc/Zq9Yh048/Sugar-Powdered-Susu.webp', dealDescription: "Get your sugar fix for less. Don't blame me for your cavities." },
             { id: 'pablo_sugar', name: 'Pablo Powdered Sugar 750g', price: 3.00, dealPrice: 2.50, img: 'https://i.postimg.cc/HxXpVKJj/Sugar-Powdered-Pablo.webp', dealDescription: "More sugar. You people have a problem. At least it's on sale." },
             { id: 'panzati_spaghetti', name: 'Panzati Spaghetti 500g', price: 4.50, dealPrice: 3.75, img: 'https://i.postimg.cc/qBcJrPV5/Pasta-Panzati.webp', dealDescription: "Making spaghetti? Good. Don't mess it up. Now it's cheaper to try." },
@@ -426,7 +442,7 @@
             { id: 'touprop_cleaner', name: 'Touprop Triple Action Cleaner', price: 6.99, dealPrice: 5.99, img: 'https://i.postimg.cc/pd2s4nvT/Cleaner-Touprop.webp', dealDescription: "Clean your filthy house. This stuff works. Don't spray it in your eyes." },
             { id: 'kilemol_spray', name: 'Kilemol Bug Spray', price: 5.99, dealPrice: 4.99, img: 'https://i.postimg.cc/Y9QfSrMV/Cleaner-Kilemol.webp', dealDescription: "For when you have a fly in your room... or a mod in your chat. Same thing." },
             { id: 'souplesse_softener', name: 'Souplesse Fresh Air Fabric Softener', price: 14.99, dealPrice: 12.99, img: 'https://i.postimg.cc/3JtjNbQK/Fabric-Softener-Souplesse.webp', dealDescription: "Make your clothes less... crusty. You might even be huggable. Maybe." },
-            { id: 'java_bleach', name: 'Java Vevel Bleach 760 ml', price: 8.99, dealPrice: 7.50, img: 'https://i.postimg.cc/zBYK6sKk/Bleach-Jaja-Vevel.webp', dealDescription: "The serious stuff for serious stains. NOT FOR DRINKING. I mean it." },
+            { id: 'java_bleach', name: 'Java Vevel Bleach 760ml', price: 8.99, dealPrice: 7.50, img: 'https://i.postimg.cc/zBYK6sKk/Bleach-Jaja-Vevel.webp', dealDescription: "The serious stuff for serious stains. NOT FOR DRINKING. I mean it." },
             { id: "wc_boeff_bleach", name: "WC Boeff Bleach", price: 8.99, dealPrice: 7.25, img: "https://i.postimg.cc/W44tT00H/Bleach-WC-Boeff-1.webp", dealDescription: "For when you need to clean up a... 'dookie' situation. This stuff is strong." },
             { id: 'patpat_cat_food', name: 'PatPat Cat Food', price: 17.99, dealPrice: 15.99, img: 'https://i.postimg.cc/1X965DWn/Cat-Food-Patpat.webp', dealDescription: "Your cat is hungry. Feed it this or it will eat you in your sleep. On sale." },
             { id: 'miaoumiam_cat_food', name: 'Miaoumiam Chicken & Catnip 4kg', price: 19.50, dealPrice: 16.99, img: 'https://i.postimg.cc/Z51dvG7h/Cat-Food-Miaoumiam.webp', dealDescription: "The fancy cat food for the cat that thinks it's better than you. Spoil it." },
@@ -989,4 +1005,3 @@
     </script>
 </body>
 </html>
-
