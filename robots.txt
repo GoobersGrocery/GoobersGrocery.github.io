@@ -1,10 +1,7 @@
-Allow all web crawlers access to the entire site
 User-agent: *
 Allow: /
 
-Specifically allow Google's AI bots access
 User-agent: Google-Extended
 Allow: /
 
-Sitemap location
-Sitemap: https://www.google.com/search?q=https://github.com/GoobersGrocery/GoobersGrocery.github.io/blob/goobers/sitemap.xml
+Sitemap: https://goobersgrocery.github.io/sitemap.xml
