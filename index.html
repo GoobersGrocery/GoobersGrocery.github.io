@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Welcome to Goobers' Grocery, the greatest grocery store ever built by the legend, Caseoh. Find gooberlicious products at ridiculously low prices.">
-    <meta name="keywords" content="Goobers' Grocery, Caseoh, grocery, food, online shopping, deals">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Welcome to Goobers' Grocery, the greatest grocery store ever built by the legend, Caseoh. Find gooberlicious products, weekly deals, and more.">
     <meta name="author" content="Caseoh">
     <title>Goobers' Grocery - Home of the Gooberlicious!</title>
     <link rel="icon" type="image/png" href="https://i.postimg.cc/tTFgvtKZ/logowithoutnamegoobersgroceryimg.png">
@@ -89,43 +89,6 @@
              border: 2px solid #fffbeB;
          }
     </style>
-
-    <!-- JSON-LD Structured Data for AI Bots -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "GroceryStore",
-      "name": "Goobers' Grocery",
-      "description": "The greatest grocery store ever built by Caseoh. Top-tier, gooberlicious items personally curated for perfect customers.",
-      "url": "https://your-github-username.github.io/your-repository-name/",
-      "logo": "https://i.postimg.cc/sx6CTMgG/logowithnamegoobersgroceryimg.png",
-      "founder": {
-        "@type": "Person",
-        "name": "Caseoh",
-        "image": "https://mythictalent.b-cdn.net/creators/caseoh.png",
-        "description": "Listen up. Before 'Goobers' Grocery,' you were all eating dirt. I looked at the grocery world and thought, 'This is garbage. I can do better.' So I did."
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "123 Goober Lane",
-        "addressLocality": "Simpleton City",
-        "addressRegion": "GOOB",
-        "postalCode": "12345",
-        "addressCountry": "US"
-      },
-      "openingHours": "Mo-Su 00:00-23:59",
-      "telephone": "+1-555-GOOBER",
-      "priceRange": "$",
-      "servesCuisine": "Gooberlicious Goods"
-    }
-    </script>
-    <script type="application/ld+json" id="product-structured-data">
-    {
-        "@context": "https://schema.org",
-        "@graph": []
-    }
-    </script>
-
 </head>
 <body class="bg-gray-100 text-gray-800">
 
@@ -626,6 +589,108 @@
             `;
         };
 
+        /**
+         * Generates and injects JSON-LD structured data into the document's head
+         * for SEO purposes, detailing all products and the weekly special offer.
+         */
+        const generateStructuredData = () => {
+            // Remove existing structured data to prevent duplicates
+            const oldScript = document.querySelector('script[type="application/ld+json"]');
+            if (oldScript) {
+                oldScript.remove();
+            }
+
+            const today = new Date();
+            const dayOfWeek = today.getDay(); // Sunday - 0, Monday - 1, ..., Saturday - 6
+            const startDate = new Date(today);
+            startDate.setDate(today.getDate() - dayOfWeek);
+            const endDate = new Date(startDate);
+            endDate.setDate(startDate.getDate() + 6);
+
+            const formatDate = (date) => date.toISOString().split('T')[0];
+
+            const productList = products.map(product => {
+                const isDeal = weeklyDealProduct && product.id === weeklyDealProduct.id;
+                const offers = [];
+                const stats = productReviewStats[product.id];
+
+                // Add the standard price offer
+                offers.push({
+                    "@type": "Offer",
+                    "price": product.price.toFixed(2),
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock",
+                     "seller": {
+                        "@type": "Organization",
+                        "name": "Goobers' Grocery"
+                    }
+                });
+
+                // If it's the deal of the week, add a SpecialOffer
+                if (isDeal) {
+                    offers.push({
+                        "@type": "SpecialOffer",
+                        "price": product.dealPrice.toFixed(2),
+                        "priceCurrency": "USD",
+                        "availability": "https://schema.org/InStock",
+                        "validFrom": formatDate(startDate),
+                        "validThrough": formatDate(endDate),
+                        "seller": {
+                            "@type": "Organization",
+                            "name": "Goobers' Grocery"
+                        }
+                    });
+                }
+
+                const productSchema = {
+                    "@type": "Product",
+                    "name": product.name,
+                    "image": product.img,
+                    "description": productDescriptions[product.id] || productDescriptions.default,
+                    "sku": product.id,
+                    "brand": {
+                        "@type": "Brand",
+                        "name": "Goobers' Grocery"
+                    },
+                    "offers": offers
+                };
+
+                // Add aggregate rating if reviews exist for this product
+                if (stats && stats.count > 0) {
+                    productSchema.aggregateRating = {
+                        "@type": "AggregateRating",
+                        "ratingValue": stats.average.toFixed(2),
+                        "reviewCount": stats.count,
+                        "bestRating": "5",
+                        "worstRating": "1"
+                    };
+                }
+
+                return productSchema;
+            });
+
+            const structuredData = {
+                "@context": "https://schema.org",
+                "@type": "GroceryStore",
+                "name": "Goobers' Grocery",
+                "image": "https://i.postimg.cc/sx6CTMgG/logowithnamegoobersgroceryimg.png",
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Gooberlicious Products",
+                    "itemListElement": productList.map(p => ({
+                        "@type": "ListItem",
+                        "item": p
+                    }))
+                }
+            };
+            
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(structuredData, null, 2); // Pretty print for readability
+            document.head.appendChild(script);
+        };
+
+
         function generateStarRatingHTML(productId, size = 'sm') {
             const stats = productReviewStats[productId];
             const textSize = size === 'sm' ? 'text-sm' : 'text-lg';
@@ -654,51 +719,6 @@
                     <span class="ml-1 text-gray-500 ${countSize}">(${reviewCount})</span>
                 </div>
             `;
-        }
-        
-        function updateProductStructuredData() {
-            const structuredData = {
-                "@context": "https://schema.org",
-                "@graph": products.map(product => {
-                    const stats = productReviewStats[product.id];
-                    const offer = {
-                        "@type": "Offer",
-                        "priceCurrency": "USD",
-                        "price": product.price.toFixed(2),
-                        "availability": "https://schema.org/InStock",
-                        "url": `https://your-github-username.github.io/your-repository-name/?product=${product.id}`
-                    };
-
-                    if (weeklyDealProduct && product.id === weeklyDealProduct.id) {
-                        offer.price = product.dealPrice.toFixed(2);
-                        offer.priceValidUntil = new Date(new Date().setDate(new Date().getDate() + 7)).toISOString();
-                    }
-                    
-                    const productData = {
-                        "@type": "Product",
-                        "name": product.name,
-                        "image": product.img,
-                        "description": productDescriptions[product.id] || productDescriptions.default,
-                        "sku": product.id,
-                        "brand": {
-                            "@type": "Brand",
-                            "name": "Goobers' Choice"
-                        },
-                        "offers": offer
-                    };
-
-                    if (stats && stats.count > 0) {
-                        productData.aggregateRating = {
-                            "@type": "AggregateRating",
-                            "ratingValue": stats.average.toFixed(2),
-                            "reviewCount": stats.count
-                        };
-                    }
-                    
-                    return productData;
-                })
-            };
-            document.getElementById('product-structured-data').textContent = JSON.stringify(structuredData, null, 2);
         }
 
         const renderProducts = (productsToRender) => {
@@ -942,7 +962,7 @@
                 }
                 productReviewStats = newStats;
                 filterAndSortAndRender();
-                updateProductStructuredData(); // Update structured data when reviews change
+                generateStructuredData(); // Regenerate data with updated review stats
             });
         };
 
@@ -1088,11 +1108,13 @@
         
         window.onpopstate = () => checkUrlForProduct();
         
+        // --- Page Initialization ---
         setupDealOfTheWeek();
+        generateStructuredData(); // <-- This is the new function call
         filterAndSortAndRender();
         checkUrlForProduct();
-        updateProductStructuredData(); // Initial population of product data
 
     </script>
 </body>
 </html>
+
