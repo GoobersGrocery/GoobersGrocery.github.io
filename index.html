@@ -23,6 +23,14 @@
         html {
             scroll-behavior: smooth;
         }
+        #hero-section, #products-section, #reviews-section {
+            scroll-margin-top: 90px;
+        }
+        @media (min-width: 768px) {
+            #hero-section, #products-section, #reviews-section {
+                scroll-margin-top: 120px;
+            }
+        }
         /* Global scrollbar hiding while maintaining full scrollability */
         * {
             scrollbar-width: none !important;
@@ -39,17 +47,22 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            background-image: url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/04/supermarket-simulator-5.jpg?q=70&fit=contain&w=1200&h=628&dpr=1');
+            /* Warm gradient overlay blending into the supermarket image */
+            background-image: 
+                linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 243, 224, 0.85) 100%), url('https://static0.gamerantimages.com/wordpress/wp-content/uploads/2024/04/supermarket-simulator-5.jpg?q=70&fit=contain&w=1200&h=628&dpr=1');
             background-size: cover;
-            background-position: center center;
-            opacity: 0.15;
-            filter: blur(6px);
+            background-position: center;
             z-index: -1;
-            transform: scale(1.05);
+            /* Subtle breathing animation to make it feel alive */
+            animation: bg-pan 20s infinite alternate ease-in-out;
+        }
+        @keyframes bg-pan {
+            0% { transform: scale(1.02) translate(0, 0); }
+            100% { transform: scale(1.06) translate(-10px, -10px); }
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            background-color: #fff7ed; /* Warm orange-50 base */
         }
         img {
             -webkit-user-drag: none;
@@ -59,15 +72,10 @@
             -ms-user-select: none;
         }
         .modal-bg {
-            background-color: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        /* Style for secondary modal to prevent stacked blur layers getting darker */
-        #reviews-modal.modal-bg {
-            background-color: transparent !important;
-            backdrop-filter: none !important;
-            -webkit-backdrop-filter: none !important;
+            background-color: rgba(15, 23, 42, 0.5); /* Slightly lighter for the glass effect */
+            backdrop-filter: blur(12px); /* Modern frosted glass blur */
+            -webkit-backdrop-filter: blur(12px); /* Safari support */
+            transition: all 0.3s ease-in-out;
         }
         .star-rating input[type="radio"] { display: none; }
         
@@ -149,7 +157,19 @@
         <section class="space-y-6">
             <h3 class="text-xl md:text-4xl font-black text-center text-slate-900 tracking-tight">Caseoh's Deal of the Week!</h3>
             <div id="deal-of-the-week" class="bg-white rounded-3xl shadow-md border border-slate-100 p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-12 cursor-pointer relative overflow-hidden group">
-                <!-- Content injected by JavaScript -->
+                <!-- Pre-load Skeleton -->
+                <div class="relative w-full md:w-2/5 flex items-center justify-center bg-slate-50 p-6 rounded-2xl h-48 md:h-64 animate-pulse border border-slate-100">
+                    <div class="w-32 h-32 md:w-48 md:h-48 bg-slate-200 rounded-full"></div>
+                </div>
+                <div class="w-full md:w-3/5 space-y-4 animate-pulse">
+                    <div class="h-6 bg-slate-200 rounded-full w-1/3 md:w-1/4"></div>
+                    <div class="h-8 md:h-10 bg-slate-200 rounded w-3/4"></div>
+                    <div class="h-6 md:h-8 bg-slate-200 rounded w-1/4 mt-2"></div>
+                    <div class="space-y-2 mt-4 pt-2">
+                        <div class="h-4 bg-slate-200 rounded w-full"></div>
+                        <div class="h-4 bg-slate-200 rounded w-5/6"></div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -162,7 +182,12 @@
                         <!-- Custom search SVG injected here -->
                     </div>
                     <input id="search-bar" type="text" placeholder="Search for an item..." 
-                        class="w-full pl-12 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-full text-sm sm:text-base font-medium">
+                        class="w-full pl-12 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-full text-sm sm:text-base font-medium">
+                    <button id="clear-search" class="absolute inset-y-0 right-0 pr-5 flex items-center text-slate-400 hover:text-slate-600 hidden">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
                 </div>
             </div>
 
@@ -178,8 +203,8 @@
                 <!-- Products will be injected here by JavaScript -->
             </div>
             
-            <div id="no-results" class="hidden text-center py-16 flex flex-col items-center justify-center space-y-4">
-                <div id="basket-icon" class="w-20 h-20 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center">
+            <div id="no-results" class="hidden text-center py-16 flex flex-col items-center justify-center space-y-4 w-full">
+                <div id="basket-icon-no-results" class="w-28 h-28 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center mx-auto">
                     <!-- Custom basket SVG injected here -->
                 </div>
                 <div class="space-y-1">
@@ -263,7 +288,7 @@
                     </div>
 
                     <!-- Store reviews container with custom asynchronous skeleton loader -->
-                    <div id="store-reviews-container" class="flex-grow h-0 min-h-[300px] overflow-y-auto pr-1 rounded-2xl space-y-4">
+                    <div id="store-reviews-container" class="flex-grow h-0 min-h-[300px] overflow-y-auto pr-1 rounded-2xl flex flex-col space-y-4">
                         <div class="animate-pulse space-y-4" id="store-reviews-skeleton">
                             <div class="bg-slate-50/70 p-4 rounded-2xl space-y-3 border border-slate-100/50">
                                 <div class="flex items-center gap-3">
@@ -338,7 +363,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white mt-12 pb-24 md:pb-8">
+    <footer class="bg-slate-900 text-white mt-12 pb-20 md:pb-6">
         <div class="container mx-auto p-6 md:p-8 text-center max-w-7xl space-y-4">
             <div class="space-y-1">
                 <p class="font-black text-xl md:text-3xl tracking-tight">Have a Gooberlicious Day!</p>
@@ -394,7 +419,7 @@
             
             <!-- Body area -->
             <div class="p-5 md:p-8 overflow-y-auto flex-grow flex flex-col space-y-5 md:space-y-6 relative">
-                <div class="relative flex items-center justify-center bg-slate-50/50 rounded-2xl p-4 md:p-6 border border-slate-100 h-48 md:h-64 shadow-inner">
+                <div class="relative flex items-center justify-center bg-slate-50/50 rounded-2xl p-4 md:p-6 border border-slate-100 h-48 md:h-64">
                     <img id="modal-img" src="" alt="Product Image" class="max-h-full max-w-full object-contain">
                     <!-- Dynamic modal hot deal badge injected here -->
                     <div id="modal-deal-badge" class="absolute top-4 right-4 hidden bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-md uppercase tracking-wider">
@@ -432,8 +457,8 @@
             </div>
 
             <!-- Scrollable list of reviews -->
-            <div class="p-4 md:p-6 overflow-y-auto flex-grow space-y-6" id="item-reviews-container-parent">
-                <div id="item-reviews-container" class="space-y-6">
+            <div class="p-4 md:p-6 overflow-y-auto flex-grow flex flex-col" id="item-reviews-container-parent">
+                <div id="item-reviews-container" class="flex-grow flex flex-col space-y-6">
                     <!-- Loaded dynamically -->
                 </div>
             </div>
@@ -588,7 +613,7 @@
 
         // Inject SVG assets directly into initial target positions
         document.getElementById('search-icon').innerHTML = ICONS.search;
-        document.getElementById('basket-icon').innerHTML = ICONS.basket;
+        document.getElementById('basket-icon-no-results').innerHTML = `<svg class="w-14 h-14 inline-block relative right-1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`;
         document.getElementById('youtube-icon').innerHTML = ICONS.youtube;
         document.getElementById('mobile-home').innerHTML = ICONS.home;
         document.getElementById('mobile-products').innerHTML = ICONS.basket;
@@ -775,6 +800,7 @@
 
         const productGrid = document.getElementById('product-grid');
         const searchBar = document.getElementById('search-bar');
+        const clearSearchBtn = document.getElementById('clear-search');
         const noResults = document.getElementById('no-results');
         const productModal = document.getElementById('product-modal');
         const reviewsModal = document.getElementById('reviews-modal');
@@ -874,27 +900,30 @@
             const seededIndex = Math.floor(seededRandom() * products.length);
             weeklyDealProduct = products[seededIndex];
             
-            dealContainer.dataset.product = JSON.stringify(weeklyDealProduct);
-            
-            dealContainer.innerHTML = `
-                <div class="relative w-full md:w-2/5 flex items-center justify-center bg-amber-50/50 p-6 rounded-2xl shadow-sm border border-amber-100 h-48 md:h-64 overflow-hidden">
-                    <img src="${weeklyDealProduct.img}" alt="${weeklyDealProduct.name}" class="max-h-36 md:max-h-52 object-contain transition-transform duration-300 group-hover:scale-105">
-                    <div class="absolute top-4 right-4 bg-amber-500 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider">
-                        HOT DEAL
+            // Add an artificial delay to show off the skeleton loading state
+            setTimeout(() => {
+                dealContainer.dataset.product = JSON.stringify(weeklyDealProduct);
+                
+                dealContainer.innerHTML = `
+                    <div class="relative w-full md:w-2/5 flex items-center justify-center bg-amber-50/50 p-6 rounded-2xl shadow-sm border border-amber-100 h-48 md:h-64 overflow-hidden">
+                        <img src="${weeklyDealProduct.img}" alt="${weeklyDealProduct.name}" class="max-h-36 md:max-h-52 object-contain transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute top-4 right-4 bg-amber-500 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider">
+                            HOT DEAL
+                        </div>
                     </div>
-                </div>
-                <div class="w-full md:w-3/5 text-center md:text-left space-y-4">
-                    <div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
-                        ${starIconSmall} <span>CASEOH'S SELECTION</span> ${starIconSmall}
+                    <div class="w-full md:w-3/5 text-center md:text-left space-y-4">
+                        <div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
+                            ${starIconSmall} <span>CASEOH'S SELECTION</span> ${starIconSmall}
+                        </div>
+                        <h4 class="text-xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">${weeklyDealProduct.name}</h4>
+                        <div class="flex items-baseline justify-center md:justify-start gap-4">
+                            <p class="text-xs sm:text-sm font-bold text-slate-400 line-through">$${weeklyDealProduct.price.toFixed(2)}</p>
+                            <p class="text-2xl md:text-4xl font-black text-amber-600 tracking-tight">$${weeklyDealProduct.dealPrice.toFixed(2)}</p>
+                        </div>
+                        <p class="text-slate-600 text-xs md:text-base leading-relaxed font-medium bg-slate-50 border border-slate-100 p-4 rounded-xl">${weeklyDealProduct.dealDescription}</p>
                     </div>
-                    <h4 class="text-xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">${weeklyDealProduct.name}</h4>
-                    <div class="flex items-baseline justify-center md:justify-start gap-4">
-                        <p class="text-xs sm:text-sm font-bold text-slate-400 line-through">$${weeklyDealProduct.price.toFixed(2)}</p>
-                        <p class="text-2xl md:text-4xl font-black text-amber-600 tracking-tight">$${weeklyDealProduct.dealPrice.toFixed(2)}</p>
-                    </div>
-                    <p class="text-slate-600 text-xs md:text-base leading-relaxed font-medium bg-slate-50 border border-slate-100 p-4 rounded-xl">${weeklyDealProduct.dealDescription}</p>
-                </div>
-            `;
+                `;
+            }, 800);
         };
 
         const generateStructuredData = () => {
@@ -1000,18 +1029,29 @@
         }
 
         function generateStarRatingHTML(productId, size = 'sm') {
-            // Display clean layout skeleton until Firestore loads ratings asynchronously
+            const countSize = size === 'sm' ? 'text-xs' : 'text-sm';
+            const starSizeClass = size === 'sm' ? 'w-3.5 h-3.5' : 'w-5 h-5';
+
+            // Display precise layout skeleton until Firestore loads ratings asynchronously to prevent jumping
             if (!isItemReviewsLoaded) {
+                let emptyStars = '';
+                for (let i = 0; i < 5; i++) {
+                    emptyStars += getRoundedStarVector(false, starSizeClass);
+                }
+                
+                // Match exact Tailwind heights: text-xs line-height is 16px (h-4), text-sm is 20px (h-5)
+                const pulseHeight = size === 'sm' ? 'h-4' : 'h-5';
+                const pulseWidth = size === 'sm' ? 'w-6' : 'w-8';
+                
                 return `
-                    <div class="flex items-center justify-center gap-1 mt-1 animate-pulse">
-                        <div class="h-4 bg-slate-200 rounded w-16"></div>
+                    <div class="flex items-center justify-center gap-0.5 mt-1 animate-pulse">
+                        <div class="inline-flex gap-0.5">${emptyStars}</div>
+                        <div class="ml-1 bg-slate-200 rounded ${pulseHeight} ${pulseWidth}"></div>
                     </div>
                 `;
             }
 
             const stats = productReviewStats[productId];
-            const countSize = size === 'sm' ? 'text-xs' : 'text-sm';
-            const starSizeClass = size === 'sm' ? 'w-3.5 h-3.5' : 'w-5 h-5';
 
             if (!stats || stats.count === 0) {
                 let emptyStars = '';
@@ -1105,9 +1145,9 @@
 
             if (uniqueReviews.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-10 text-slate-400 flex flex-col items-center justify-center space-y-2 w-full h-full min-h-[200px]">
-                        <div class="mb-1 text-slate-300 flex justify-center w-full">${ICONS.comments}</div>
-                        <span class="text-xs sm:text-sm font-semibold text-center block w-full">No reviews yet. Be the first simpleton to leave one!</span>
+                    <div class="flex flex-col items-center justify-center space-y-3 w-full my-auto py-10 text-slate-400">
+                        <div class="text-slate-300 flex items-center justify-center w-full">${ICONS.comments}</div>
+                        <span class="text-xs sm:text-sm font-semibold text-center block w-full max-w-md px-4 leading-relaxed">No reviews yet. Be the first simpleton to leave one!</span>
                     </div>`;
                 return;
             }
@@ -1131,19 +1171,46 @@
                 const currentReviewReplies = loadedReplies.filter(r => r.reviewId === review.id);
                 let repliesListHTML = '';
                 if (currentReviewReplies.length > 0) {
-                    repliesListHTML = `<div class="space-y-3 mt-3 ml-2 pl-2 sm:ml-6 sm:pl-4 bg-slate-100 p-3 sm:p-4 rounded-2xl">`;
-                    currentReviewReplies.forEach(rep => {
-                        const replyAvatar = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(rep.username)}`;
-                        repliesListHTML += `
-                            <div class="bg-white p-2 sm:p-3 rounded-xl shadow-sm text-xs sm:text-sm">
-                                <div class="flex items-center gap-2 mb-1 min-w-0">
-                                    <img src="${replyAvatar}" alt="Reply Avatar" class="w-5 h-5 rounded-full bg-slate-100 flex-shrink-0">
-                                    <span class="font-black text-slate-850 truncate max-w-[120px] sm:max-w-[180px]">${rep.username}</span>
-                                </div>
-                                <p class="text-slate-600 font-medium leading-relaxed">${rep.comment}</p>
+                    repliesListHTML = `<div class="space-y-3 mt-3 w-full bg-slate-100 p-3 sm:p-4 rounded-2xl flex flex-col items-center">`;
+                    
+                    // Show only the first reply initially
+                    const firstReply = currentReviewReplies[0];
+                    const firstAvatar = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(firstReply.username)}`;
+                    
+                    repliesListHTML += `
+                        <div class="bg-white p-3 rounded-xl shadow-sm text-xs sm:text-sm w-full text-center flex flex-col items-center">
+                            <div class="flex items-center justify-center gap-2 mb-1.5 min-w-0">
+                                <img src="${firstAvatar}" alt="Reply Avatar" class="w-5 h-5 rounded-full bg-slate-100 flex-shrink-0">
+                                <span class="font-black text-slate-850 truncate max-w-[185px]">${firstReply.username}</span>
                             </div>
+                            <p class="text-slate-600 font-medium leading-relaxed w-full text-center" style="white-space: pre-line; word-break: break-word;">${firstReply.comment}</p>
+                        </div>
+                    `;
+
+                    if (currentReviewReplies.length > 1) {
+                        repliesListHTML += `
+                            <div id="more-replies-${review.id}" class="hidden w-full space-y-3 flex flex-col items-center">
                         `;
-                    });
+                        for (let i = 1; i < currentReviewReplies.length; i++) {
+                            const rep = currentReviewReplies[i];
+                            const repAvatar = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(rep.username)}`;
+                            repliesListHTML += `
+                                <div class="bg-white p-3 rounded-xl shadow-sm text-xs sm:text-sm w-full text-center flex flex-col items-center mt-3">
+                                    <div class="flex items-center justify-center gap-2 mb-1.5 min-w-0">
+                                        <img src="${repAvatar}" alt="Reply Avatar" class="w-5 h-5 rounded-full bg-slate-100 flex-shrink-0">
+                                        <span class="font-black text-slate-850 truncate max-w-[185px]">${rep.username}</span>
+                                    </div>
+                                    <p class="text-slate-600 font-medium leading-relaxed w-full text-center" style="white-space: pre-line; word-break: break-word;">${rep.comment}</p>
+                                </div>
+                            `;
+                        }
+                        repliesListHTML += `
+                            </div>
+                            <button data-review-id="${review.id}" class="toggle-more-replies-btn mt-1 text-[10px] sm:text-xs font-black text-amber-900 hover:text-amber-700 bg-amber-200/60 hover:bg-amber-200 py-1.5 px-3 rounded-full btn-smooth">
+                                Show more replies (${currentReviewReplies.length - 1})
+                            </button>
+                        `;
+                    }
                     repliesListHTML += `</div>`;
                 }
 
@@ -1160,7 +1227,7 @@
                         </div>
                     </div>
                     
-                    <p class="text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed font-medium bg-white p-3 sm:p-4 rounded-2xl border border-slate-100">${review.comment}</p>
+                    <p class="text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed font-medium bg-white p-3 sm:p-4 rounded-2xl border border-slate-100" style="white-space: pre-line; word-break: break-word;">${review.comment}</p>
                     
                     <!-- Nested Replies Container -->
                     ${repliesListHTML}
@@ -1188,6 +1255,19 @@
                 container.appendChild(reviewEl);
             });
 
+            // Toggle More Replies Expandable Button View
+            container.querySelectorAll('.toggle-more-replies-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const reviewId = e.currentTarget.dataset.reviewId;
+                    const moreContainer = document.getElementById(`more-replies-${reviewId}`);
+                    if (moreContainer) {
+                        const isHidden = moreContainer.classList.contains('hidden');
+                        moreContainer.classList.toggle('hidden');
+                        e.currentTarget.textContent = isHidden ? "Show less replies" : `Show more replies (${moreContainer.children.length})`;
+                    }
+                });
+            });
+
             // Toggle Reply Form View
             container.querySelectorAll('.toggle-reply-form-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
@@ -1208,10 +1288,11 @@
 
                     btn.disabled = true;
                     try {
+                        const sanitizedCommentText = commentText.replace(/\r\n/g, '\n').replace(/\n{2,}/g, '\n\n');
                         await addDoc(repliesCol, {
                             reviewId: reviewId,
                             username: getOrSetUsername(),
-                            comment: commentText,
+                            comment: sanitizedCommentText,
                             timestamp: new Date()
                         });
                         input.value = '';
@@ -1297,7 +1378,9 @@
         const closeProductModal = () => {
             productModal.classList.add('hidden');
             if (!reviewsModal.classList.contains('hidden')) {
-                closeReviewsModal();
+                reviewsModal.classList.add('hidden');
+                document.getElementById('item-review-form').reset();
+                document.getElementById('item-review-form').dispatchEvent(new Event('reset'));
             }
             document.body.style.overflow = 'auto';
             
@@ -1314,6 +1397,7 @@
             if (!activeProduct || !currentUser) return;
             
             document.getElementById('reviews-modal-title').textContent = `${activeProduct.name} - Gooberviews`;
+            productModal.classList.add('hidden');
             reviewsModal.classList.remove('hidden');
 
             // Set placeholder skeleton loader inside modal list to avoid visual jumping
@@ -1346,13 +1430,22 @@
 
         const closeReviewsModal = () => {
             reviewsModal.classList.add('hidden');
+            if (activeProduct) productModal.classList.remove('hidden');
             document.getElementById('item-review-form').reset();
             // Trigger customized dynamic interactive star resets
             document.getElementById('item-review-form').dispatchEvent(new Event('reset'));
         };
+
+        function normalizeString(str) {
+            if (!str) return '';
+            return str.toLowerCase()
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "") // removes accents
+                .replace(/[^a-z0-9]/g, "");     // removes hyphens, spacing, and apostrophes
+        }
         
         const filterAndSortAndRender = () => {
-            let productsToRender = products.filter(p => p.name.toLowerCase().includes(currentSearchTerm));
+            let productsToRender = products.filter(p => normalizeString(p.name).includes(currentSearchTerm));
             
             const getPrice = p => (weeklyDealProduct && p.id === weeklyDealProduct.id ? p.dealPrice : p.price);
             const getRating = p => (productReviewStats[p.id]?.average || 0);
@@ -1373,11 +1466,16 @@
                     sortedProducts.sort((a, b) => {
                         const ratingA = getRating(a);
                         const ratingB = getRating(b);
-                        if (ratingB !== ratingA) {
-                            return ratingB - ratingA;
-                        }
                         const countA = productReviewStats[a.id]?.count || 0;
                         const countB = productReviewStats[b.id]?.count || 0;
+
+                        // Bayesian weighted sort: slightly scale average ratings by counts so high review density floats higher
+                        const scoreA = ratingA + (countA > 0 ? (countA / (countA + 2)) : 0);
+                        const scoreB = ratingB + (countB > 0 ? (countB / (countB + 2)) : 0);
+
+                        if (scoreB !== scoreA) {
+                            return scoreB - scoreA;
+                        }
                         return countB - countA;
                     });
                     break;
@@ -1387,8 +1485,23 @@
         };
         
         searchBar.addEventListener('input', (e) => {
-            currentSearchTerm = e.target.value.toLowerCase();
+            const rawValue = e.target.value;
+            currentSearchTerm = normalizeString(rawValue);
+            
+            if (rawValue.length > 0) {
+                clearSearchBtn.classList.remove('hidden');
+            } else {
+                clearSearchBtn.classList.add('hidden');
+            }
             filterAndSortAndRender();
+        });
+
+        clearSearchBtn.addEventListener('click', () => {
+            searchBar.value = '';
+            currentSearchTerm = '';
+            clearSearchBtn.classList.add('hidden');
+            filterAndSortAndRender();
+            searchBar.focus();
         });
 
         sortControls.addEventListener('click', (e) => {
@@ -1419,6 +1532,7 @@
         businessesModal.addEventListener('click', (e) => { if (e.target === businessesModal) businessesModal.classList.add('hidden'); });
         
         dealContainer.addEventListener('click', () => {
+            if (!dealContainer.dataset.product) return; // Prevent clicking while skeleton is loading
             const dealProduct = JSON.parse(dealContainer.dataset.product);
             if (dealProduct) openProductModal(dealProduct);
         });
@@ -1488,6 +1602,11 @@
                 if (!reviewsModal.classList.contains('hidden')) {
                     triggerReRenderOfReviews();
                 }
+
+                // Live update the active product modal's rating if it is currently open
+                if (!productModal.classList.contains('hidden') && activeProduct) {
+                    document.getElementById('modal-avg-rating').innerHTML = generateStarRatingHTML(activeProduct.id, 'lg');
+                }
             }, (error) => {
                 console.error("Firestore global item reviews snapshot failed:", error);
             });
@@ -1533,7 +1652,10 @@
                 return;
             }
 
-            const cleanComment = data.payload.comment ? data.payload.comment.trim() : "";
+            const rawComment = data.payload.comment ? data.payload.comment : "";
+            // Replace sequences of three or more newlines with a single empty line spacing (\n\n)
+            const cleanComment = rawComment.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+            
             if (!cleanComment) {
                 showToast("Please write a comment, you simpleton!", "error");
                 return;
@@ -1788,8 +1910,95 @@
         setupInteractiveStars('store-review-form', 'store-rating');
         setupInteractiveStars('item-review-form', 'item-rating');
 
-        // Initial active indicator load state
-        window.addEventListener('load', triggerInitialNavigationHighlight);
+        // Override automatic browser scroll restoration
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+
+        // Handle exact initial positioning on page load
+        // Function to smoothly sync the product spotlight modal state without jumping/reloading
+        function syncProductModalState() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const spotlightModal = document.getElementById('product-spotlight-modal');
+            if (spotlightModal) {
+                if (urlParams.get('product') === 'farine-supreme') {
+                    spotlightModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden'; // Lock background scroll position
+                } else {
+                    spotlightModal.style.display = 'none';
+                    document.body.style.overflow = ''; // Unlock background scroll position
+                }
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const hasProductQuery = urlParams.has('product');
+            const hash = window.location.hash;
+
+            // Check URL state on initial full page enter
+            syncProductModalState();
+
+            // Intercept spotlight open button clicks to prevent full page reloads and scroll shifts
+            document.querySelectorAll('a[href*="product=farine-supreme"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    history.pushState(null, '', link.getAttribute('href'));
+                    syncProductModalState();
+                });
+            });
+
+            // Intercept modal close button clicks to prevent full page reloads and scroll shifts
+            const spotlightModal = document.getElementById('product-spotlight-modal');
+            if (spotlightModal) {
+                const closeBtn = spotlightModal.querySelector('.close-btn');
+                if (closeBtn) {
+                    closeBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        // Strip query params cleanly without resetting background scroll
+                        history.pushState(null, '', window.location.pathname + window.location.hash);
+                        syncProductModalState();
+                    });
+                }
+            }
+
+            if (hash) {
+                const targetElement = document.querySelector(hash);
+                if (targetElement) {
+                    // Temporarily force instant jump by disabling smooth behavior
+                    const html = document.documentElement;
+                    const originalBehavior = html.style.scrollBehavior;
+                    html.style.scrollBehavior = 'auto';
+
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    window.scrollTo({
+                        top: elementPosition - headerHeight - 16,
+                        behavior: 'auto'
+                    });
+
+                    // Restore smooth scroll behavior after placement
+                    setTimeout(() => {
+                        html.style.scrollBehavior = originalBehavior;
+                    }, 50);
+                }
+            } else if (!hasProductQuery) {
+                // Only force hard reset to top on clean initial entry, not on state updates
+                if (!window.location.search && !window.location.hash) {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'auto'
+                    });
+                }
+            }
+            triggerInitialNavigationHighlight();
+        });
+
+        // Handle backward/forward browser navigation actions fluidly
+        window.addEventListener('popstate', syncProductModalState);
+
         window.addEventListener('scroll', () => {
             if (window.scrollY === 0) {
                 highlightActiveNavigation('nav-home');
