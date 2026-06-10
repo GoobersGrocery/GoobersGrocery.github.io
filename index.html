@@ -59,11 +59,11 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 243, 224, 0.70) 100%), url('https://cdna.artstation.com/p/assets/images/images/074/181/314/medium/dave-cavedraws-47-49-51-alt-1-small.jpg?1711449214');
+                linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 243, 224, 0.70) 100%), url('https://storage.ghost.io/c/42/fc/42fcd807-7c75-44a7-8b26-8deade0bf4c9/content/images/size/w1000/2026/01/copainter_supermarket_10.png');
             background-size: cover;
             background-position: center;
             z-index: -1;
-            filter: blur(1.5px);
+            filter: blur(5px);
             transform: translate3d(0, 0, 0);
             backface-visibility: hidden;
             will-change: transform;
@@ -1618,22 +1618,18 @@
                     sortedProducts.sort((a, b) => a.name.localeCompare(b.name));
                     break;
                 case 'rating-desc':
-                    sortedProducts.sort((a, b) => {
-                        const ratingA = getRating(a);
-                        const ratingB = getRating(b);
-                        const countA = productReviewStats[a.id]?.count || 0;
-                        const countB = productReviewStats[b.id]?.count || 0;
+					sortedProducts.sort((a, b) => {
+						const ratingA = Math.round(getRating(a));
+						const ratingB = Math.round(getRating(b));
+						const countA = productReviewStats[a.id]?.count || 0;
+						const countB = productReviewStats[b.id]?.count || 0;
 
-                        // Bayesian weighted sort: slightly scale average ratings by counts so high review density floats higher
-                        const scoreA = ratingA + (countA > 0 ? (countA / (countA + 2)) : 0);
-                        const scoreB = ratingB + (countB > 0 ? (countB / (countB + 2)) : 0);
-
-                        if (scoreB !== scoreA) {
-                            return scoreB - scoreA;
-                        }
-                        return countB - countA;
-                    });
-                    break;
+						if (ratingB !== ratingA) {
+							return ratingB - ratingA;
+						}
+						return countB - countA;
+					});
+                break;
             }
 
             renderProducts(sortedProducts);
