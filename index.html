@@ -70,10 +70,6 @@
                 animation: bg-pan 20s infinite alternate ease-in-out;
             }
         }
-        @keyframes bg-pan {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.01) translate(0, 0); }
-        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #fff7ed;
@@ -86,12 +82,10 @@
             -ms-user-select: none;
         }
         .modal-bg {
-            background-color: rgba(15, 23, 42, 0.5); 
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px); 
+            background-color: rgba(15, 23, 42, 0.75); 
             transition: all 0.3s ease-in-out;
             transform: translate3d(0, 0, 0);
-            will-change: backdrop-filter;
+            will-change: background-color;
             backface-visibility: hidden;
         }
         .star-rating input[type="radio"] { display: none; }
@@ -813,8 +807,8 @@
             default: "I picked this out myself. It's probably the best you'll ever have. Now buy it before I get mad."
         };
 
-        const adjectives = ['Goobery', 'Wobbly', 'Gigantic', 'Banned', 'Simple', 'Hungry', 'Jiggly', 'BoxShaped', 'Chonky', 'Glizzy', '1x1Lego', 'Dookie', 'Lawsuit', 'Cranky', 'Screaming', 'Sweaty', 'Loud', 'Bankrupt', 'Gassy', 'Confused', 'Crying', 'Greasy', 'Clueless', 'Bewildered', 'Flummoxed', 'Perplexed', 'Baffled', 'Stunned', 'Dazed', 'Frazzled', 'Jittery', 'Clumsy', 'Awkward', 'Goofy', 'Zany', 'Bonkers', 'Quirky', 'Peculiar', 'Bizarre', 'Outlandish', 'Absurd', 'Ridiculous', 'Preposterous', 'Ludicrous', 'Stinky', 'Jobless'];
-        const nouns = ['Simpleton', 'Goober', 'Eater', 'Customer', 'Builder', 'Donator', 'Mod', 'Shopper', 'Brick', 'Janitor', 'Victim', 'Gladiator', 'Gobbler', 'Hater', 'Fanboy', 'Keyboard', 'Creature', 'Mouthbreather', 'Bandit', 'Entity', 'Wall', 'Building', 'Dingus', 'Doofus', 'Nincompoop', 'Scallywag', 'Rascal', 'Imp', 'Gremlin', 'Gnome', 'Troll', 'Ogre', 'Yeti', 'Blob', 'Critter', 'Muppet', 'Puppet', 'Cartoon', 'Anomaly', 'Glitch', 'Paradox', 'Enigma', 'Conundrum', 'Chat', 'Cuh'];
+        const adjectives = ['Goobery', 'Wobbly', 'Gigantic', 'Banned', 'Simple', 'Hungry', 'Jiggly', 'BoxShaped', 'Chonky', 'Glizzy', '1x1Lego', 'Dookie', 'Lawsuit', 'Cranky', 'Screaming', 'Sweaty', 'Loud', 'Bankrupt', 'Gassy', 'Confused', 'Crying', 'Greasy', 'Clueless', 'Bewildered', 'Flummoxed', 'Perplexed', 'Baffled', 'Stunned', 'Dazed', 'Frazzled', 'Jittery', 'Clumsy', 'Awkward', 'Goofy', 'Zany', 'Bonkers', 'Quirky', 'Peculiar', 'Bizarre', 'Outlandish', 'Absurd', 'Ridiculicious', 'Preposterous', 'Ludicrous', 'Stinky', 'Jobless', 'Malnourished', 'Planetary', 'Galactic', 'Astronomical', 'Interstellar', 'Cosmic', 'Tectonic', 'Seismic', 'Gravitational', 'Bottomless', 'Massive', 'Colossal', 'Gargantuan', 'Titanic', 'Heavyweight', 'DoubleWide', 'WideLoad', 'Supersized', 'LightBlocking', 'SunEclipsing', 'FerrisWheel', 'AudioPeaking', 'EarDestroying', 'MicPeaking', 'DeskBreaking', 'ChairBreaking', 'ControllerSmashing', 'BanHappy', 'Unbanned', 'Screeching', 'Whining', 'Complaining', 'Ginger', 'RedHeaded', 'Bearded', 'BaldHeaded', 'WaffleHouse', 'DeepFried', 'Crispy', 'CheetoDusted', 'DoritoBreathed', 'ButterDrenched', 'BrokeBoy', 'PennyPinching', 'Cheapskate', 'Unemployed', 'BasementDwelling', 'SmoothBrained', 'FlatBrained', 'LowIQ', 'AirHeaded', 'BrainDead', 'StreamSniping', 'Lagging', 'HighPing', 'FrameDropping', 'Sus', 'Sketchy', 'Fraudulent', 'Hardstuck'];
+		const nouns = ['Simpleton', 'Goober', 'Eater', 'Customer', 'Builder', 'Donator', 'Mod', 'Shopper', 'Brick', 'Janitor', 'Victim', 'Gladiator', 'Gobbler', 'Hater', 'Fanboy', 'Keyboard', 'Creature', 'Mouthbreather', 'Bandit', 'Entity', 'Wall', 'Building', 'Dingus', 'Doofus', 'Nincompoop', 'Scallywag', 'Rascal', 'Imp', 'Gremlin', 'Gnome', 'Troll', 'Ogre', 'Yeti', 'Blob', 'Critter', 'Muppet', 'Puppet', 'Cartoon', 'Anomaly', 'Glitch', 'Paradox', 'Enigma', 'Conundrum', 'Chat', 'Cuh', 'DiscordMod', 'StreamSniper', 'Tier3Sub', 'PrimeSub', 'GiftedSub', 'NonSub', 'KeyboardWarrior', 'CouchPotato', 'BasementDweller', 'BedStain', 'Chatter', 'Vip', 'WaffleHouseEmployee', 'FastFoodWorker', 'TacoBellManager', 'ShrimpAlfredo', 'GlizzyGobbler', 'Whopper', 'BigMac', 'Dorito', 'Cheeto', 'Chump', 'Sucker', 'Loser', 'Failure', 'Disappointment', 'Clown', 'Jester', 'Fool', 'Idiot', 'Moron', 'Buffoon', 'Blockhead', 'Numbskull', 'Airhead', 'Birdbrain', 'PeaBrain', 'Halfwit', 'Dimwit', 'Nitwit', 'Twit', 'Dope', 'Klutz', 'Toddler', 'iPadKid', 'Baby', 'Crybaby'];
 
         function generateUsername() {
             const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -1241,7 +1235,7 @@
                             const rep = currentReviewReplies[i];
                             const repAvatar = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(rep.username)}`;
                             repliesListHTML += `
-                                <div class="bg-white p-3 rounded-xl shadow-sm text-xs sm:text-sm w-full text-center flex flex-col items-center mt-3">
+                                <div class="bg-white p-3 rounded-xl shadow-sm text-xs sm:text-sm w-full text-center flex flex-col items-center">
                                     <div class="flex items-center justify-center gap-2 mb-1.5 min-w-0">
                                         <img src="${repAvatar}" alt="Reply Avatar" class="w-5 h-5 rounded-full bg-slate-100 flex-shrink-0">
                                         <span class="font-black text-slate-850 truncate max-w-[185px]">${rep.username}</span>
@@ -1461,7 +1455,7 @@
                                 <div class="flex items-center gap-0.5 mt-0.5">${starsHTML}</div>
                             </div>
                         </div>
-                        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed font-medium bg-white p-2.5 rounded-xl border border-slate-50 line-clamp-2" style="white-space: pre-line; word-break: break-word;">${review.comment}</p>
+                        <p class="text-slate-700 text-xs sm:text-sm leading-relaxed font-medium bg-white p-2.5 rounded-xl border border-slate-50" style="white-space: pre-line; word-break: break-word;">${review.comment}</p>
                     </div>
                 `;
             }).join('');
