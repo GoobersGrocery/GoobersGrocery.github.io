@@ -47,22 +47,21 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            /* Warm gradient overlay blending into the supermarket image */
             background-image: 
-                linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 243, 224, 0.85) 100%), url('https://storage.ghost.io/c/42/fc/42fcd807-7c75-44a7-8b26-8deade0bf4c9/content/images/2026/01/copainter_supermarket_10.png');
+                linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(255, 243, 224, 0.70) 100%), url('https://cdna.artstation.com/p/assets/images/images/074/181/314/medium/dave-cavedraws-47-49-51-alt-1-small.jpg?1711449214');
             background-size: cover;
             background-position: center;
             z-index: -1;
-            /* Subtle breathing animation to make it feel alive */
             animation: bg-pan 20s infinite alternate ease-in-out;
+            filter: blur(1.5px);
         }
         @keyframes bg-pan {
-            0% { transform: scale(1.02) translate(0, 0); }
-            100% { transform: scale(1.06) translate(-10px, -10px); }
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.01) translate(-0px, -0px); }
         }
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #fff7ed; /* Warm orange-50 base */
+            background-color: #fff7ed;
         }
         img {
             -webkit-user-drag: none;
@@ -120,11 +119,20 @@
                 <h1 class="hidden md:block text-2xl md:text-3xl font-black text-slate-950 tracking-tight">Goobers' Grocery</h1>
             </div>
             
-            <div class="flex items-center space-x-3 bg-slate-50 p-2 px-4 rounded-full max-w-[180px] xs:max-w-xs md:max-w-none overflow-hidden">
-                <img id="header-avatar" src="https://api.dicebear.com/10.x/glyphs/svg?seed=ValuedGoober" alt="User Avatar" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border border-slate-200 flex-shrink-0">
-                <div class="text-sm text-left min-w-0">
-                    <span class="text-slate-400 block text-[9px] md:text-[11px] uppercase font-bold tracking-wider truncate">Shopper Account</span>
-                    <span id="username-display" class="font-extrabold text-slate-800 text-xs md:text-base truncate block max-w-[80px] xs:max-w-[120px] md:max-w-none">Valued Goober</span>
+            <div class="flex items-center bg-slate-50 p-2 px-4 rounded-full max-w-[180px] xs:max-w-xs md:max-w-none overflow-hidden">
+                <div id="account-skeleton" class="flex items-center space-x-3 animate-pulse">
+                    <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-200 border border-slate-100 flex-shrink-0"></div>
+                    <div class="text-sm text-left min-w-0 space-y-1">
+                        <div class="h-2 md:h-2.5 bg-slate-200 rounded-[2.5px] w-16 md:w-20"></div>
+                        <div class="h-3 md:h-4 bg-slate-200 rounded w-28 md:w-36"></div>
+                    </div>
+                </div>
+                <div id="account-real" class="flex items-center space-x-3 hidden">
+                    <img id="header-avatar" src="" alt="User Avatar" class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-100 border border-slate-200 flex-shrink-0">
+                    <div class="text-sm text-left min-w-0">
+                        <span class="text-slate-400 block text-[9px] md:text-[11px] uppercase font-bold tracking-wider truncate">Your Accountski</span>
+                        <span id="username-display" class="font-extrabold text-slate-800 text-xs md:text-base truncate block max-w-[80px] xs:max-w-[120px] md:max-w-none"></span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -144,9 +152,11 @@
 
         <!-- About Caseoh Section -->
         <section class="bg-white rounded-3xl shadow-md p-6 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
-            <img src="https://i.ibb.co/Vp20T2pD/a07c0e945f063fcc0f3f6c8e5c82f4f0.jpg" 
-			 alt="Caseoh, The Founder" 
-			 class="w-28 h-28 md:w-56 md:h-56 object-cover rounded-[30%] border-2 border-orange-400 shadow-lg flex-shrink-0">
+            <div class="w-28 h-28 md:w-56 md:h-56 overflow-hidden rounded-[30%] border-2 border-orange-400 shadow-lg flex-shrink-0">
+                <img src="https://wallpapers.com/images/high/caseoh-streaming-setup-h6uvjnckkn99601g.webp" 
+                     alt="Caseoh, The Founder" 
+                     class="w-full h-full object-cover scale-100">
+            </div>
             <div class="text-center md:text-left space-y-3 md:space-y-4">
                 <h3 class="text-xl md:text-4xl font-black text-slate-950">A Little About Me, The Legend</h3>
                 <p class="text-slate-600 leading-relaxed text-sm md:text-lg">Listen up. Before "Goobers' Grocery," you were all eating dirt. I looked at the grocery world and thought, "This is garbage. I can do better." So I did. I poured my blood, sweat, and a whole lot of tears into this place. Every single shelf, product, and low price was all me. I single-handedly created this paradise. You're welcome.</p>
@@ -192,11 +202,11 @@
             </div>
 
             <div id="sort-controls" class="flex flex-wrap justify-center gap-2 md:gap-3">
-                <button data-sort="default" class="sort-btn bg-amber-400 hover:bg-amber-350 text-amber-950 font-black py-2 px-4 rounded-full text-xs sm:text-sm shadow-md btn-smooth">Default</button>
-                <button data-sort="price-asc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 shadow-sm btn-smooth">Price: Low to High</button>
-                <button data-sort="price-desc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 shadow-sm btn-smooth">Price: High to Low</button>
-                <button data-sort="name-asc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 shadow-sm btn-smooth">Name: A-Z</button>
-                <button data-sort="rating-desc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 shadow-sm btn-smooth">Rating</button>
+                <button data-sort="default" class="sort-btn bg-amber-400 hover:bg-amber-350 text-amber-950 font-black py-2 px-4 rounded-full text-xs sm:text-sm btn-smooth">Default</button>
+                <button data-sort="price-asc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 btn-smooth">Price: Low to High</button>
+                <button data-sort="price-desc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 btn-smooth">Price: High to Low</button>
+                <button data-sort="name-asc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 btn-smooth">Name: A-Z</button>
+                <button data-sort="rating-desc" class="sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 btn-smooth">Rating</button>
             </div>
 
             <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
@@ -370,16 +380,16 @@
                 <p class="text-xs text-slate-400 font-semibold">Follow my journey to greatness on YouTube.</p>
             </div>
             
-            <a href="https://www.youtube.com/@caseoh_" target="_blank" class="inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-500 text-white font-extrabold py-3.5 px-8 rounded-full text-xs sm:text-sm transition duration-200 shadow-lg uppercase tracking-widest">
+            <a href="https://www.youtube.com/@caseoh_" target="_blank" class="inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-500 text-white font-extrabold py-3.5 px-8 rounded-2xl text-xs sm:text-sm transition duration-200 shadow-lg uppercase tracking-widest">
                 <span id="youtube-icon"></span>
                 <span>Caseoh's YouTube</span>
             </a>
             
             <div class="pt-4 space-y-4">
                 <div class="flex flex-col md:flex-row justify-center items-center gap-3">
-                    <button id="legal-notice-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-full transition duration-200 shadow-sm">Important Legal Notice</button>
-                    <button id="other-businesses-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-full transition duration-200 shadow-sm">View Other Businesses</button>
-                    <a href="https://maps.app.goo.gl/yhnMvrsZA8GkkYD18" target="_blank" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-full transition duration-200 shadow-sm flex items-center justify-center">
+                    <button id="legal-notice-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 shadow-sm">Important Legal Notice</button>
+                    <button id="other-businesses-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 shadow-sm">View Other Businesses</button>
+                    <a href="https://maps.app.goo.gl/yhnMvrsZA8GkkYD18" target="_blank" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center">
                         <span>View Our Location</span>
                     </a>
                 </div>
@@ -422,7 +432,7 @@
                 <div class="relative flex items-center justify-center bg-slate-50/50 rounded-2xl p-4 md:p-6 border border-slate-100 h-48 md:h-64">
                     <img id="modal-img" src="" alt="Product Image" class="max-h-full max-w-full object-contain">
                     <!-- Dynamic modal hot deal badge injected here -->
-                    <div id="modal-deal-badge" class="absolute top-4 right-4 hidden bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-full shadow-md uppercase tracking-wider">
+                    <div id="modal-deal-badge" class="absolute top-4 right-4 hidden bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-[10px] shadow-md uppercase tracking-wider">
                         HOT DEAL!
                     </div>
                 </div>
@@ -530,12 +540,12 @@
             <button id="close-businesses-modal" class="absolute top-4 right-5 text-2xl md:text-3xl text-slate-400 hover:text-slate-800 btn-smooth">&times;</button>
             <h3 class="text-lg md:text-2xl font-black text-slate-900 mb-6 md:mb-8 text-center uppercase tracking-wider">My Other Glorious Businesses</h3>
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                <li><a href="https://youtu.be/vLeR8-ScECg?si=57l9oVoYSdtSFKAB" target="_blank" class="block w-full py-3.5 bg-slate-50 hover:bg-slate-100 rounded-2xl text-xs sm:text-sm font-black text-slate-700 btn-smooth text-center shadow-sm">Sweet Shop</a></li>
-                <li><a href="https://youtu.be/t-Y0Wfc6qYg?si=Qfw8YXyE_hO_kZUy" target="_blank" class="block w-full py-3.5 bg-slate-50 hover:bg-slate-100 rounded-2xl text-xs sm:text-sm font-black text-slate-700 btn-smooth text-center shadow-sm">Gas Station</a></li>
-                <li><a href="https://youtu.be/MHYl7Cew4-8?si=U-T7DSQtACneU2hL" target="_blank" class="block w-full py-3.5 bg-slate-50 hover:bg-slate-100 rounded-2xl text-xs sm:text-sm font-black text-slate-700 btn-smooth text-center shadow-sm">Card Shop</a></li>
-                <li><a href="https://youtu.be/K7j8I6cNyjY?si=WkMDjgDaUXl7AS4n" target="_blank" class="block w-full py-3.5 bg-slate-50 hover:bg-slate-100 rounded-2xl text-xs sm:text-sm font-black text-slate-700 btn-smooth text-center shadow-sm">GoobLagoon Water Park</a></li>
-                <li><a href="https://youtu.be/NCIlhnvZalU?si=Lo_fmpvm7SCY62BN" target="_blank" class="block w-full py-3.5 bg-slate-50 hover:bg-slate-100 rounded-2xl text-xs sm:text-sm font-black text-slate-700 btn-smooth text-center shadow-sm">The Warsh Laundry</a></li>
-                <li><a href="https://youtu.be/YIoLf9XGqwA?si=xKesHrRh6B5IX1V4" target="_blank" class="block w-full py-3.5 bg-slate-50 hover:bg-slate-100 rounded-2xl text-xs sm:text-sm font-black text-slate-700 btn-smooth text-center shadow-sm">The Caseino</a></li>
+                <li><a href="https://youtu.be/vLeR8-ScECg?si=57l9oVoYSdtSFKAB" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">Sweet Shop</a></li>
+                <li><a href="https://youtu.be/t-Y0Wfc6qYg?si=Qfw8YXyE_hO_kZUy" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">Gas Station</a></li>
+                <li><a href="https://youtu.be/MHYl7Cew4-8?si=U-T7DSQtACneU2hL" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">Card Shop</a></li>
+                <li><a href="https://youtu.be/K7j8I6cNyjY?si=WkMDjgDaUXl7AS4n" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">GoobLagoon Water Park</a></li>
+                <li><a href="https://youtu.be/NCIlhnvZalU?si=Lo_fmpvm7SCY62BN" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">The Warsh Laundry</a></li>
+                <li><a href="https://youtu.be/YIoLf9XGqwA?si=xKesHrRh6B5IX1V4" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">The Caseino</a></li>
             </ul>
         </div>
     </div>
@@ -776,13 +786,6 @@
         const adjectives = ['Goobery', 'Wobbly', 'Gigantic', 'Banned', 'Simple', 'Hungry', 'Jiggly', 'BoxShaped', 'Chonky', 'Glizzy', '1x1Lego', 'Dookie', 'Lawsuit', 'Cranky', 'Screaming', 'Sweaty', 'Loud', 'Bankrupt', 'Gassy', 'Confused', 'Crying', 'Greasy', 'Clueless', 'Bewildered', 'Flummoxed', 'Perplexed', 'Baffled', 'Stunned', 'Dazed', 'Frazzled', 'Jittery', 'Clumsy', 'Awkward', 'Goofy', 'Zany', 'Bonkers', 'Quirky', 'Peculiar', 'Bizarre', 'Outlandish', 'Absurd', 'Ridiculous', 'Preposterous', 'Ludicrous', 'Stinky', 'Jobless'];
         const nouns = ['Simpleton', 'Goober', 'Eater', 'Customer', 'Builder', 'Donator', 'Mod', 'Shopper', 'Brick', 'Janitor', 'Victim', 'Gladiator', 'Gobbler', 'Hater', 'Fanboy', 'Keyboard', 'Creature', 'Mouthbreather', 'Bandit', 'Entity', 'Wall', 'Building', 'Dingus', 'Doofus', 'Nincompoop', 'Scallywag', 'Rascal', 'Imp', 'Gremlin', 'Gnome', 'Troll', 'Ogre', 'Yeti', 'Blob', 'Critter', 'Muppet', 'Puppet', 'Cartoon', 'Anomaly', 'Glitch', 'Paradox', 'Enigma', 'Conundrum', 'Chat', 'Cuh'];
 
-        function generateUsername() {
-            const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
-            const noun = nouns[Math.floor(Math.random() * nouns.length)];
-            const num = Math.floor(Math.random() * 900) + 100;
-            return `${adj}${noun}${num}`;
-        }
-
         function getOrSetUsername() {
             let username = localStorage.getItem('gooberUsername');
             if (!username) {
@@ -791,9 +794,15 @@
             }
             document.getElementById('username-display').textContent = username;
             
-            // Generate & set current user avatar in header
             const avatarUrl = `https://api.dicebear.com/10.x/glyphs/svg?seed=${username}`;
             document.getElementById('header-avatar').src = avatarUrl;
+
+            const skeleton = document.getElementById('account-skeleton');
+            const real = document.getElementById('account-real');
+            if (skeleton && real) {
+                skeleton.classList.add('hidden');
+                real.classList.remove('hidden');
+            }
             
             return username;
         }
@@ -907,12 +916,12 @@
                 dealContainer.innerHTML = `
                     <div class="relative w-full md:w-2/5 flex items-center justify-center bg-amber-50/50 p-6 rounded-2xl shadow-sm border border-amber-100 h-48 md:h-64 overflow-hidden">
                         <img src="${weeklyDealProduct.img}" alt="${weeklyDealProduct.name}" class="max-h-36 md:max-h-52 object-contain transition-transform duration-300 group-hover:scale-105">
-                        <div class="absolute top-4 right-4 bg-amber-500 text-white text-[10px] font-black px-3 py-1.5 rounded-full shadow-sm uppercase tracking-wider">
+                        <div class="absolute top-4 right-4 bg-amber-500 text-white text-[10px] font-black px-3 py-1.5 rounded-2xl shadow-sm uppercase tracking-wider">
                             HOT DEAL
                         </div>
                     </div>
                     <div class="w-full md:w-3/5 text-center md:text-left space-y-4">
-                        <div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider">
+                        <div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 text-xs font-black px-4 py-1.5 rounded-2xl uppercase tracking-wider">
                             ${starIconSmall} <span>CASEOH'S SELECTION</span> ${starIconSmall}
                         </div>
                         <h4 class="text-xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">${weeklyDealProduct.name}</h4>
@@ -1511,9 +1520,9 @@
             currentSort = sortBtn.dataset.sort;
             
             sortControls.querySelectorAll('.sort-btn').forEach(btn => {
-                btn.className = 'sort-btn bg-slate-100 text-slate-600 font-bold py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 shadow-sm btn-smooth';
+                btn.className = 'sort-btn bg-slate-100 text-slate-600 font-black py-2 px-4 rounded-full text-xs sm:text-sm hover:bg-slate-200 btn-smooth';
             });
-            sortBtn.className = 'sort-btn bg-amber-400 text-amber-950 font-bold py-2 px-4 rounded-full text-xs sm:text-sm shadow-md btn-smooth';
+            sortBtn.className = 'sort-btn bg-amber-400 text-amber-950 font-black py-2 px-4 rounded-full text-xs sm:text-sm btn-smooth';
 
             filterAndSortAndRender();
         });
