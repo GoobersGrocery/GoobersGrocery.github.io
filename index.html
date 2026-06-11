@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Meta Tags -->
     <meta name="description" content="Welcome to Goobers' Grocery, the greatest grocery store ever built by the legend, Caseoh. Find gooberlicious products, weekly deals, and more.">
     <meta name="author" content="Caseoh">
     
-    <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="Goobers' Grocery - Home of the Gooberlicious!">
     <meta property="og:description" content="Welcome to Goobers' Grocery, the greatest grocery store ever built by the legend, Caseoh.">
     <meta property="og:image" content="https://art.ngfiles.com/images/5583000/5583492_642443_sillyrespawn3_untitled-5583492.4c96aeca899222fb14f8190240e22baa.webp?f1712088363">
@@ -34,15 +32,14 @@
         html {
             scroll-behavior: smooth;
         }
-        #hero-section, #products-section, #reviews-section {
+        #hero, #products, #reviews {
             scroll-margin-top: 90px;
         }
         @media (min-width: 768px) {
-            #hero-section, #products-section, #reviews-section {
+            #hero, #products, #reviews {
                 scroll-margin-top: 120px;
             }
         }
-        /* Global scrollbar hiding while maintaining full scrollability */
         * {
             scrollbar-width: none !important;
             -ms-overflow-style: none !important;
@@ -104,7 +101,6 @@
         .btn-smooth {
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        /* Elegant single-border focus state with no complex ring effects */
         input, textarea, select {
             outline: none !important;
             box-shadow: none !important;
@@ -112,14 +108,13 @@
         }
         input:focus, textarea:focus, select:focus {
             outline: none !important;
-            border-color: #cbd5e1 !important; /* Soft, light grey border */
+            border-color: #cbd5e1 !important; 
             box-shadow: none !important;
         }
     </style>
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col text-lg">
 
-    <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-40">
         <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center max-w-7xl">
             <div class="flex items-center space-x-3 md:space-x-4">
@@ -153,11 +148,9 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="container mx-auto p-4 md:p-8 flex-grow max-w-7xl space-y-12">
 
-        <!-- Hero Section -->
-        <section id="hero-section" class="bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 rounded-3xl p-6 md:p-14 text-white shadow-xl text-center relative overflow-hidden">
+        <section id="hero" class="bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 rounded-3xl p-6 md:p-14 text-white shadow-xl text-center relative overflow-hidden">
             <div class="absolute inset-0 bg-black/10 mix-blend-multiply"></div>
             <div class="relative z-10 space-y-4">
                 <h2 class="text-3xl md:text-6xl font-black tracking-tight">Welcome, you simpletons!</h2>
@@ -165,7 +158,6 @@
             </div>
         </section>
 
-        <!-- About Caseoh Section -->
         <section class="bg-white rounded-3xl shadow-md p-6 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
             <div class="w-28 h-28 md:w-56 md:h-56 overflow-hidden rounded-[30%] border-2 border-orange-400 shadow-lg flex-shrink-0">
                 <img src="https://wallpapers.com/images/high/caseoh-streaming-setup-h6uvjnckkn99601g.webp" 
@@ -178,11 +170,9 @@
             </div>
         </section>
         
-        <!-- Deal of the Week Section -->
         <section class="space-y-6">
             <h3 class="text-xl md:text-4xl font-black text-center text-slate-900 tracking-tight">Caseoh's Deal of the Week!</h3>
             <div id="deal-of-the-week" class="bg-white rounded-3xl shadow-md border border-slate-100 p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-12 cursor-pointer relative overflow-hidden group">
-                <!-- Pre-load Skeleton -->
                 <div class="relative w-full md:w-2/5 flex items-center justify-center bg-slate-50 p-6 rounded-2xl h-48 md:h-64 animate-pulse border border-slate-100">
                     <div class="w-32 h-32 md:w-48 md:h-48 bg-slate-200 rounded-full"></div>
                 </div>
@@ -198,13 +188,11 @@
             </div>
         </section>
 
-        <!-- Product Listing -->
-        <section id="products-section" class="bg-white rounded-3xl shadow-md p-4 sm:p-6 md:p-10 space-y-8">
+        <section id="products" class="bg-white rounded-3xl shadow-md p-4 sm:p-6 md:p-10 space-y-8">
             <div class="max-w-2xl mx-auto space-y-6">
                 <h3 class="text-xl md:text-4xl font-black text-center text-slate-900 tracking-tight">Our Gooberlicious Products</h3>
                 <div class="relative">
                     <div id="search-icon" class="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none text-slate-400">
-                        <!-- Custom search SVG injected here -->
                     </div>
                     <input id="search-bar" type="text" placeholder="Search for an item..." 
                         class="w-full pl-12 pr-12 py-3 bg-slate-50 border border-slate-200 rounded-full text-sm sm:text-base font-medium">
@@ -225,12 +213,10 @@
             </div>
 
             <div id="product-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
-                <!-- Products will be injected here by JavaScript -->
             </div>
             
             <div id="no-results" class="hidden text-center py-16 flex flex-col items-center justify-center space-y-4 w-full">
                 <div id="basket-icon-no-results" class="w-28 h-28 bg-slate-50 text-slate-400 rounded-full flex items-center justify-center mx-auto">
-                    <!-- Custom basket SVG injected here -->
                 </div>
                 <div class="space-y-1">
                     <p class="text-slate-500 font-black text-xl">Womp Womp. No items found, you simpleton.</p>
@@ -239,9 +225,7 @@
             </div>
         </section>
         
-        <!-- Propaganda & Reviews Sections Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-stretch">
-            <!-- Employee Testimonials -->
             <section class="bg-white rounded-3xl shadow-md p-6 md:p-10 flex flex-col justify-between space-y-8">
                 <div class="space-y-6">
                     <h3 class="text-xl md:text-3xl font-black text-center text-slate-900">What My "Valued" Employees Say</h3>
@@ -270,7 +254,6 @@
                     </div>
                 </div>
                 
-                <!-- A word from our founder -->
                 <div class="p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 space-y-4 shadow-sm">
                     <h4 class="text-base font-black text-amber-900 uppercase tracking-wide">A Word From Our Founder</h4>
                     <div class="space-y-3">
@@ -288,54 +271,124 @@
                 </div>
             </section>
             
-            <!-- Store Reviews Section -->
-            <section id="reviews-section" class="bg-white rounded-3xl shadow-md p-6 md:p-10 flex flex-col h-full justify-between space-y-6">
+            <section id="reviews" class="bg-white rounded-3xl shadow-md p-6 md:p-10 flex flex-col h-full justify-between space-y-6">
                 <div class="space-y-6 flex flex-col flex-grow">
                     <h3 class="text-xl md:text-3xl font-black text-center text-slate-900">Review My Glorious Store</h3>
                     
-                    <div class="bg-slate-50 rounded-2xl p-4 sm:p-6 flex flex-col space-y-4 shadow-sm">
-                        <div id="store-rating-display" class="hidden text-center space-y-1">
+                    <div class="bg-slate-50 rounded-2xl p-4 sm:p-6 flex flex-col space-y-4 shadow-sm min-h-[220px]">
+                        <div id="store-rating-display" class="text-center space-y-1">
                             <div class="flex items-center justify-center text-xl md:text-3xl font-black text-slate-850 gap-2">
-                                <span id="store-avg-rating"></span>
-                                <div class="inline-flex gap-1" id="store-avg-star-renders"></div>
+                                <span id="store-avg-rating">
+                                    <div class="h-7 md:h-9 w-12 md:w-16 bg-slate-200 rounded inline-block align-middle animate-pulse"></div>
+                                </span>
+                                <div class="inline-flex gap-1" id="store-avg-star-renders">
+                                    <svg class="w-6 h-6 md:w-7 md:h-7 text-slate-200 fill-slate-200 animate-pulse" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                                    <svg class="w-6 h-6 md:w-7 md:h-7 text-slate-200 fill-slate-200 animate-pulse" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                                    <svg class="w-6 h-6 md:w-7 md:h-7 text-slate-200 fill-slate-200 animate-pulse" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                                    <svg class="w-6 h-6 md:w-7 md:h-7 text-slate-200 fill-slate-200 animate-pulse" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                                    <svg class="w-6 h-6 md:w-7 md:h-7 text-slate-200 fill-slate-200 animate-pulse" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                                </div>
                             </div>
-                            <div id="total-reviews" class="text-xs md:text-sm text-slate-400 font-extrabold"></div>
+                            <div id="total-reviews" class="text-xs md:text-sm text-slate-400 font-extrabold flex justify-center">
+                                <div class="h-3 md:h-4 w-32 md:w-40 bg-slate-200 rounded animate-pulse mt-1"></div>
+                            </div>
                         </div>
+                        
                         <div id="review-percentages" class="text-xs md:text-sm text-slate-600 space-y-1">
-                            <!-- Pre-load metrics Skeleton to prevent layout shifting on database fetch -->
-                            <div class="animate-pulse space-y-3 py-1">
-                                <div class="h-4 bg-slate-200 rounded w-1/3"></div>
-                                <div class="h-2 bg-slate-200 rounded w-full"></div>
-                                <div class="h-4 bg-slate-200 rounded w-1/4"></div>
-                                <div class="h-2 bg-slate-200 rounded w-full"></div>
+                            <div class="space-y-4 text-left text-xs sm:text-sm font-medium animate-pulse">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-6 h-6 bg-slate-200 rounded-full flex-shrink-0"></div>
+                                    <div class="w-full">
+                                        <div class="flex justify-between mb-1">
+                                            <div class="h-3 sm:h-4 bg-slate-200 rounded w-28"></div>
+                                            <div class="h-3 sm:h-4 bg-slate-200 rounded w-8"></div>
+                                        </div>
+                                        <div class="w-full bg-slate-100 rounded-full h-2">
+                                            <div class="bg-slate-200 h-2 rounded-full w-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-6 h-6 bg-slate-200 rounded-full flex-shrink-0"></div>
+                                    <div class="w-full">
+                                        <div class="flex justify-between mb-1">
+                                            <div class="h-3 sm:h-4 bg-slate-200 rounded w-20"></div>
+                                            <div class="h-3 sm:h-4 bg-slate-200 rounded w-8"></div>
+                                        </div>
+                                        <div class="w-full bg-slate-100 rounded-full h-2">
+                                            <div class="bg-slate-200 h-2 rounded-full w-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-6 h-6 bg-slate-200 rounded-full flex-shrink-0"></div>
+                                    <div class="w-full">
+                                        <div class="flex justify-between mb-1">
+                                            <div class="h-3 sm:h-4 bg-slate-200 rounded w-36"></div>
+                                            <div class="h-3 sm:h-4 bg-slate-200 rounded w-8"></div>
+                                        </div>
+                                        <div class="w-full bg-slate-100 rounded-full h-2">
+                                            <div class="bg-slate-200 h-2 rounded-full w-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Store reviews container with custom asynchronous skeleton loader -->
                     <div id="store-reviews-container" class="flex-grow h-0 min-h-[300px] overflow-y-auto pr-1 rounded-2xl flex flex-col space-y-4">
                         <div class="animate-pulse space-y-4" id="store-reviews-skeleton">
-                            <div class="bg-slate-50/70 p-4 rounded-2xl space-y-3 border border-slate-100/50">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-11 h-11 bg-slate-200 rounded-full"></div>
-                                    <div class="flex-1 space-y-2">
-                                        <div class="h-4 bg-slate-200 rounded w-1/4"></div>
-                                        <div class="h-3 bg-slate-200 rounded w-1/3"></div>
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
+                                    <div class="space-y-2 flex-1">
+                                        <div class="h-3 sm:h-4 bg-slate-200 rounded w-1/3"></div>
+                                        <div class="h-2.5 sm:h-3 bg-slate-200 rounded w-1/4"></div>
                                     </div>
                                 </div>
-                                <div class="h-4 bg-slate-200 rounded w-full"></div>
-                                <div class="h-4 bg-slate-200 rounded w-5/6"></div>
+                                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 space-y-2.5">
+                                    <div class="h-3 bg-slate-200 rounded w-full"></div>
+                                    <div class="h-3 bg-slate-200 rounded w-5/6"></div>
+                                </div>
+                                <div class="flex items-center justify-between mt-1">
+                                    <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-16 sm:w-20"></div>
+                                    <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
+                                </div>
                             </div>
-                            <div class="bg-slate-50/70 p-4 rounded-2xl space-y-3 border border-slate-100/50">
-                                <div class="flex items-center gap-3">
-                                    <div class="w-11 h-11 bg-slate-200 rounded-full"></div>
-                                    <div class="flex-1 space-y-2">
-                                        <div class="h-4 bg-slate-200 rounded w-1/4"></div>
-                                        <div class="h-3 bg-slate-200 rounded w-1/3"></div>
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
+                                    <div class="space-y-2 flex-1">
+                                        <div class="h-3 sm:h-4 bg-slate-200 rounded w-1/4"></div>
+                                        <div class="h-2.5 sm:h-3 bg-slate-200 rounded w-1/5"></div>
                                     </div>
                                 </div>
-                                <div class="h-4 bg-slate-200 rounded w-full"></div>
-                                <div class="h-4 bg-slate-200 rounded w-1/2"></div>
+                                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 space-y-2.5">
+                                    <div class="h-3 bg-slate-200 rounded w-full"></div>
+                                    <div class="h-3 bg-slate-200 rounded w-4/5"></div>
+                                    <div class="h-3 bg-slate-200 rounded w-2/3"></div>
+                                </div>
+                                <div class="flex items-center justify-between mt-1">
+                                    <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-16 sm:w-20"></div>
+                                    <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                                <div class="flex items-center gap-2 sm:gap-3">
+                                    <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
+                                    <div class="space-y-2 flex-1">
+                                        <div class="h-3 sm:h-4 bg-slate-200 rounded w-1/3"></div>
+                                        <div class="h-2.5 sm:h-3 bg-slate-200 rounded w-1/4"></div>
+                                    </div>
+                                </div>
+                                <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 space-y-2.5">
+                                    <div class="h-3 bg-slate-200 rounded w-11/12"></div>
+                                    <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+                                </div>
+                                <div class="flex items-center justify-between mt-1">
+                                    <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-16 sm:w-20"></div>
+                                    <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -343,7 +396,6 @@
 
                 <form id="store-review-form" class="space-y-4 pt-4">
                     <div class="star-rating flex flex-row-reverse justify-center gap-2">
-                        <!-- Custom rendered SVG interactive star selectors -->
                         <input type="radio" id="store-star5" name="store-rating" value="5"/>
                         <label for="store-star5" class="cursor-pointer text-slate-200">
                             <svg class="w-8 h-8 md:w-10 md:h-10 inline-block fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -387,7 +439,6 @@
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-slate-900 text-white mt-12 pb-20 md:pb-6">
         <div class="container mx-auto p-6 md:p-8 text-center max-w-7xl space-y-4">
             <div class="space-y-1">
@@ -422,36 +473,31 @@
         </div>
     </footer>
     
-    <!-- Mobile Bottom Navigation -->
     <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-150 shadow-2xl z-50 flex justify-around py-2.5">
-         <a id="nav-home" href="#hero-section" class="flex flex-col items-center justify-center text-slate-500 hover:text-amber-500 w-full transition-colors space-y-0.5">
+         <a id="nav-home" href="?section=hero" class="flex flex-col items-center justify-center text-slate-500 hover:text-amber-500 w-full transition-colors space-y-0.5">
             <span id="mobile-home"></span>
             <span class="text-[10px] font-bold">Home</span>
         </a>
-        <a id="nav-products" href="#products-section" class="flex flex-col items-center justify-center text-slate-500 hover:text-amber-500 w-full transition-colors space-y-0.5">
+        <a id="nav-products" href="?section=products" class="flex flex-col items-center justify-center text-slate-500 hover:text-amber-500 w-full transition-colors space-y-0.5">
             <span id="mobile-products"></span>
             <span class="text-[10px] font-bold">Products</span>
         </a>
-        <a id="nav-reviews" href="#reviews-section" class="flex flex-col items-center justify-center text-slate-500 hover:text-amber-500 w-full transition-colors space-y-0.5">
+        <a id="nav-reviews" href="?section=reviews" class="flex flex-col items-center justify-center text-slate-500 hover:text-amber-500 w-full transition-colors space-y-0.5">
             <span id="mobile-reviews"></span>
             <span class="text-[10px] font-bold">Reviews</span>
          </a>
     </nav>
 
-    <!-- Product Details Modal -->
     <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 modal-bg hidden">
         <div class="bg-white w-full h-full md:h-[85vh] md:max-h-[85vh] md:rounded-3xl shadow-2xl md:max-w-2xl overflow-hidden flex flex-col">
-            <!-- Header bar of modal -->
             <div class="p-4 md:p-5 flex justify-between items-center bg-slate-50">
                 <span class="text-[10px] sm:text-xs uppercase tracking-wider font-extrabold text-slate-400">Product Spotlight</span>
                 <button id="close-product-modal" class="text-2xl sm:text-3xl text-slate-400 hover:text-slate-700 leading-none btn-smooth">&times;</button>
             </div>
             
-            <!-- Body area -->
             <div class="p-5 md:p-8 overflow-y-auto flex-grow flex flex-col space-y-5 md:space-y-6 relative">
                 <div class="relative flex items-center justify-center bg-slate-50/50 rounded-2xl p-4 md:p-6 border border-slate-100 h-48 md:h-64">
                     <img id="modal-img" src="" alt="Product Image" class="max-h-full max-w-full object-contain">
-                    <!-- Dynamic modal hot deal badge injected here -->
                     <div id="modal-deal-badge" class="absolute top-4 right-4 hidden bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-[10px] shadow-md uppercase tracking-wider">
                         HOT DEAL!
                     </div>
@@ -479,7 +525,6 @@
         </div>
     </div>
 
-    <!-- Secondary Reviews Modal -->
     <div id="reviews-modal" class="fixed inset-0 z-55 flex items-center justify-center p-0 md:p-4 modal-bg hidden" style="z-index: 60;">
         <div class="bg-white w-full h-full md:h-[85vh] md:max-h-[85vh] md:rounded-3xl shadow-2xl md:max-w-2xl overflow-hidden flex flex-col">
             <div class="p-4 md:p-5 flex justify-between items-center bg-slate-50">
@@ -490,19 +535,15 @@
                 <button id="close-reviews-modal" class="text-2xl sm:text-3xl text-slate-400 hover:text-slate-700 leading-none btn-smooth">&times;</button>
             </div>
 
-            <!-- Scrollable list of reviews -->
             <div class="p-4 md:p-6 overflow-y-auto flex-grow flex flex-col" id="item-reviews-container-parent">
                 <div id="item-reviews-container" class="flex-grow flex flex-col space-y-6">
-                    <!-- Loaded dynamically -->
                 </div>
             </div>
 
-            <!-- Input area fixed at bottom -->
             <div class="p-4 md:p-5 bg-slate-50 mt-auto sticky bottom-0 z-10 space-y-3 border-t border-slate-100">
                 <h4 class="text-xs font-black uppercase tracking-wider text-slate-500">Write a Gooberview</h4>
                 <form id="item-review-form" class="space-y-3">
                     <div class="star-rating flex flex-row-reverse justify-center gap-2">
-                        <!-- Custom rendered SVG interactive star selectors -->
                         <input type="radio" id="item-star5" name="item-rating" value="5"/>
                         <label for="item-star5" class="cursor-pointer text-slate-200">
                             <svg class="w-8 h-8 md:w-10 md:h-10 inline-block fill-current" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -545,12 +586,10 @@
         </div>
     </div>
 
-    <!-- Legal Notice Modal -->
     <div id="legal-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl p-6 md:p-12 text-center relative">
             <button id="close-legal-modal" class="absolute top-4 right-5 text-2xl md:text-3xl text-slate-400 hover:text-slate-800 btn-smooth">&times;</button>
             <div id="warning-icon" class="w-12 h-12 md:w-16 md:h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
-                <!-- Custom warning SVG injected here -->
             </div>
             <h3 class="text-lg md:text-2xl font-black text-slate-900 mb-3 md:mb-4 uppercase tracking-wider">Legal Notice</h3>
             <p class="text-slate-600 text-sm md:text-lg leading-relaxed mb-6 md:mb-8">If you happen to, you know, keel over and die from eating any food you buy here, that's not on me. Zero liability is held against me, Caseoh. It's not my fault. Take it up with the manufacturers who made the stuff, or maybe blame one of my employees that work here at Goobers' Grocery. They probably messed something up. I'm perfect.</p>
@@ -558,7 +597,6 @@
         </div>
     </div>
     
-    <!-- Other Businesses Modal -->
     <div id="businesses-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl p-6 md:p-12 relative max-h-[90vh] overflow-y-auto">
             <button id="close-businesses-modal" class="absolute top-4 right-5 text-2xl md:text-3xl text-slate-400 hover:text-slate-800 btn-smooth">&times;</button>
@@ -574,16 +612,13 @@
         </div>
     </div>
 
-    <!-- Toast Notifications Container -->
     <div id="toast-container" class="fixed bottom-24 md:bottom-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none w-full max-w-sm px-4"></div>
 
-    <!-- Firebase SDK -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, query, onSnapshot, where, doc, updateDoc, increment } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Globally preloaded premium vector SVG assets (scaled identically)
         const ICONS = {
             search: `<svg class="w-5 h-5 md:w-6 md:h-6 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>`,
             basket: `<svg class="w-6 h-6 md:w-7 md:h-7 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`,
@@ -593,19 +628,17 @@
             comments: `<svg class="w-8 h-8 md:w-10 md:h-10 inline-block" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>`,
             comments_button: `<svg class="w-4 h-4 md:w-5 md:h-5 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>`,
             warning: `<svg class="w-6 h-6 md:w-7 md:h-7 inline-block text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
-            thumbsUp: `<svg class="w-4 h-4 md:w-5 md:h-5 inline-block" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 9V5a3 3 0 0 0-3-3l-3 9v11h10.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM5 22H3a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 3 11h2z"/></svg>`,
-            thumbsUpFilled: `<svg class="w-4 h-4 md:w-5 md:h-5 inline-block" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 9V5a3 3 0 0 0-3-3l-3 9v11h10.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM5 22H3a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 3 11h2z"/></svg>`,
+            thumbsUp: `<svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.5 9V5a3 3 0 0 0-3-3l-3 9v11h10.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM5 22H3a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 3 11h2z"/></svg>`,
+            thumbsUpFilled: `<svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="currentColor" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.5 9V5a3 3 0 0 0-3-3l-3 9v11h10.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM5 22H3a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 3 11h2z"/></svg>`,
             youtube: `<svg class="w-5 h-5 md:w-6 md:h-6 inline-block" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.546 15.569V8.431L15.818 12z"/></svg>`,
             submit: `<svg class="w-4 h-4 md:w-5 md:h-5 inline-block" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0.01" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M21.168 2.835a2.8 2.8 0 0 0-2.648-.755L5.78 4.757a4.43 4.43 0 0 0-3.732 5.029 4.43 4.43 0 0 0 1.25 2.483l1.366 1.367a.33.33 0 0 1 .099.24v2.52a2.843 2.843 0 0 0 2.84 2.839h2.52a.34.34 0 0 1 .24.099l1.365 1.366A4.4 4.4 0 0 0 14.85 22a4.5 4.5 0 0 0 1.422-.234 4.4 4.4 0 0 0 2.97-3.549l2.677-12.699a2.82 2.82 0 0 0-.75-2.683M4.6 8.523a1.89 1.89 0 0 1 1.57-1.296q.044-.006.087-.015l11.1-2.332L7.263 14.968v-1.093a2.82 2.82 0 0 0-.833-2.007l-1.364-1.366A1.9 1.9 0 0 1 4.6 8.523m12.185 9.223q-.01.043-.015.087a1.93 1.93 0 0 1-2.174 1.65 1.93 1.93 0 0 1-1.101-.547L12.13 17.57a2.82 2.82 0 0 0-2.008-.833H9.03L19.122 6.643z"/></svg>`
         };
 
         const starIconSmall = `<svg class="w-3.5 h-3.5 inline-block" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
 
-        // Fade-in centered Toast Alert system
         function showToast(message, type = 'error') {
             const container = document.getElementById('toast-container');
             
-            // Limit to a single instance on screen at any given time to prevent stacking
             const existingToasts = container.querySelectorAll('.toast-msg');
             for (let t of existingToasts) {
                 if (t.textContent.trim() === message.trim()) {
@@ -624,13 +657,11 @@
             
             container.appendChild(toast);
             
-            // Simple fade-in animation
             setTimeout(() => {
                 toast.classList.remove('opacity-0');
                 toast.classList.add('opacity-100');
             }, 10);
             
-            // Auto dismiss after 4 seconds with simple fade-out
             setTimeout(() => {
                 toast.classList.remove('opacity-100');
                 toast.classList.add('opacity-0');
@@ -638,14 +669,12 @@
             }, 4000);
         }
 
-        // Disable right-clicking globally on all images
         document.addEventListener('contextmenu', (e) => {
             if (e.target.tagName === 'IMG') {
                 e.preventDefault();
             }
         });
 
-        // Inject SVG assets directly into initial target positions
         document.getElementById('search-icon').innerHTML = ICONS.search;
         document.getElementById('basket-icon-no-results').innerHTML = `<svg class="w-14 h-14 inline-block relative right-1" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>`;
         document.getElementById('youtube-icon').innerHTML = ICONS.youtube;
@@ -656,7 +685,6 @@
         document.getElementById('modal-comments').innerHTML = ICONS.comments_button;
         document.getElementById('secondary-reviews-icon').innerHTML = ICONS.comment;
 
-        // Inject button action send icons
         document.querySelectorAll('.submit-icon').forEach(el => {
             el.innerHTML = ICONS.submit;
         });
@@ -807,8 +835,8 @@
             default: "I picked this out myself. It's probably the best you'll ever have. Now buy it before I get mad."
         };
 
-        const adjectives = ['Goobery', 'Wobbly', 'Gigantic', 'Banned', 'Simple', 'Hungry', 'Jiggly', 'BoxShaped', 'Chonky', 'Glizzy', '1x1Lego', 'Dookie', 'Lawsuit', 'Cranky', 'Screaming', 'Sweaty', 'Loud', 'Bankrupt', 'Gassy', 'Confused', 'Crying', 'Greasy', 'Clueless', 'Bewildered', 'Flummoxed', 'Perplexed', 'Baffled', 'Stunned', 'Dazed', 'Frazzled', 'Jittery', 'Clumsy', 'Awkward', 'Goofy', 'Zany', 'Bonkers', 'Quirky', 'Peculiar', 'Bizarre', 'Outlandish', 'Absurd', 'Ridiculicious', 'Preposterous', 'Ludicrous', 'Stinky', 'Jobless', 'Malnourished', 'Planetary', 'Galactic', 'Astronomical', 'Interstellar', 'Cosmic', 'Tectonic', 'Seismic', 'Gravitational', 'Bottomless', 'Massive', 'Colossal', 'Gargantuan', 'Titanic', 'Heavyweight', 'DoubleWide', 'WideLoad', 'Supersized', 'LightBlocking', 'SunEclipsing', 'FerrisWheel', 'AudioPeaking', 'EarDestroying', 'MicPeaking', 'DeskBreaking', 'ChairBreaking', 'ControllerSmashing', 'BanHappy', 'Unbanned', 'Screeching', 'Whining', 'Complaining', 'Ginger', 'RedHeaded', 'Bearded', 'BaldHeaded', 'WaffleHouse', 'DeepFried', 'Crispy', 'CheetoDusted', 'DoritoBreathed', 'ButterDrenched', 'BrokeBoy', 'PennyPinching', 'Cheapskate', 'Unemployed', 'BasementDwelling', 'SmoothBrained', 'FlatBrained', 'LowIQ', 'AirHeaded', 'BrainDead', 'StreamSniping', 'Lagging', 'HighPing', 'FrameDropping', 'Sus', 'Sketchy', 'Fraudulent', 'Hardstuck'];
-		const nouns = ['Simpleton', 'Goober', 'Eater', 'Customer', 'Builder', 'Donator', 'Mod', 'Shopper', 'Brick', 'Janitor', 'Victim', 'Gladiator', 'Gobbler', 'Hater', 'Fanboy', 'Keyboard', 'Creature', 'Mouthbreather', 'Bandit', 'Entity', 'Wall', 'Building', 'Dingus', 'Doofus', 'Nincompoop', 'Scallywag', 'Rascal', 'Imp', 'Gremlin', 'Gnome', 'Troll', 'Ogre', 'Yeti', 'Blob', 'Critter', 'Muppet', 'Puppet', 'Cartoon', 'Anomaly', 'Glitch', 'Paradox', 'Enigma', 'Conundrum', 'Chat', 'Cuh', 'DiscordMod', 'StreamSniper', 'Tier3Sub', 'PrimeSub', 'GiftedSub', 'NonSub', 'KeyboardWarrior', 'CouchPotato', 'BasementDweller', 'BedStain', 'Chatter', 'Vip', 'WaffleHouseEmployee', 'FastFoodWorker', 'TacoBellManager', 'ShrimpAlfredo', 'GlizzyGobbler', 'Whopper', 'BigMac', 'Dorito', 'Cheeto', 'Chump', 'Sucker', 'Loser', 'Failure', 'Disappointment', 'Clown', 'Jester', 'Fool', 'Idiot', 'Moron', 'Buffoon', 'Blockhead', 'Numbskull', 'Airhead', 'Birdbrain', 'PeaBrain', 'Halfwit', 'Dimwit', 'Nitwit', 'Twit', 'Dope', 'Klutz', 'Toddler', 'iPadKid', 'Baby', 'Crybaby'];
+        const adjectives = ['Goobery', 'Wobbly', 'Gigantic', 'Banned', 'Simple', 'Hungry', 'Chonky', 'Glizzy', '1x1Lego', 'Dookie', 'Lawsuit', 'Cranky', 'Screaming', 'Sweaty', 'Loud', 'Bankrupt', 'Gassy', 'Confused', 'Crying', 'Greasy', 'Clueless', 'Bewildered', 'Flummoxed', 'Perplexed', 'Baffled', 'Stunned', 'Dazed', 'Frazzled', 'Jittery', 'Clumsy', 'Awkward', 'Goofy', 'Zany', 'Bonkers', 'Quirky', 'Peculiar', 'Bizarre', 'Outlandish', 'Absurd', 'Ridiculicious', 'Preposterous', 'Ludicrous', 'Stinky', 'Jobless', 'Malnourished', 'Planetary', 'Galactic', 'Astronomical', 'Interstellar', 'Cosmic', 'Tectonic', 'Seismic', 'Gravitational', 'Bottomless', 'Massive', 'Colossal', 'Gargantuan', 'Titanic', 'Heavyweight', 'DoubleWide', 'WideLoad', 'Supersized', 'LightBlocking', 'SunEclipsing', 'FerrisWheel', 'AudioPeaking', 'EarDestroying', 'MicPeaking', 'DeskBreaking', 'ChairBreaking', 'ControllerSmashing', 'BanHappy', 'Unbanned', 'Screeching', 'Whining', 'Ginger', 'Bearded', 'BaldHeaded', 'WaffleHouse', 'DeepFried', 'Crispy', 'CheetoDusted', 'DoritoBreathed', 'ButterDrenched', 'BrokeBoy', 'PennyPinching', 'Cheapskate', 'Unemployed', 'BasementDwelling', 'SmoothBrained', 'FlatBrained', 'LowIQ', 'AirHeaded', 'BrainDead', 'StreamSniping', 'Lagging', 'HighPing', 'FrameDropping', 'Sus', 'Sketchy', 'Fraudulent', 'Hardstuck'];
+        const nouns = ['Simpleton', 'Goober', 'Eater', 'Customer', 'Builder', 'Donator', 'Mod', 'Shopper', 'Brick', 'Janitor', 'Victim', 'Gladiator', 'Gobbler', 'Hater', 'Fanboy', 'Keyboard', 'Creature', 'Mouthbreather', 'Bandit', 'Entity', 'Wall', 'Building', 'Dingus', 'Doofus', 'Nincompoop', 'Scallywag', 'Rascal', 'Imp', 'Gremlin', 'Gnome', 'Troll', 'Ogre', 'Yeti', 'Blob', 'Critter', 'Muppet', 'Puppet', 'Cartoon', 'Anomaly', 'Glitch', 'Paradox', 'Enigma', 'Conundrum', 'Chat', 'Cuh', 'DiscordMod', 'StreamSniper', 'Tier3Sub', 'PrimeSub', 'GiftedSub', 'NonSub', 'KeyboardWarrior', 'CouchPotato', 'BasementDweller', 'BedStain', 'Chatter', 'Vip', 'WaffleHouseEmployee', 'FastFoodWorker', 'TacoBellManager', 'ShrimpAlfredo', 'GlizzyGobbler', 'Whopper', 'BigMac', 'Dorito', 'Cheeto', 'Chump', 'Sucker', 'Loser', 'Failure', 'Disappointment', 'Clown', 'Jester', 'Fool', 'Idiot', 'Moron', 'Buffoon', 'Blockhead', 'Numbskull', 'Airhead', 'PeaBrain', 'Halfwit', 'Dimwit', 'Nitwit', 'Twit', 'Dope', 'Klutz', 'Toddler', 'iPadKid', 'Baby', 'Crybaby'];
 
         function generateUsername() {
             const adj = adjectives[Math.floor(Math.random() * adjectives.length)];
@@ -857,20 +885,17 @@
         let activeProduct = null;
         let currentUser = null;
         
-        // Globally preloaded memory stores
         let loadedReplies = [];
         let loadedAllItemReviews = [];
         let loadedStoreReviewsList = [];
         let isItemReviewsLoaded = false;
 
-        // Interactive Star highlight logic to avoid flickering and dead zones
         function setupInteractiveStars(formId, inputName) {
             const form = document.getElementById(formId);
             if (!form) return;
             const starContainer = form.querySelector('.star-rating');
             if (!starContainer) return;
 
-            // Gather inputs and labels in paired order 1 to 5
             const starPairs = [
                 { input: form.querySelector(`input[id$="star1"]`), label: form.querySelector(`label[for$="star1"]`) },
                 { input: form.querySelector(`input[id$="star2"]`), label: form.querySelector(`label[for$="star2"]`) },
@@ -919,7 +944,6 @@
             });
         }
 
-        // Setup Deal of the Week logic using week-seeded deterministic generation so all users get the exact same deal
         const setupDealOfTheWeek = () => {
             const today = new Date();
             const startOfYear = new Date(today.getFullYear(), 0, 1);
@@ -927,10 +951,8 @@
             const oneWeekInMs = 1000 * 60 * 60 * 24 * 7;
             const currentWeekNumber = Math.floor(diffInMs / oneWeekInMs) + 1;
             
-            // Unique week seed (e.g., 202624)
             const weekSeed = today.getFullYear() * 100 + currentWeekNumber;
             
-            // Simple LCG pseudo-random algorithm
             let state = weekSeed;
             const seededRandom = () => {
                 state = (state * 1664525 + 1013904223) % 4294967296;
@@ -940,7 +962,6 @@
             const seededIndex = Math.floor(seededRandom() * products.length);
             weeklyDealProduct = products[seededIndex];
             
-            // Add an artificial delay to show off the skeleton loading state
             setTimeout(() => {
                 dealContainer.dataset.product = JSON.stringify(weeklyDealProduct);
                 
@@ -1059,7 +1080,6 @@
             document.head.appendChild(script);
         };
 
-        // Generates clean SVG star ratings with rounded edges via vector strokes
         function getRoundedStarVector(filled, sizeClass = 'w-6 h-6') {
             return `
                 <svg class="${sizeClass} inline-block ${filled ? 'text-amber-400 fill-amber-400' : 'text-slate-200 fill-slate-200'}" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1072,14 +1092,12 @@
             const countSize = size === 'sm' ? 'text-xs' : 'text-sm';
             const starSizeClass = size === 'sm' ? 'w-3.5 h-3.5' : 'w-5 h-5';
 
-            // Display precise layout skeleton until Firestore loads ratings asynchronously to prevent jumping
             if (!isItemReviewsLoaded) {
                 let emptyStars = '';
                 for (let i = 0; i < 5; i++) {
                     emptyStars += getRoundedStarVector(false, starSizeClass);
                 }
                 
-                // Match exact Tailwind heights: text-xs line-height is 16px (h-4), text-sm is 20px (h-5)
                 const pulseHeight = size === 'sm' ? 'h-4' : 'h-5';
                 const pulseWidth = size === 'sm' ? 'w-6' : 'w-8';
                 
@@ -1168,11 +1186,9 @@
             });
         };
 
-        // Render reviews with deduplication
         const renderReviews = (container, reviews, collectionRef, isItemReview = false) => {
             container.innerHTML = '';
             
-            // Filter out duplicate reviews
             const seenReviews = new Set();
             const uniqueReviews = [];
             reviews.forEach(review => {
@@ -1213,7 +1229,6 @@
                     const scrollClass = currentReviewReplies.length >= 3 ? 'max-h-60 overflow-y-auto pr-1' : '';
                     repliesListHTML = `<div class="space-y-3 mt-3 w-full bg-slate-100 p-3 sm:p-4 rounded-2xl flex flex-col items-center ${scrollClass}">`;
                     
-                    // Show only the first reply initially
                     const firstReply = currentReviewReplies[0];
                     const firstAvatar = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(firstReply.username)}`;
                     
@@ -1269,10 +1284,8 @@
                     
                     <p class="text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed font-medium bg-white p-3 sm:p-4 rounded-2xl border border-slate-100" style="white-space: pre-line; word-break: break-word;">${review.comment}</p>
                     
-                    <!-- Nested Replies Container -->
                     ${repliesListHTML}
 
-                    <!-- Actions Layout -->
                     <div class="flex flex-wrap items-center justify-between gap-2 mt-1">
                         <button data-review-id="${review.id}" class="toggle-reply-form-btn text-[10px] sm:text-xs font-black text-amber-850 hover:text-amber-700 flex items-center gap-1.5 bg-amber-100 hover:bg-amber-200 py-1.5 px-3 rounded-full btn-smooth">
                             ${ICONS.comment} Reply
@@ -1284,18 +1297,16 @@
                         </button>
                     </div>
 
-                    <!-- Hidden Reply Input Area -->
                     <div id="reply-form-box-${review.id}" class="hidden mt-3 bg-slate-100 p-3 sm:p-4 rounded-2xl">
                         <div class="flex items-center gap-2 w-full">
-                            <input id="reply-input-${review.id}" type="text" placeholder="Spit your reply out..." class="flex-grow min-w-0 p-2 sm:p-3 bg-white border border-slate-200 focus:outline-none rounded-xl text-xs sm:text-sm font-medium">
-                            <button data-review-id="${review.id}" class="submit-reply-btn h-8 sm:h-11 bg-amber-400 hover:bg-amber-300 text-amber-950 px-3 sm:px-5 rounded-xl text-xs sm:text-sm font-black btn-smooth flex-shrink-0">Post</button>
+                            <input id="reply-input-${review.id}" type="text" placeholder="Spit your reply out..." class="flex-grow min-w-0 h-11 sm:h-12 px-3 sm:px-4 bg-white border border-slate-200 focus:outline-none rounded-xl text-xs sm:text-sm font-medium">
+                            <button data-review-id="${review.id}" class="submit-reply-btn h-10 sm:h-11 bg-amber-400 hover:bg-amber-300 text-amber-950 px-4 sm:px-6 rounded-xl text-xs sm:text-sm font-black btn-smooth flex-shrink-0">Post</button>
                         </div>
                     </div>
                 `;
                 container.appendChild(reviewEl);
             });
 
-            // Toggle More Replies Expandable Button View
             container.querySelectorAll('.toggle-more-replies-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const reviewId = e.currentTarget.dataset.reviewId;
@@ -1308,7 +1319,6 @@
                 });
             });
 
-            // Toggle Reply Form View
             container.querySelectorAll('.toggle-reply-form-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const reviewId = e.currentTarget.dataset.reviewId;
@@ -1317,7 +1327,6 @@
                 });
             });
 
-            // Reply Submission handler
             container.querySelectorAll('.submit-reply-btn').forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     if (!currentUser) return;
@@ -1345,7 +1354,6 @@
                 });
             });
 
-            // Toggleable Helpful Button with Absolute State updates
             container.querySelectorAll('.helpful-btn').forEach(btn => {
                 btn.addEventListener('click', async (e) => {
                     if (!currentUser) return;
@@ -1383,7 +1391,6 @@
             const isDeal = weeklyDealProduct && product.id === weeklyDealProduct.id;
             let priceHTML = `<p class="text-xl md:text-2xl font-black text-amber-500">$${product.price.toFixed(2)}</p>`;
             
-            // Set dynamic modal deal badge visibility
             const modalDealBadge = document.getElementById('modal-deal-badge');
             if (isDeal) {
                 priceHTML = `
@@ -1423,7 +1430,7 @@
             if (!isItemReviewsLoaded) {
                 container.innerHTML = `
                     <div class="animate-pulse space-y-3">
-                        <div class="bg-slate-50/70 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
+                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
                             <div class="flex items-center gap-2">
                                 <div class="w-7 h-7 bg-slate-200 rounded-full"></div>
                                 <div class="flex-grow space-y-1.5">
@@ -1434,7 +1441,7 @@
                             <div class="h-3 bg-slate-200 rounded w-full"></div>
                             <div class="h-3 bg-slate-200 rounded w-5/6"></div>
                         </div>
-                        <div class="bg-slate-50/70 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
+                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
                             <div class="flex items-center gap-2">
                                 <div class="w-7 h-7 bg-slate-200 rounded-full"></div>
                                 <div class="flex-grow space-y-1.5">
@@ -1445,7 +1452,7 @@
                             <div class="h-3 bg-slate-200 rounded w-full"></div>
                             <div class="h-3 bg-slate-200 rounded w-5/6"></div>
                         </div>
-                        <div class="bg-slate-50/70 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
+                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
                             <div class="flex items-center gap-2">
                                 <div class="w-7 h-7 bg-slate-200 rounded-full"></div>
                                 <div class="flex-grow space-y-1.5">
@@ -1552,25 +1559,72 @@
             productModal.classList.add('hidden');
             reviewsModal.classList.remove('hidden');
 
-            // Set placeholder skeleton loader inside modal list to avoid visual jumping
             const itemReviewsContainer = document.getElementById('item-reviews-container');
             itemReviewsContainer.innerHTML = `
                 <div class="animate-pulse space-y-4 w-full">
-                    <div class="bg-slate-50 p-5 rounded-2xl space-y-3">
-                        <div class="flex items-center gap-3">
-                            <div class="w-11 h-11 bg-slate-200 rounded-full"></div>
-                            <div class="flex-1 space-y-2">
-                                <div class="h-4 bg-slate-200 rounded w-1/4"></div>
-                                <div class="h-3 bg-slate-200 rounded w-1/3"></div>
+                    <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
+                            <div class="space-y-2 flex-1">
+                                <div class="h-3 sm:h-4 bg-slate-200 rounded w-1/3"></div>
+                                <div class="h-2.5 sm:h-3 bg-slate-200 rounded w-1/4"></div>
                             </div>
                         </div>
-                        <div class="h-4 bg-slate-200 rounded w-full"></div>
-                        <div class="h-4 bg-slate-200 rounded w-5/6"></div>
+                        <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 space-y-2.5">
+                            <div class="h-3 bg-slate-200 rounded w-full"></div>
+                            <div class="h-3 bg-slate-200 rounded w-5/6"></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-16 sm:w-20"></div>
+                            <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
+                            <div class="space-y-2 flex-1">
+                                <div class="h-3 sm:h-4 bg-slate-200 rounded w-1/4"></div>
+                                <div class="h-2.5 sm:h-3 bg-slate-200 rounded w-1/5"></div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 space-y-2.5">
+                            <div class="h-3 bg-slate-200 rounded w-full"></div>
+                            <div class="h-3 bg-slate-200 rounded w-4/5"></div>
+                            <div class="h-3 bg-slate-200 rounded w-2/3"></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-16 sm:w-20"></div>
+                            <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                        <div class="flex items-center gap-2 sm:gap-3">
+                            <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
+                            <div class="space-y-2 flex-1">
+                                <div class="h-3 sm:h-4 bg-slate-200 rounded w-1/3"></div>
+                                <div class="h-2.5 sm:h-3 bg-slate-200 rounded w-1/4"></div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-3 sm:p-4 rounded-2xl border border-slate-100 space-y-2.5">
+                            <div class="h-3 bg-slate-200 rounded w-11/12"></div>
+                            <div class="h-3 bg-slate-200 rounded w-1/2"></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-1">
+                            <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-16 sm:w-20"></div>
+                            <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
+                        </div>
                     </div>
                 </div>
             `;
 
             triggerReRenderOfReviews();
+
+            try {
+                document.title = `${activeProduct.name} Reviews - Goobers' Grocery`;
+                history.pushState({ productId: activeProduct.id, gooberviews: true }, document.title, `?product=${activeProduct.id}&gooberviews`);
+            } catch (e) {
+                console.warn("History pushState blocked:", e);
+            }
         };
 
         const triggerReRenderOfReviews = () => {
@@ -1585,18 +1639,95 @@
 
         const closeReviewsModal = () => {
             reviewsModal.classList.add('hidden');
-            if (activeProduct) productModal.classList.remove('hidden');
+            if (activeProduct) {
+                productModal.classList.remove('hidden');
+                try {
+                    document.title = `${activeProduct.name} - Goobers' Grocery`;
+                    history.pushState({ productId: activeProduct.id }, document.title, `?product=${activeProduct.id}`);
+                } catch (e) {
+                    console.warn("History pushState blocked:", e);
+                }
+            }
             document.getElementById('item-review-form').reset();
-            // Trigger customized dynamic interactive star resets
             document.getElementById('item-review-form').dispatchEvent(new Event('reset'));
+        };
+
+        const checkUrlForProduct = () => {
+            try {
+                const urlParams = new URLSearchParams(window.location.search);
+                const productId = urlParams.get('product');
+                const sectionId = urlParams.get('section');
+
+                productModal.classList.add('hidden');
+                reviewsModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+
+                if (productId) {
+                    const product = products.find(p => p.id === productId);
+                    if (product) {
+                        activeProduct = product;
+                        const isDeal = weeklyDealProduct && product.id === weeklyDealProduct.id;
+                        let priceHTML = `<p class="text-xl md:text-2xl font-black text-amber-500">$${product.price.toFixed(2)}</p>`;
+                        
+                        const modalDealBadge = document.getElementById('modal-deal-badge');
+                        if (isDeal) {
+                            priceHTML = `
+                                <div class="flex items-center gap-3">
+                                    <span class="text-sm font-bold text-slate-400 line-through">$${product.price.toFixed(2)}</span>
+                                    <span class="text-xl md:text-2xl font-black text-red-600">$${product.dealPrice.toFixed(2)}</span>
+                                </div>`;
+                            modalDealBadge.classList.remove('hidden');
+                        } else {
+                            modalDealBadge.classList.add('hidden');
+                        }
+
+                        document.getElementById('modal-img').src = product.img;
+                        document.getElementById('modal-name').textContent = product.name;
+                        document.getElementById('modal-price').innerHTML = priceHTML;
+                        document.getElementById('modal-avg-rating').innerHTML = generateStarRatingHTML(product.id, 'lg');
+                        document.getElementById('modal-desc').textContent = productDescriptions[product.id] || productDescriptions.default;
+                        renderTop3ModalReviews(product.id);
+                        
+                        document.getElementById('item-review-form').dataset.productId = product.id;
+
+                        if (urlParams.has('gooberviews')) {
+                            document.getElementById('reviews-modal-title').textContent = `${product.name} - Gooberviews`;
+                            reviewsModal.classList.remove('hidden');
+                            document.body.style.overflow = 'hidden';
+                            triggerReRenderOfReviews();
+                        } else {
+                            productModal.classList.remove('hidden');
+                            document.body.style.overflow = 'hidden';
+                        }
+                    }
+                } else if (sectionId) {
+                    const targetElement = document.getElementById(sectionId);
+                    if (targetElement) {
+                        const header = document.querySelector('header');
+                        const headerHeight = header ? header.offsetHeight : 80;
+                        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        window.scrollTo({
+                            top: elementPosition - headerHeight - 16,
+                            behavior: 'auto'
+                        });
+                        const matchedSection = sectionsList.find(s => s.id === sectionId);
+                        if (matchedSection) {
+                            highlightActiveNavigation(matchedSection.navId);
+                        }
+                    }
+                }
+            } catch (e) {
+                console.warn("URL query parameter inspection blocked in sandboxed environment context:", e);
+            }
         };
 
         function normalizeString(str) {
             if (!str) return '';
             return str.toLowerCase()
                 .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "") // removes accents
-                .replace(/[^a-z0-9]/g, "");     // removes hyphens, spacing, and apostrophes
+                .replace(/[\u0300-\u036f]/g, "") 
+                .replace(/[^a-z0-9]/g, "");     
         }
         
         const filterAndSortAndRender = () => {
@@ -1683,25 +1814,21 @@
         businessesModal.addEventListener('click', (e) => { if (e.target === businessesModal) businessesModal.classList.add('hidden'); });
         
         dealContainer.addEventListener('click', () => {
-            if (!dealContainer.dataset.product) return; // Prevent clicking while skeleton is loading
+            if (!dealContainer.dataset.product) return; 
             const dealProduct = JSON.parse(dealContainer.dataset.product);
             if (dealProduct) openProductModal(dealProduct);
         });
 
-        // Global instantaneous subscription for item reviews, ratings, and replies
         const setupGlobalSnapshots = () => {
             if (!currentUser) return;
 
-            // Load replies globally
             onSnapshot(repliesCol, (snapshot) => {
                 loadedReplies = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                // Re-render store reviews so new replies appear immediately
                 if (loadedStoreReviewsList.length > 0) {
                     renderReviews(document.getElementById('store-reviews-container'), loadedStoreReviewsList, storeReviewsCol);
                 }
                 
-                // Re-render modal reviews if active
                 if (!reviewsModal.classList.contains('hidden')) {
                     triggerReRenderOfReviews();
                 }
@@ -1709,11 +1836,9 @@
                 console.error("Firestore global replies snapshot failed:", error);
             });
 
-            // Load item reviews globally and calculate accurate aggregate metrics (with unique deduplication)
             onSnapshot(itemReviewsCol, (snapshot) => {
                 loadedAllItemReviews = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
-                // Deduplicate item reviews so spam doesn't inflate review counts
                 const seenItemReviews = new Set();
                 const uniqueItemReviews = [];
                 loadedAllItemReviews.forEach(review => {
@@ -1761,7 +1886,6 @@
             });
         };
 
-        // Custom Auth Token fallback handler
         const initAuthenticationFlow = async () => {
             try {
                 if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -1793,7 +1917,6 @@
         const submitReview = async (collectionRef, data, errorBoxId) => {
             const form = data.form;
 
-            // Custom manual validation checks with Centered Bottom Fade Toasts
             if (!data.rating) {
                 showToast("Please select a star rating, you simpleton!", "error");
                 form.querySelector('.star-rating').classList.add('shake');
@@ -1802,7 +1925,6 @@
             }
 
             const rawComment = data.payload.comment ? data.payload.comment : "";
-            // Replace sequences of three or more newlines with a single empty line spacing (\n\n)
             const cleanComment = rawComment.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
             
             if (!cleanComment) {
@@ -1812,7 +1934,6 @@
 
             const currentUsername = getOrSetUsername();
 
-            // Validate against duplicate comment spam
             let isDuplicate = false;
             if (data.payload.itemId) {
                 isDuplicate = loadedAllItemReviews.some(r => r.comment.trim().toLowerCase() === cleanComment.toLowerCase() && r.username === currentUsername && r.itemId === data.payload.itemId);
@@ -1871,7 +1992,6 @@
             onSnapshot(storeReviewsCol, (snapshot) => {
                 loadedStoreReviewsList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 
-                // Deduplicate store reviews for correct average calculation metrics
                 const seenStoreReviews = new Set();
                 const uniqueStoreReviews = [];
                 loadedStoreReviewsList.forEach(review => {
@@ -1892,7 +2012,6 @@
                     const averageNum = (totalRating / totalReviews);
                     document.getElementById('store-avg-rating').textContent = averageNum.toFixed(2);
                     
-                    // Render store average stars
                     const fullStars = Math.round(averageNum);
                     let storeStarsHTML = '';
                     for (let i = 0; i < 5; i++) {
@@ -1973,25 +2092,10 @@
         document.getElementById('store-review-comment').addEventListener('input', filterEmojis);
         document.getElementById('item-review-comment').addEventListener('input', filterEmojis);
         
-        const checkUrlForProduct = () => {
-            try {
-                const productId = new URLSearchParams(window.location.search).get('product');
-                if (productId) {
-                    const product = products.find(p => p.id === productId);
-                    if (product) openProductModal(product);
-                }
-            } catch (e) {
-                console.warn("URL query parameter inspection blocked in sandboxed environment context:", e);
-            }
-        };
-        
-        window.onpopstate = () => checkUrlForProduct();
-        
-        // --- Active Navigation Highlighting on Scroll / Page Load ---
         const sectionsList = [
-            { id: 'hero-section', navId: 'nav-home' },
-            { id: 'products-section', navId: 'nav-products' },
-            { id: 'reviews-section', navId: 'nav-reviews' }
+            { id: 'hero', navId: 'nav-home' },
+            { id: 'products', navId: 'nav-products' },
+            { id: 'reviews', navId: 'nav-reviews' }
         ];
 
         function highlightActiveNavigation(activeNavId) {
@@ -2029,7 +2133,32 @@
             if (el) navObserver.observe(el);
         });
 
-        // Trigger starting active tab state on immediate DOM configuration
+        document.querySelectorAll('a[href^="?section="]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = new URL(link.href, window.location.origin);
+                const sectionId = url.searchParams.get('section');
+                const targetElement = document.getElementById(sectionId);
+                if (targetElement) {
+                    const header = document.querySelector('header');
+                    const headerHeight = header ? header.offsetHeight : 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    window.scrollTo({
+                        top: elementPosition - headerHeight - 16,
+                        behavior: 'smooth'
+                    });
+                    
+                    try {
+                        history.pushState({ sectionId }, '', `?section=${sectionId}`);
+                    } catch (err) {
+                        console.warn("History pushState blocked:", err);
+                    }
+                    highlightActiveNavigation(link.id);
+                }
+            });
+        });
+
         function triggerInitialNavigationHighlight() {
             let foundActive = false;
             sectionsList.forEach(sec => {
@@ -2047,7 +2176,6 @@
             }
         }
         
-        // --- Page Initialization ---
         document.getElementById('copyright-year').textContent = new Date().getFullYear();
         setupDealOfTheWeek();
         generateStructuredData();
@@ -2055,66 +2183,23 @@
         checkUrlForProduct();
         initAuthenticationFlow();
 
-        // Initialize custom interactive click/hover logic for both forms
         setupInteractiveStars('store-review-form', 'store-rating');
         setupInteractiveStars('item-review-form', 'item-rating');
 
-        // Override automatic browser scroll restoration
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
 
-        // Handle exact initial positioning on page load
-        // Function to smoothly sync the product spotlight modal state without jumping/reloading
-        function syncProductModalState() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const spotlightModal = document.getElementById('product-spotlight-modal');
-            if (spotlightModal) {
-                if (urlParams.get('product') === 'farine-supreme') {
-                    spotlightModal.style.display = 'flex';
-                    document.body.style.overflow = 'hidden'; // Lock background scroll position
-                } else {
-                    spotlightModal.style.display = 'none';
-                    document.body.style.overflow = ''; // Unlock background scroll position
-                }
-            }
-        }
+        window.addEventListener('popstate', checkUrlForProduct);
 
         window.addEventListener('load', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const hasProductQuery = urlParams.has('product');
-            const hash = window.location.hash;
+            const sectionParam = urlParams.get('section');
 
-            // Check URL state on initial full page enter
-            syncProductModalState();
-
-            // Intercept spotlight open button clicks to prevent full page reloads and scroll shifts
-            document.querySelectorAll('a[href*="product=farine-supreme"]').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    history.pushState(null, '', link.getAttribute('href'));
-                    syncProductModalState();
-                });
-            });
-
-            // Intercept modal close button clicks to prevent full page reloads and scroll shifts
-            const spotlightModal = document.getElementById('product-spotlight-modal');
-            if (spotlightModal) {
-                const closeBtn = spotlightModal.querySelector('.close-btn');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        // Strip query params cleanly without resetting background scroll
-                        history.pushState(null, '', window.location.pathname + window.location.hash);
-                        syncProductModalState();
-                    });
-                }
-            }
-
-            if (hash) {
-                const targetElement = document.querySelector(hash);
+            if (sectionParam) {
+                const targetElement = document.getElementById(sectionParam);
                 if (targetElement) {
-                    // Temporarily force instant jump by disabling smooth behavior
                     const html = document.documentElement;
                     const originalBehavior = html.style.scrollBehavior;
                     html.style.scrollBehavior = 'auto';
@@ -2128,13 +2213,11 @@
                         behavior: 'auto'
                     });
 
-                    // Restore smooth scroll behavior after placement
                     setTimeout(() => {
                         html.style.scrollBehavior = originalBehavior;
                     }, 50);
                 }
             } else if (!hasProductQuery) {
-                // Only force hard reset to top on clean initial entry, not on state updates
                 if (!window.location.search && !window.location.hash) {
                     window.scrollTo({
                         top: 0,
@@ -2144,9 +2227,6 @@
             }
             triggerInitialNavigationHighlight();
         });
-
-        // Handle backward/forward browser navigation actions fluidly
-        window.addEventListener('popstate', syncProductModalState);
 
         window.addEventListener('scroll', () => {
             if (window.scrollY === 0) {
