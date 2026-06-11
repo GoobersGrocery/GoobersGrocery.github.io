@@ -82,7 +82,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #fff7ed;
         }
-        img {
+        img, button, .sort-btn, .btn-smooth, a[role="button"] {
             -webkit-user-drag: none;
             user-select: none;
             -moz-user-select: none;
@@ -116,8 +116,12 @@
         }
         input:focus, textarea:focus, select:focus {
             outline: none !important;
-            border-color: #cbd5e1 !important; 
-            box-shadow: none !important;
+            border-color: #f59e0b !important;
+            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important; 
+        }
+        ::selection {
+            background-color: #fde68a; 
+            color: #78350f; 
         }
     </style>
 </head>
