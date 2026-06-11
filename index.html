@@ -116,8 +116,8 @@
         }
         input:focus, textarea:focus, select:focus {
             outline: none !important;
-            border-color: #f59e0b !important;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.3) !important; 
+            border-color: #cbd5e1 !important;
+            box-shadow: none !important;
         }
         ::selection {
             background-color: #fde68a; 
@@ -127,7 +127,7 @@
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col text-lg">
 
-    <header class="bg-white shadow-md sticky top-0 z-40">
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40">
         <div class="container mx-auto px-4 md:px-6 py-4 flex justify-between items-center max-w-7xl">
             <div class="flex items-center space-x-3 md:space-x-4">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 2048" class="h-10 md:h-16 w-auto" preserveAspectRatio="xMidYMid meet">
@@ -141,7 +141,7 @@
                 <h1 class="hidden md:block text-2xl md:text-3xl font-black text-slate-950 tracking-tight">Goobers' Grocery</h1>
             </div>
             
-            <div class="flex items-center bg-slate-50 px-4 rounded-full max-w-[180px] xs:max-w-xs md:max-w-none overflow-hidden h-11 md:h-14">
+            <div class="flex items-center bg-slate-50 border border-slate-200 px-4 rounded-full max-w-[180px] xs:max-w-xs md:max-w-none overflow-hidden h-11 md:h-14">
                 <div id="account-skeleton" class="flex items-center space-x-3 animate-pulse">
                     <div class="w-8 h-8 md:w-10 md:h-10 rounded-full bg-slate-200 border border-slate-100 flex-shrink-0"></div>
                     <div class="text-left min-w-0 flex flex-col justify-center space-y-1 flex-shrink-0">
@@ -162,7 +162,7 @@
 
     <main class="container mx-auto p-4 md:p-8 flex-grow max-w-7xl space-y-12">
 
-        <section id="hero" class="bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 rounded-3xl p-6 md:p-14 text-white shadow-xl text-center relative overflow-hidden">
+        <section id="hero" class="bg-gradient-to-r from-amber-400 via-orange-400 to-orange-500 rounded-3xl p-6 md:p-14 text-white border border-orange-400 text-center relative overflow-hidden">
             <div class="absolute inset-0 bg-black/10 mix-blend-multiply"></div>
             <div class="relative z-10 space-y-4">
                 <h2 class="text-3xl md:text-6xl font-black tracking-tight">Welcome, you simpletons!</h2>
@@ -170,8 +170,8 @@
             </div>
         </section>
 
-        <section class="bg-white rounded-3xl shadow-md p-6 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
-            <div class="w-28 h-28 md:w-56 md:h-56 overflow-hidden rounded-[30%] border-2 border-orange-400 shadow-lg flex-shrink-0">
+        <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-12 flex flex-col md:flex-row items-center gap-6 md:gap-12">
+            <div class="w-28 h-28 md:w-56 md:h-56 overflow-hidden rounded-[30%] border-2 border-orange-400 flex-shrink-0">
                 <img src="https://wallpapers.com/images/high/caseoh-streaming-setup-h6uvjnckkn99601g.webp" 
                      alt="Caseoh, The Founder" 
                      class="w-full h-full object-cover scale-100">
@@ -183,8 +183,10 @@
         </section>
         
         <section class="space-y-6">
-            <h3 class="text-xl md:text-4xl font-black text-center text-slate-900 tracking-tight">Caseoh's Deal of the Week!</h3>
-            <div id="deal-of-the-week" class="bg-white rounded-3xl shadow-md border border-slate-100 p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-12 cursor-pointer relative overflow-hidden group">
+            <div class="bg-white rounded-3xl border border-slate-200 p-5 md:p-6 text-center">
+                <h3 class="text-xl md:text-3xl font-black text-slate-950 tracking-tight uppercase">Caseoh's Deal of the Week!</h3>
+            </div>
+            <div id="deal-of-the-week" class="bg-white rounded-3xl border border-slate-200 p-6 md:p-10 flex flex-col md:flex-row items-center gap-6 md:gap-12 cursor-pointer relative overflow-hidden group hover:bg-slate-50 hover:border-slate-300 transition-all duration-300">
                 <div class="relative w-full md:w-2/5 flex items-center justify-center bg-slate-50 p-6 rounded-2xl h-48 md:h-64 animate-pulse border border-slate-100">
                     <div class="w-32 h-32 md:w-48 md:h-48 bg-slate-200 rounded-full"></div>
                 </div>
@@ -200,7 +202,7 @@
             </div>
         </section>
 
-        <section id="products" class="bg-white rounded-3xl shadow-md p-4 sm:p-6 md:p-10 space-y-8">
+        <section id="products" class="bg-white rounded-3xl border border-slate-200 p-4 sm:p-6 md:p-10 space-y-8">
             <div class="max-w-2xl mx-auto space-y-6">
                 <h3 class="text-xl md:text-4xl font-black text-center text-slate-900 tracking-tight">Our Gooberlicious Products</h3>
                 <div class="relative">
@@ -238,25 +240,25 @@
         </section>
         
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 items-stretch">
-            <section class="bg-white rounded-3xl shadow-md p-6 md:p-10 flex flex-col justify-between space-y-8">
+            <section class="bg-white rounded-3xl border border-slate-200 p-6 md:p-10 flex flex-col justify-between space-y-8">
                 <div class="space-y-6">
                     <h3 class="text-xl md:text-3xl font-black text-center text-slate-900">What My "Valued" Employees Say</h3>
                     <div class="space-y-6">
-                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/70 shadow-sm">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/70 border border-slate-200">
                             <img src="https://i.ibb.co/ds4W3p1L/tim.jpg" alt="Employee Tim" class="w-12 h-12 rounded-full object-cover border-2 border-slate-200 flex-shrink-0">
                             <div class="space-y-1 min-w-0">
                                 <p class="text-slate-600 italic text-xs md:text-base leading-snug">"Mr. Caseoh is... a boss. He has a vision, and it's a big one. Literally. He lets me work here, and for that, I am grateful. He always keeps his heart open for us, which is nice."</p>
                                 <p class="font-extrabold text-slate-800 text-right text-xs truncate">- Tim, Cashier</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/70 shadow-sm">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/70 border border-slate-200">
                             <img src="https://i.ibb.co/0jKw088N/jim.jpg" alt="Employee Jim" class="w-12 h-12 rounded-full object-cover border-2 border-slate-200 flex-shrink-0">
                             <div class="space-y-1 min-w-0">
                                 <p class="text-slate-600 italic text-xs md:text-base leading-snug">"Working at Goobers' is an experience. Mr. Caseoh demands excellence, which he says he provides. He's the best boss I could ever have, probably."</p>
                                 <p class="font-extrabold text-slate-800 text-right text-xs truncate">- Jim, Shelf Stocker</p>
                             </div>
                         </div>
-                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/70 shadow-sm">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-50/70 border border-slate-200">
                             <img src="https://i.ibb.co/tpbjMdxt/slim.jpg" alt="Employee Slim" class="w-12 h-12 rounded-full object-cover border-2 border-slate-200 flex-shrink-0">
                             <div class="space-y-1 min-w-0">
                                 <p class="text-slate-600 italic text-xs md:text-base leading-snug">"Mr. Caseoh... he pays the bills. Sometimes he looks at the cash register and asks if it's edible. It's a unique work environment."</p>
@@ -266,7 +268,7 @@
                     </div>
                 </div>
                 
-                <div class="p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 space-y-4 shadow-sm">
+                <div class="p-6 rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 space-y-4 border border-amber-200/50">
                     <h4 class="text-base font-black text-amber-900 uppercase tracking-wide">A Word From Our Founder</h4>
                     <div class="space-y-3">
                         <p class="text-slate-700 italic text-xs md:text-sm leading-relaxed">
@@ -283,11 +285,11 @@
                 </div>
             </section>
             
-            <section id="reviews" class="bg-white rounded-3xl shadow-md p-6 md:p-10 flex flex-col h-full justify-between space-y-6">
+            <section id="reviews" class="bg-white rounded-3xl border border-slate-200 p-6 md:p-10 flex flex-col h-full justify-between space-y-6">
                 <div class="space-y-6 flex flex-col flex-grow">
                     <h3 class="text-xl md:text-3xl font-black text-center text-slate-900">Review My Glorious Store</h3>
                     
-                    <div class="bg-slate-50 rounded-2xl p-4 sm:p-6 flex flex-col space-y-4 shadow-sm min-h-[220px]">
+                    <div class="bg-slate-50 rounded-2xl p-4 sm:p-6 flex flex-col space-y-4 border border-slate-200 min-h-[220px]">
                         <div id="store-rating-display" class="text-center space-y-1">
                             <div class="flex items-center justify-center text-xl md:text-3xl font-black text-slate-850 gap-2">
                                 <span id="store-avg-rating">
@@ -350,7 +352,7 @@
 
                     <div id="store-reviews-container" class="flex-grow h-0 min-h-[300px] overflow-y-auto pr-1 rounded-2xl flex flex-col space-y-4">
                         <div class="animate-pulse space-y-4" id="store-reviews-skeleton">
-                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 border border-slate-200">
                                 <div class="flex items-center gap-2 sm:gap-3">
                                     <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
                                     <div class="space-y-2 flex-1">
@@ -367,7 +369,7 @@
                                     <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
                                 </div>
                             </div>
-                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 border border-slate-200">
                                 <div class="flex items-center gap-2 sm:gap-3">
                                     <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
                                     <div class="space-y-2 flex-1">
@@ -385,7 +387,7 @@
                                     <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
                                 </div>
                             </div>
-                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                            <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 border border-slate-200">
                                 <div class="flex items-center gap-2 sm:gap-3">
                                     <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
                                     <div class="space-y-2 flex-1">
@@ -441,7 +443,7 @@
                     </div>
                     <textarea id="store-review-comment" class="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl h-24 text-sm md:text-base resize-none" placeholder="Tell me how great my store is..."></textarea>
                     
-                    <button type="submit" class="w-full h-12 sm:h-14 bg-amber-400 hover:bg-amber-350 text-amber-950 font-black rounded-2xl text-xs sm:text-sm shadow-md btn-smooth uppercase tracking-widest flex items-center justify-center gap-2">
+                    <button type="submit" class="w-full h-12 sm:h-14 bg-amber-400 hover:bg-amber-350 text-amber-950 font-black rounded-2xl text-xs sm:text-sm btn-smooth uppercase tracking-widest flex items-center justify-center gap-2">
                         <span class="submit-icon"></span>
                         <span>Submit Gooberview</span>
                     </button>
@@ -458,22 +460,22 @@
                 <p class="text-xs text-slate-400 font-semibold">Follow my journey to greatness on YouTube.</p>
             </div>
             
-            <div class="flex flex-col items-center gap-3">
-                <a href="https://www.youtube.com/@caseoh_" target="_blank" class="inline-flex items-center gap-2.5 bg-red-600 hover:bg-red-500 text-white font-extrabold py-3.5 px-8 rounded-2xl text-xs sm:text-sm transition duration-200 shadow-lg uppercase tracking-widest">
-                    <span id="youtube-icon"></span>
+            <div class="flex flex-wrap justify-center items-center gap-3">
+                <a href="https://www.youtube.com/@caseoh_" target="_blank" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 flex items-center gap-2">
+                    <span id="youtube-icon" class="text-rose-500 flex items-center justify-center"></span>
                     <span>Caseoh's YouTube</span>
                 </a>
-                <a href="https://usecheeky.com" target="_blank" class="inline-flex items-center gap-2.5 bg-teal-600 hover:bg-teal-500 text-white font-extrabold py-3.5 px-8 rounded-2xl text-xs sm:text-sm transition duration-200 shadow-lg uppercase tracking-widest">
-                    <svg xmlns="http://www.w3.org/2000/svg" id="soap" viewBox="0 0 24 24" data-name="soap" class="w-6 h-6 fill-current"><path d="m16 12c-2.691 0-4-1.309-4-4s1.309-4 4-4 4 1.309 4 4-1.309 4-4 4zm5.585-1.426c-.801 2.205-2.738 3.426-5.585 3.426-3.778 0-5.952-2.152-5.992-5.9-1.338.105-2.378.264-2.472.28-4.052.863-6.535 1.668-6.535 7.119s2.483 6.256 6.581 7.128c.092.015 2.284.372 4.419.372s4.327-.357 4.465-.381c4.052-.863 6.535-1.668 6.535-7.119 0-2.281-.424-3.84-1.415-4.926zm-11.961 3.562c-.88.11-1.732.293-2.593.559-.018.197-.031.46-.031.806 0 .348.014.613.031.81.437.141.826.25 1.198.338.538.127.871.666.744 1.203-.109.46-.52.77-.973.77-.721-.094-1.345-.338-2.186-.61-.306-.106-.542-.355-.632-.667-.12-.417-.184-1.054-.184-1.844s.063-1.428.184-1.844c.09-.312.326-.561.633-.667 1.185-.413 2.35-.687 3.56-.837.553-.068 1.048.321 1.116.868.068.548-.32 1.048-.868 1.116zm-1.624-7.136c-1.99 0-3-1.009-3-3s1.01-3 3-3 3 1.009 3 3-1.01 3-3 3zm13.5-6c-1.071 0-1.5.429-1.5 1.5s.429 1.5 1.5 1.5 1.5-.429 1.5-1.5-.429-1.5-1.5-1.5z"/></svg>
+                <a href="https://usecheeky.com" target="_blank" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="soap" viewBox="0 0 24 24" data-name="soap" class="w-4 h-4 fill-current text-teal-400"><path d="m16 12c-2.691 0-4-1.309-4-4s1.309-4 4-4 4 1.309 4 4-1.309 4-4 4zm5.585-1.426c-.801 2.205-2.738 3.426-5.585 3.426-3.778 0-5.952-2.152-5.992-5.9-1.338.105-2.378.264-2.472.28-4.052.863-6.535 1.668-6.535 7.119s2.483 6.256 6.581 7.128c.092.015 2.284.372 4.419.372s4.327-.357 4.465-.381c4.052-.863 6.535-1.668 6.535-7.119 0-2.281-.424-3.84-1.415-4.926zm-11.961 3.562c-.88.11-1.732.293-2.593.559-.018.197-.031.46-.031.806 0 .348.014.613.031.81.437.141.826.25 1.198.338.538.127.871.666.744 1.203-.109.46-.52.77-.973.77-.721-.094-1.345-.338-2.186-.61-.306-.106-.542-.355-.632-.667-.12-.417-.184-1.054-.184-1.844s.063-1.428.184-1.844c.09-.312.326-.561.633-.667 1.185-.413 2.35-.687 3.56-.837.553-.068 1.048.321 1.116.868.068.548-.32 1.048-.868 1.116zm-1.624-7.136c-1.99 0-3-1.009-3-3s1.01-3 3-3 3 1.009 3 3-1.01 3-3 3zm13.5-6c-1.071 0-1.5.429-1.5 1.5s.429 1.5 1.5 1.5 1.5-.429 1.5-1.5-.429-1.5-1.5-1.5z"/></svg>
                     <span>Take a shower</span>
                 </a>
             </div>
             
             <div class="pt-4 space-y-4">
                 <div class="flex flex-col md:flex-row justify-center items-center gap-3">
-                    <button id="legal-notice-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 shadow-sm">Important Legal Notice</button>
-                    <button id="other-businesses-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 shadow-sm">View Other Businesses</button>
-                    <a href="https://maps.app.goo.gl/yhnMvrsZA8GkkYD18" target="_blank" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 shadow-sm flex items-center justify-center">
+                    <button id="legal-notice-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200">Important Legal Notice</button>
+                    <button id="other-businesses-btn" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200">View Other Businesses</button>
+                    <a href="https://maps.app.goo.gl/yhnMvrsZA8GkkYD18" target="_blank" class="text-xs text-slate-300 hover:text-white font-bold bg-slate-800 hover:bg-slate-750 py-2.5 px-5 rounded-2xl transition duration-200 flex items-center justify-center">
                         <span>View Our Location</span>
                     </a>
                 </div>
@@ -485,7 +487,7 @@
         </div>
     </footer>
     
-    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-150 shadow-2xl z-50 flex justify-around py-2.5">
+    <nav class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 flex justify-around py-2.5">
          <a id="nav-home" href="?section=hero" class="flex flex-col items-center justify-center text-slate-500 hover:text-amber-500 w-full transition-colors space-y-0.5">
             <span id="mobile-home"></span>
             <span class="text-[10px] font-bold">Home</span>
@@ -501,7 +503,7 @@
     </nav>
 
     <div id="product-modal" class="fixed inset-0 z-50 flex items-center justify-center p-0 md:p-4 modal-bg hidden">
-        <div class="bg-white w-full h-full md:h-[85vh] md:max-h-[85vh] md:rounded-3xl shadow-2xl md:max-w-2xl overflow-hidden flex flex-col">
+        <div class="bg-white w-full h-full md:h-[85vh] md:max-h-[85vh] md:rounded-3xl md:max-w-2xl overflow-hidden border border-slate-200 md:border-slate-300 flex flex-col">
             <div class="p-4 md:p-5 flex justify-between items-center bg-slate-50">
                 <span class="text-[10px] sm:text-xs uppercase tracking-wider font-extrabold text-slate-400">Product Spotlight</span>
                 <button id="close-product-modal" class="text-2xl sm:text-3xl text-slate-400 hover:text-slate-700 leading-none btn-smooth">&times;</button>
@@ -510,7 +512,7 @@
             <div class="p-5 md:p-8 overflow-y-auto flex-grow flex flex-col space-y-5 md:space-y-6 relative">
                 <div class="relative flex items-center justify-center bg-slate-50/50 rounded-2xl p-4 md:p-6 border border-slate-100 h-48 md:h-64">
                     <img id="modal-img" src="" alt="Product Image" class="max-h-full max-w-full object-contain">
-                    <div id="modal-deal-badge" class="absolute top-4 right-4 hidden bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-[10px] shadow-md uppercase tracking-wider">
+                    <div id="modal-deal-badge" class="absolute top-4 right-4 hidden bg-gradient-to-r from-amber-500 to-red-600 text-white font-black text-[10px] sm:text-xs px-3 sm:px-4 py-1 sm:py-1.5 rounded-[10px] uppercase tracking-wider">
                         HOT DEAL!
                     </div>
                 </div>
@@ -520,7 +522,7 @@
                     <div id="modal-price" class="text-xl md:text-2xl font-black text-amber-500"></div>
                     <div id="modal-avg-rating" class="py-0.5"></div>
                 </div>
-                <p id="modal-desc" class="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed bg-slate-50 p-4 sm:p-5 rounded-2xl font-medium">Description</p>
+                <p id="modal-desc" class="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed bg-slate-50 border border-slate-200 p-4 sm:p-5 rounded-2xl font-medium">Description</p>
                 
                 <div class="space-y-3 pt-2">
                     <div id="modal-top-reviews" class="space-y-3">
@@ -529,7 +531,7 @@
             </div>
 
             <div class="p-4 md:p-5 bg-slate-50 mt-auto sticky bottom-0 z-10 border-t border-slate-100">
-                <button id="view-gooberviews-btn" class="w-full h-12 md:h-14 bg-amber-400 hover:bg-amber-350 text-amber-950 font-black rounded-2xl text-xs sm:text-sm shadow-md uppercase tracking-wider btn-smooth flex items-center justify-center gap-2">
+                <button id="view-gooberviews-btn" class="w-full h-12 md:h-14 bg-amber-400 hover:bg-amber-350 text-amber-950 font-black rounded-2xl text-xs sm:text-sm uppercase tracking-wider btn-smooth flex items-center justify-center gap-2">
                     <span id="modal-comments"></span>
                     <span>View More Gooberviews</span>
                 </button>
@@ -538,7 +540,7 @@
     </div>
 
     <div id="reviews-modal" class="fixed inset-0 z-55 flex items-center justify-center p-0 md:p-4 modal-bg hidden" style="z-index: 60;">
-        <div class="bg-white w-full h-full md:h-[85vh] md:max-h-[85vh] md:rounded-3xl shadow-2xl md:max-w-2xl overflow-hidden flex flex-col">
+        <div class="bg-white w-full h-full md:h-[85vh] md:max-h-[85vh] md:rounded-3xl md:max-w-2xl overflow-hidden border border-slate-200 md:border-slate-300 flex flex-col">
             <div class="p-4 md:p-5 flex justify-between items-center bg-slate-50">
                 <div class="flex items-center gap-2 min-w-0">
                     <span id="secondary-reviews-icon" class="flex-shrink-0"></span>
@@ -589,7 +591,7 @@
                     </div>
                     <textarea id="item-review-comment" class="w-full p-3 bg-white border border-slate-200 rounded-2xl h-20 text-xs sm:text-sm font-medium resize-none" placeholder="Tell Caseoh what you think..."></textarea>
                     
-                    <button type="submit" class="w-full h-12 md:h-14 bg-amber-400 hover:bg-amber-350 text-amber-950 font-black rounded-2xl text-xs sm:text-sm shadow-md btn-smooth uppercase tracking-widest flex items-center justify-center gap-2">
+                    <button type="submit" class="w-full h-12 md:h-14 bg-amber-400 hover:bg-amber-350 text-amber-950 font-black rounded-2xl text-xs sm:text-sm btn-smooth uppercase tracking-widest flex items-center justify-center gap-2">
                         <span class="submit-icon"></span>
                         <span>Post Review</span>
                     </button>
@@ -599,7 +601,7 @@
     </div>
 
     <div id="legal-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl p-6 md:p-12 text-center relative">
+        <div class="bg-white rounded-3xl border border-slate-200 md:border-slate-300 w-full max-w-2xl p-6 md:p-12 text-center relative">
             <button id="close-legal-modal" class="absolute top-4 right-5 text-2xl md:text-3xl text-slate-400 hover:text-slate-800 btn-smooth">&times;</button>
             <div id="warning-icon" class="w-12 h-12 md:w-16 md:h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
             </div>
@@ -610,16 +612,16 @@
     </div>
     
     <div id="businesses-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 modal-bg hidden">
-        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-2xl p-6 md:p-12 relative max-h-[90vh] overflow-y-auto">
+        <div class="bg-white rounded-3xl border border-slate-200 md:border-slate-300 w-full max-w-2xl p-6 md:p-12 relative max-h-[90vh] overflow-y-auto">
             <button id="close-businesses-modal" class="absolute top-4 right-5 text-2xl md:text-3xl text-slate-400 hover:text-slate-800 btn-smooth">&times;</button>
             <h3 class="text-lg md:text-2xl font-black text-slate-900 mb-6 md:mb-8 text-center uppercase tracking-wider">My Other Glorious Businesses</h3>
             <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                <li><a href="https://youtu.be/vLeR8-ScECg?si=57l9oVoYSdtSFKAB" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">Sweet Shop</a></li>
-                <li><a href="https://youtu.be/t-Y0Wfc6qYg?si=Qfw8YXyE_hO_kZUy" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">Gas Station</a></li>
-                <li><a href="https://youtu.be/MHYl7Cew4-8?si=U-T7DSQtACneU2hL" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">Card Shop</a></li>
-                <li><a href="https://youtu.be/K7j8I6cNyjY?si=WkMDjgDaUXl7AS4n" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">GoobLagoon Water Park</a></li>
-                <li><a href="https://youtu.be/NCIlhnvZalU?si=Lo_fmpvm7SCY62BN" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">The Warsh Laundry</a></li>
-                <li><a href="https://youtu.be/YIoLf9XGqwA?si=xKesHrRh6B5IX1V4" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center shadow-sm">The Caseino</a></li>
+                <li><a href="https://youtu.be/vLeR8-ScECg?si=57l9oVoYSdtSFKAB" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center border border-slate-700">Sweet Shop</a></li>
+                <li><a href="https://youtu.be/t-Y0Wfc6qYg?si=Qfw8YXyE_hO_kZUy" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center border border-slate-700">Gas Station</a></li>
+                <li><a href="https://youtu.be/MHYl7Cew4-8?si=U-T7DSQtACneU2hL" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center border border-slate-700">Card Shop</a></li>
+                <li><a href="https://youtu.be/K7j8I6cNyjY?si=WkMDjgDaUXl7AS4n" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center border border-slate-700">GoobLagoon Water Park</a></li>
+                <li><a href="https://youtu.be/NCIlhnvZalU?si=Lo_fmpvm7SCY62BN" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center border border-slate-700">The Warsh Laundry</a></li>
+                <li><a href="https://youtu.be/YIoLf9XGqwA?si=xKesHrRh6B5IX1V4" target="_blank" class="block w-full py-3.5 bg-slate-800 hover:bg-slate-700 rounded-2xl text-xs sm:text-sm font-black text-white btn-smooth text-center border border-slate-700">The Caseino</a></li>
             </ul>
         </div>
     </div>
@@ -644,7 +646,7 @@
             warning: `<svg class="w-6 h-6 md:w-7 md:h-7 inline-block text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>`,
             thumbsUp: `<svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.5 9V5a3 3 0 0 0-3-3l-3 9v11h10.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM5 22H3a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 3 11h2z"/></svg>`,
             thumbsUpFilled: `<svg class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0" fill="currentColor" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.5 9V5a3 3 0 0 0-3-3l-3 9v11h10.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM5 22H3a1.5 1.5 0 0 1-1.5-1.5v-8A1.5 1.5 0 0 1 3 11h2z"/></svg>`,
-            youtube: `<svg class="w-5 h-5 md:w-6 md:h-6 inline-block" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.02 3.02 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.02 3.02 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.02 3.02 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.02 3.02 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814M9.546 15.569V8.431L15.818 12z"/></svg>`,
+            youtube: `<svg class="w-4 h-4 inline-block" fill="currentColor" viewBox="0 0 1024 1024"><path transform="translate(0,0)" fill="currentColor" d="M 0 452.125 L 0.265287 451.159 C 2.93973 441.043 3.01573 410.803 3.63093 398.627 C 4.83719 372.12 7.11825 346.304 9.64729 319.828 C 13.5552 278.917 11.0731 249.274 37.7494 215.405 C 74.7214 168.463 124.008 172.412 178.907 166.368 C 381.616 145.597 585.825 143.846 788.861 161.138 C 816.902 163.394 844.997 166.044 872.988 169.352 C 890.651 171.44 910.887 172.516 928.12 176.87 C 965.837 186.652 1000.17 221.615 1007.89 260.009 C 1011.87 279.782 1012.65 301.865 1014.53 321.928 C 1018.13 360.238 1021.01 398.262 1021.69 436.731 C 1021.82 444.095 1022.27 453.44 1024 460.543 L 1024 564.452 L 1023.89 564.902 C 1021.31 576.212 1021.01 607.219 1020.54 620.791 C 1019.59 648.206 1016.73 673.365 1014.68 700.451 C 1010.16 760.009 1010.65 798.242 955.977 835.113 C 951.045 838.439 939.091 844.559 933.434 845.919 C 901.749 853.532 861.688 856.459 829.051 859.722 C 634.471 878.754 438.564 880.085 243.743 863.699 C 213.138 861.287 182.966 857.741 152.609 854.93 C 99.4568 850.009 60.5811 846.642 29.1261 796.493 C 23.4606 787.597 19.2782 777.838 16.7425 767.6 C 13.9029 755.941 13.0907 744.07 12.0112 732.181 C 7.62906 683.919 3.2888 635.864 2.11168 587.393 C 1.99929 582.765 1.31947 576.287 0 571.873 L 0 452.125 z M 580.222 579.86 C 613.742 557.771 648.196 533.604 681.955 512.352 C 664.062 498.834 639.395 483.347 620.401 470.695 L 510.139 397.231 L 453.962 359.562 C 449.213 356.39 431.018 344.033 426.732 342.33 C 425.903 420.737 426.578 500.323 426.636 578.816 L 426.674 641.302 C 426.642 651.19 425.893 670.53 427.473 679.234 L 428.905 680.237 C 439.77 674.705 467.616 655.072 479.187 647.343 L 580.222 579.86 z"/></svg>`,
             submit: `<svg class="w-4 h-4 md:w-5 md:h-5 inline-block" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="0.01" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg"><path d="M21.168 2.835a2.8 2.8 0 0 0-2.648-.755L5.78 4.757a4.43 4.43 0 0 0-3.732 5.029 4.43 4.43 0 0 0 1.25 2.483l1.366 1.367a.33.33 0 0 1 .099.24v2.52a2.843 2.843 0 0 0 2.84 2.839h2.52a.34.34 0 0 1 .24.099l1.365 1.366A4.4 4.4 0 0 0 14.85 22a4.5 4.5 0 0 0 1.422-.234 4.4 4.4 0 0 0 2.97-3.549l2.677-12.699a2.82 2.82 0 0 0-.75-2.683M4.6 8.523a1.89 1.89 0 0 1 1.57-1.296q.044-.006.087-.015l11.1-2.332L7.263 14.968v-1.093a2.82 2.82 0 0 0-.833-2.007l-1.364-1.366A1.9 1.9 0 0 1 4.6 8.523m12.185 9.223q-.01.043-.015.087a1.93 1.93 0 0 1-2.174 1.65 1.93 1.93 0 0 1-1.101-.547L12.13 17.57a2.82 2.82 0 0 0-2.008-.833H9.03L19.122 6.643z"/></svg>`
         };
 
@@ -661,7 +663,7 @@
             }
 
             const toast = document.createElement('div');
-            toast.className = 'bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center justify-center gap-3 border border-slate-800 transition-opacity duration-300 opacity-0 pointer-events-auto text-center mx-auto w-full';
+            toast.className = 'bg-slate-900 text-white px-6 py-4 rounded-2xl border border-slate-750 flex items-center justify-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-auto text-center mx-auto w-full';
             
             const icon = type === 'error' ? ICONS.warning : ICONS.thumbsUp;
             toast.innerHTML = `
@@ -929,12 +931,16 @@
                 });
             };
 
+            const supportsHover = window.matchMedia('(hover: hover)').matches;
+
             starPairs.forEach((pair, idx) => {
                 const targetRating = idx + 1;
 
-                pair.label.addEventListener('mouseenter', () => {
-                    updateVisuals(targetRating);
-                });
+                if (supportsHover) {
+                    pair.label.addEventListener('mouseenter', () => {
+                        updateVisuals(targetRating);
+                    });
+                }
 
                 pair.label.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -943,6 +949,12 @@
                     updateVisuals(activeSelectedRating);
                 });
             });
+
+            if (supportsHover) {
+                starContainer.addEventListener('mouseleave', () => {
+                    updateVisuals(activeSelectedRating);
+                });
+            }
 
             starContainer.addEventListener('mouseleave', () => {
                 updateVisuals(activeSelectedRating);
@@ -975,23 +987,24 @@
             setTimeout(() => {
                 dealContainer.dataset.product = JSON.stringify(weeklyDealProduct);
                 
+                const discountPercent = Math.round(((weeklyDealProduct.price - weeklyDealProduct.dealPrice) / weeklyDealProduct.price) * 100);
                 dealContainer.innerHTML = `
-                    <div class="relative w-full md:w-2/5 flex items-center justify-center bg-amber-50/50 p-6 rounded-2xl shadow-sm border border-amber-100 h-48 md:h-64 overflow-hidden">
+                    <div class="relative w-full md:w-2/5 flex items-center justify-center bg-slate-50 p-6 rounded-2xl border border-slate-200 h-48 md:h-64 overflow-hidden">
                         <img src="${weeklyDealProduct.img}" alt="${weeklyDealProduct.name}" class="max-h-36 md:max-h-52 object-contain transition-transform duration-300 group-hover:scale-105">
-                        <div class="absolute top-4 right-4 bg-amber-500 text-white text-[10px] font-black px-3 py-1.5 rounded-2xl shadow-sm uppercase tracking-wider">
-                            HOT DEAL
+                        <div class="absolute top-4 right-4 bg-amber-500 text-white text-[10px] sm:text-xs font-black px-3 py-1.5 rounded-xl uppercase tracking-wider">
+                            SAVE ${discountPercent}%
                         </div>
                     </div>
-                    <div class="w-full md:w-3/5 text-center md:text-left space-y-4">
-                        <div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 text-xs font-black px-4 py-1.5 rounded-2xl uppercase tracking-wider">
-                            ${starIconSmall} <span>CASEOH'S SELECTION</span> ${starIconSmall}
+                    <div class="w-full md:w-3/5 text-center md:text-left space-y-4 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-1.5 bg-amber-100 text-amber-800 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-wider self-center md:self-start">
+                            ${starIconSmall} <span>CASEOH'S PICK OF THE WEEK</span> ${starIconSmall}
                         </div>
-                        <h4 class="text-xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight">${weeklyDealProduct.name}</h4>
-                        <div class="flex items-baseline justify-center md:justify-start gap-4">
-                            <p class="text-xs sm:text-sm font-bold text-slate-400 line-through">$${weeklyDealProduct.price.toFixed(2)}</p>
-                            <p class="text-2xl md:text-4xl font-black text-amber-600 tracking-tight">$${weeklyDealProduct.dealPrice.toFixed(2)}</p>
+                        <h4 class="text-xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight group-hover:text-amber-500 transition-colors duration-200">${weeklyDealProduct.name}</h4>
+                        <div class="flex items-baseline justify-center md:justify-start gap-3">
+                            <p class="text-xs sm:text-base font-bold text-slate-400 line-through">$${weeklyDealProduct.price.toFixed(2)}</p>
+                            <p class="text-3xl md:text-5xl font-black text-amber-500 tracking-tight">$${weeklyDealProduct.dealPrice.toFixed(2)}</p>
                         </div>
-                        <p class="text-slate-600 text-xs md:text-base leading-relaxed font-medium bg-slate-50 border border-slate-100 p-4 rounded-xl">${weeklyDealProduct.dealDescription}</p>
+                        <p class="text-slate-600 text-xs md:text-base leading-relaxed font-medium bg-slate-50 border border-slate-200 p-4 rounded-2xl">${weeklyDealProduct.dealDescription}</p>
                     </div>
                 `;
             }, 800);
@@ -1160,7 +1173,7 @@
             
             productsToRender.forEach(product => {
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-2xl shadow-md p-3 sm:p-4 flex flex-col items-center text-center cursor-pointer hover:shadow-lg transition duration-300 transform hover:scale-[1.01] relative overflow-hidden';
+                card.className = 'bg-white rounded-2xl border border-slate-200 p-3 sm:p-4 flex flex-col items-center text-center cursor-pointer hover:border-slate-350 hover:bg-slate-50/50 transition duration-300 transform hover:scale-[1.01] relative overflow-hidden';
                 
                 const isDeal = weeklyDealProduct && product.id === weeklyDealProduct.id;
                 let priceHTML = `<p class="text-sm md:text-lg font-black text-slate-800 mt-2">$${product.price.toFixed(2)}</p>`;
@@ -1173,7 +1186,7 @@
                             <p class="text-sm md:text-lg font-black text-red-600">$${product.dealPrice.toFixed(2)}</p>
                         </div>
                     `;
-                    dealBadge = `<div class="absolute top-0 right-0 bg-gradient-to-br from-red-500 to-orange-500 text-white text-[9px] sm:text-[10px] font-black px-2 py-0.5 sm:px-3 sm:py-1 rounded-bl-xl shadow-sm">DEAL!</div>`;
+                    dealBadge = `<div class="absolute top-0 right-0 bg-gradient-to-br from-red-500 to-orange-500 text-white text-[9px] sm:text-[10px] font-black px-2 py-0.5 sm:px-3 sm:py-1 rounded-bl-xl">DEAL!</div>`;
                 }
                 
                 const ratingHTML = generateStarRatingHTML(product.id, 'sm');
@@ -1223,7 +1236,7 @@
             
             uniqueReviews.forEach(review => {
                 const reviewEl = document.createElement('div');
-                reviewEl.className = 'bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 text-left transition duration-200 shadow-sm';
+                reviewEl.className = 'bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 text-left transition duration-205 border border-slate-200';
                 
                 let starsHTML = '';
                 for (let i = 1; i <= 5; i++) {
@@ -1243,7 +1256,7 @@
                     const firstAvatar = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(firstReply.username)}`;
                     
                     repliesListHTML += `
-                        <div class="bg-white p-3 rounded-xl shadow-sm text-xs sm:text-sm w-full text-center flex flex-col items-center">
+                        <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs sm:text-sm w-full text-center flex flex-col items-center">
                             <div class="flex items-center justify-center gap-2 mb-1.5 min-w-0">
                                 <img src="${firstAvatar}" alt="Reply Avatar" class="w-5 h-5 rounded-full bg-slate-100 flex-shrink-0">
                                 <span class="font-black text-slate-850 truncate max-w-[185px]">${firstReply.username}</span>
@@ -1260,7 +1273,7 @@
                             const rep = currentReviewReplies[i];
                             const repAvatar = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(rep.username)}`;
                             repliesListHTML += `
-                                <div class="bg-white p-3 rounded-xl shadow-sm text-xs sm:text-sm w-full text-center flex flex-col items-center">
+                                <div class="bg-white p-3 rounded-xl border border-slate-200 text-xs sm:text-sm w-full text-center flex flex-col items-center">
                                     <div class="flex items-center justify-center gap-2 mb-1.5 min-w-0">
                                         <img src="${repAvatar}" alt="Reply Avatar" class="w-5 h-5 rounded-full bg-slate-100 flex-shrink-0">
                                         <span class="font-black text-slate-850 truncate max-w-[185px]">${rep.username}</span>
@@ -1284,7 +1297,7 @@
                 reviewEl.innerHTML = `
                     <div class="flex justify-between items-start gap-2">
                         <div class="flex items-center gap-2 sm:gap-3 min-w-0">
-                            <img src="${avatarUrl}" alt="Avatar" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-100 border border-slate-200 shadow-sm flex-shrink-0">
+                            <img src="${avatarUrl}" alt="Avatar" class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-100 border border-slate-200 flex-shrink-0">
                             <div class="min-w-0">
                                 <p class="font-black text-xs sm:text-sm text-slate-900 truncate max-w-[140px] sm:max-w-[200px]">${review.username}</p>
                                 <div class="flex items-center gap-0.5 mt-0.5 sm:mt-1">${starsHTML}</div>
@@ -1440,7 +1453,7 @@
             if (!isItemReviewsLoaded) {
                 container.innerHTML = `
                     <div class="animate-pulse space-y-3">
-                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
+                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-200">
                             <div class="flex items-center gap-2">
                                 <div class="w-7 h-7 bg-slate-200 rounded-full"></div>
                                 <div class="flex-grow space-y-1.5">
@@ -1451,7 +1464,7 @@
                             <div class="h-3 bg-slate-200 rounded w-full"></div>
                             <div class="h-3 bg-slate-200 rounded w-5/6"></div>
                         </div>
-                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
+                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-200">
                             <div class="flex items-center gap-2">
                                 <div class="w-7 h-7 bg-slate-200 rounded-full"></div>
                                 <div class="flex-grow space-y-1.5">
@@ -1462,7 +1475,7 @@
                             <div class="h-3 bg-slate-200 rounded w-full"></div>
                             <div class="h-3 bg-slate-200 rounded w-5/6"></div>
                         </div>
-                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-100/50">
+                        <div class="bg-slate-50 p-3.5 sm:p-4 rounded-2xl space-y-2.5 border border-slate-200">
                             <div class="flex items-center gap-2">
                                 <div class="w-7 h-7 bg-slate-200 rounded-full"></div>
                                 <div class="flex-grow space-y-1.5">
@@ -1530,7 +1543,7 @@
                 }
                 const avatarUrl = `https://api.dicebear.com/10.x/glyphs/svg?seed=${encodeURIComponent(review.username)}`;
                 return `
-                    <div class="bg-slate-50 p-3 sm:p-4 rounded-2xl flex flex-col gap-2 text-left border border-slate-100 shadow-sm">
+                    <div class="bg-slate-50 p-3 sm:p-4 rounded-2xl flex flex-col gap-2 text-left border border-slate-200">
                         <div class="flex items-center gap-2 min-w-0">
                             <img src="${avatarUrl}" alt="Avatar" class="w-7 h-7 rounded-full bg-slate-100 border border-slate-200 flex-shrink-0">
                             <div class="min-w-0">
@@ -1585,7 +1598,7 @@
             if (!isItemReviewsLoaded) {
                 itemReviewsContainer.innerHTML = `
                     <div class="animate-pulse space-y-4 w-full">
-                        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 border border-slate-200">
                             <div class="flex items-center gap-2 sm:gap-3">
                                 <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
                                 <div class="space-y-2 flex-1">
@@ -1602,7 +1615,7 @@
                                 <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
                             </div>
                         </div>
-                        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 border border-slate-200">
                             <div class="flex items-center gap-2 sm:gap-3">
                                 <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
                                 <div class="space-y-2 flex-1">
@@ -1620,7 +1633,7 @@
                                 <div class="h-6 sm:h-7 bg-slate-200 rounded-full w-20 sm:w-24"></div>
                             </div>
                         </div>
-                        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 shadow-sm border border-slate-100/50">
+                        <div class="bg-slate-50 p-4 sm:p-5 rounded-2xl flex flex-col gap-3 sm:gap-4 border border-slate-200">
                             <div class="flex items-center gap-2 sm:gap-3">
                                 <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-200 flex-shrink-0"></div>
                                 <div class="space-y-2 flex-1">
