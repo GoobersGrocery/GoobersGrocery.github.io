@@ -550,7 +550,7 @@
                     
                     <button type="submit" class="w-full h-12 md:h-14 bg-slate-900 hover:bg-slate-800 text-white font-black rounded-2xl text-xs sm:text-sm btn-smooth uppercase tracking-widest flex items-center justify-center gap-2 border border-slate-950">
                         <span class="submit-icon"></span>
-                        <span>Post Store Review</span>
+                        <span>Post Product Review</span>
                     </button>
                 </form>
             </div>
@@ -753,7 +753,7 @@
             }
 
             const toast = document.createElement('div');
-            toast.className = 'bg-slate-900 text-white px-6 py-4 rounded-2xl flex items-center justify-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-auto text-center mx-auto w-full';
+            toast.className = 'bg-slate-900 text-white border border-slate-800 px-6 py-4 rounded-2xl flex items-center justify-center gap-3 transition-opacity duration-300 opacity-0 pointer-events-auto text-center mx-auto w-full';
             
             const icon = type === 'error' ? ICONS.warning : ICONS.thumbsUp;
             toast.innerHTML = `
