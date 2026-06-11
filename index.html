@@ -2248,14 +2248,7 @@
                 console.error("Firestore snapshot error on store reviews:", error);
             });
         };
-        
-        const filterEmojis = (e) => {
-            const regex = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|[\u2011-\u26FF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g;
-            e.target.value = e.target.value.replace(regex, '');
-        };
-        document.getElementById('store-review-comment').addEventListener('input', filterEmojis);
-        document.getElementById('item-review-comment').addEventListener('input', filterEmojis);
-        
+		
         const sectionsList = [
             { id: 'hero', navId: 'nav-home' },
             { id: 'products', navId: 'nav-products' },
