@@ -1159,10 +1159,12 @@
             const weekSeed = today.getFullYear() * 100 + currentWeekNumber;
             
             let state = weekSeed;
-            const seededRandom = () => {
-                state = (state * 1664525 + 1013904223) % 4294967296;
-                return state / 4294967296;
-            };
+			const seededRandom = () => {
+				for (let i = 0; i < 5; i++) {
+					state = (state * 1664525 + 1013904223) % 4294967296;
+				}
+				return state / 4294967296;
+			};
 
             const seededIndex = Math.floor(seededRandom() * products.length);
             weeklyDealProduct = products[seededIndex];
