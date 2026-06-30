@@ -1535,7 +1535,7 @@
                             <p class="text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed font-medium bg-white p-3 sm:p-4 rounded-2xl border border-slate-100" style="white-space: pre-line; word-break: break-word;">${review.comment}</p>
                         `;
                     } else {
-                        const repliesWrapperHTML = `<div class="replies-wrapper">${repliesListHTML}</div>`;
+                        const repliesWrapperHTML = currentReviewReplies.length > 0 ? `<div class="replies-wrapper">${repliesListHTML}</div>` : '';
                         reviewEl.innerHTML = `
                             <div class="flex justify-between items-start gap-2">
                                 <div class="flex items-center gap-2 sm:gap-3 min-w-0">
@@ -1559,10 +1559,20 @@
                     if (textParagraph && textParagraph.textContent !== review.comment) {
                         textParagraph.textContent = review.comment;
                     }
-                    const repliesWrapper = reviewEl.querySelector('.replies-wrapper');
-                    if (repliesWrapper) {
-                        repliesWrapper.innerHTML = repliesListHTML;
-                    }
+                    let repliesWrapper = reviewEl.querySelector('.replies-wrapper');
+					if (!repliesWrapper && currentReviewReplies.length > 0) {
+						repliesWrapper = document.createElement('div');
+						repliesWrapper.className = 'replies-wrapper';
+						const footerActionsWrapper = reviewEl.querySelector('.footer-actions-wrapper');
+						if (footerActionsWrapper) {
+							reviewEl.insertBefore(repliesWrapper, footerActionsWrapper);
+						} else {
+							reviewEl.appendChild(repliesWrapper);
+						}
+					}
+					if (repliesWrapper) {
+						repliesWrapper.innerHTML = repliesListHTML;
+					}
                     const footerActionsWrapper = reviewEl.querySelector('.footer-actions-wrapper');
                     if (footerActionsWrapper) {
                         footerActionsWrapper.innerHTML = footerActionsHTML;
