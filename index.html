@@ -1535,7 +1535,7 @@
                             <p class="text-slate-700 text-xs sm:text-sm md:text-base leading-relaxed font-medium bg-white p-3 sm:p-4 rounded-2xl border border-slate-100" style="white-space: pre-line; word-break: break-word;">${review.comment}</p>
                         `;
                     } else {
-                        const repliesWrapperHTML = currentReviewReplies.length > 0 ? `<div class="replies-wrapper">${repliesListHTML}</div>` : '';
+                        const repliesWrapperHTML = `<div class="replies-wrapper">${repliesListHTML}</div>`;
                         reviewEl.innerHTML = `
                             <div class="flex justify-between items-start gap-2">
                                 <div class="flex items-center gap-2 sm:gap-3 min-w-0">
